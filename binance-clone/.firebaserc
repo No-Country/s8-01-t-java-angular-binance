@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "binance-clone-d1128"
-  }
+    "default": "binance-clone-d1128",
+    "binance-clone": "binance-clone-d1128"
+  },
+  "targets": {},
+  "etags": {}
 }
