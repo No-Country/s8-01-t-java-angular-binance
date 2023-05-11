@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "binance-clone-d1128",
-    "binance-clone": "binance-clone-d1128"
+    "binance-clone": "binance-clone-d1128",
+    "s8-01-t-java-angular-binance": "s8-01-t-java-angular-binance"
   },
   "targets": {},
   "etags": {}
