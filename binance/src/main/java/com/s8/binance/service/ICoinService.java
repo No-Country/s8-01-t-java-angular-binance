@@ -16,10 +16,9 @@ public interface ICoinService {
 
     public List<Coin> getCoinsByFilters();
 
-    public ResponseEntity<?> createCoin(CoinRequestDto coinRequestDto);
+    public Coin createCoin(CoinRequestDto coinRequestDto);
 
     public ResponseEntity<CoinResponseDto> updateCoin(Long id, CoinRequestDto coinRequestDto);
 
     public ResponseEntity<?> deleteCoin(Long id);
-
 }
