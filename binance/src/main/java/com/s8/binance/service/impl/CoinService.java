@@ -20,11 +20,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CoinService implements ICoinService {
-
     private final ICoinRepository repository;
-
     private final CoinMapper mapper;
-    
     @Override
     public ResponseEntity<List<CoinResponseDto>> getAll() {
      List<Coin> coins = repository.findAll();
@@ -37,25 +34,23 @@ public class CoinService implements ICoinService {
 
         return new ResponseEntity(coinResponseDtoList,HttpStatus.ACCEPTED);
     }
-
     @Override
     public ResponseEntity<CoinResponseDto> getCoinById(Long id) {
         Coin coin = repository.findById(id).orElseThrow();
         CoinResponseDto response = mapper.fromEntityToDto(coin);
         return new ResponseEntity<CoinResponseDto>(response, HttpStatus.ACCEPTED);
     }
-
     @Override
     public List<Coin> getCoinsByFilters() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCoinsByFilters'");
     }
-
     @Override
-    public ResponseEntity<?> createCoin(CoinRequestDto coinrRequestDto) {
+    public Coin createCoin(CoinRequestDto coinrRequestDto) {
+
         Coin coin = mapper.fromDtoToEntity(coinrRequestDto);
         repository.save(coin);
-        return new ResponseEntity<>(new Mensaje("Coin successfully created"), HttpStatus.ACCEPTED);
+        return coin;
     }
 
     @Override
