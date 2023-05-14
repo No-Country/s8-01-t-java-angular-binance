@@ -17,13 +17,16 @@ import com.s8.binance.service.ICoinService;
 
 import lombok.RequiredArgsConstructor;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class CoinService implements ICoinService {
     private final ICoinRepository repository;
     private final CoinMapper mapper;
+
     @Override
-    public ResponseEntity<List<CoinResponseDto>> getAll() {
+    public List<CoinResponseDto> getAll() {
      List<Coin> coins = repository.findAll();
      List<CoinResponseDto> coinResponseDtoList = new ArrayList<>();
 
@@ -31,40 +34,38 @@ public class CoinService implements ICoinService {
          CoinResponseDto response = mapper.fromEntityToDto(coin);
          coinResponseDtoList.add(response);
      });
-
-        return new ResponseEntity(coinResponseDtoList,HttpStatus.ACCEPTED);
+        return coinResponseDtoList;
     }
     @Override
-    public ResponseEntity<CoinResponseDto> getCoinById(Long id) {
+    public CoinResponseDto getCoinById(Long id) {
         Coin coin = repository.findById(id).orElseThrow();
         CoinResponseDto response = mapper.fromEntityToDto(coin);
-        return new ResponseEntity<CoinResponseDto>(response, HttpStatus.ACCEPTED);
+        return response;
     }
     @Override
-    public List<Coin> getCoinsByFilters() {
+    public Coin getCoinsByFilters() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCoinsByFilters'");
     }
     @Override
+    @Transactional
     public Coin createCoin(CoinRequestDto coinrRequestDto) {
-
         Coin coin = mapper.fromDtoToEntity(coinrRequestDto);
         repository.save(coin);
         return coin;
     }
 
     @Override
-    public ResponseEntity<CoinResponseDto> updateCoin(Long id, CoinRequestDto coinRequestDto) {
+    public CoinResponseDto updateCoin(Long id,CoinRequestDto coinRequestDto) {
         Coin coin = repository.findById(id).orElseThrow();
         Coin updatedCoin = mapper.updateCoin(coin, coinRequestDto);
         repository.save(updatedCoin);
         CoinResponseDto response = mapper.fromEntityToDto(updatedCoin);
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+        return response;
     }
 
     @Override
-    public ResponseEntity<?> deleteCoin(Long id) {
+    public void deleteCoin(Long id) {
       repository.deleteById(id);
-      return new ResponseEntity<>(new Mensaje("Coin successfully deleted"), HttpStatus.ACCEPTED);
     }
 }
