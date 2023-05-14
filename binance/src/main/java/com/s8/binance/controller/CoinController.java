@@ -1,5 +1,6 @@
 package com.s8.binance.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -27,24 +28,22 @@ public class CoinController {
     private final ICoinService service;
     @GetMapping
     public ResponseEntity<List<CoinResponseDto>> getAllCoins(){
-        ResponseEntity<?> responseEntity = (ResponseEntity<?>) service.getAll();
-        return new ResponseEntity(responseEntity.getBody(),responseEntity.getStatusCode());
+         List<CoinResponseDto> coins = service.getAll();
+        return ResponseEntity.ok().body( coins);
     }
     @GetMapping("/{id}")
     public ResponseEntity<CoinResponseDto> getCoinById(@PathVariable Long id){
-         ResponseEntity<?> responseEntity = (ResponseEntity<?>) service.getCoinById(id);
-        return new ResponseEntity(responseEntity.getBody(),responseEntity.getStatusCode());
+         CoinResponseDto responseEntity =  service.getCoinById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
-
     @PostMapping("/create")
     public ResponseEntity<?> createCoin(@RequestBody CoinRequestDto coin){
         Coin responseEntity = service.createCoin(coin);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<CoinResponseDto> updateCoin(@PathVariable Long id, @RequestBody CoinRequestDto coinRequestDto){
-        ResponseEntity<?> responseEntity = (ResponseEntity<?>) service.updateCoin(id, coinRequestDto);
-        return new ResponseEntity(responseEntity.getBody(),responseEntity.getStatusCode());
+        CoinResponseDto responseEntity = service.updateCoin(id, coinRequestDto);
+        return  ResponseEntity.ok().body(responseEntity);
     }
 }
