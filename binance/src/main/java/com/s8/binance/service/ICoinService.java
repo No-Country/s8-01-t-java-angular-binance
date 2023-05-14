@@ -10,15 +10,15 @@ import com.s8.binance.model.response.CoinResponseDto;
 
 public interface ICoinService {
     
-    public ResponseEntity<List<CoinResponseDto>> getAll();
+    public List<CoinResponseDto> getAll();
     
-    public ResponseEntity<CoinResponseDto> getCoinById(Long id);
+    public CoinResponseDto getCoinById(Long id);
 
-    public List<Coin> getCoinsByFilters();
+    public Coin getCoinsByFilters();
 
     public Coin createCoin(CoinRequestDto coinRequestDto);
 
-    public ResponseEntity<CoinResponseDto> updateCoin(Long id, CoinRequestDto coinRequestDto);
+    public CoinResponseDto updateCoin(Long id, CoinRequestDto coinRequestDto);
 
-    public ResponseEntity<?> deleteCoin(Long id);
+    public void  deleteCoin(Long id);
 }
