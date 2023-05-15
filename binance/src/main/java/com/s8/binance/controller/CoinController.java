@@ -3,6 +3,8 @@ package com.s8.binance.controller;
 import java.util.Collections;
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +22,9 @@ import com.s8.binance.model.response.CoinResponseDto;
 import com.s8.binance.service.ICoinService;
 
 import lombok.RequiredArgsConstructor;
+
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/v1/coins")
 @RequiredArgsConstructor
@@ -37,13 +42,18 @@ public class CoinController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
     @PostMapping("/create")
-    public ResponseEntity<?> createCoin(@RequestBody CoinRequestDto coin){
+    public ResponseEntity<?> createCoin(@Valid @RequestBody CoinRequestDto coin){
         Coin responseEntity = service.createCoin(coin);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<CoinResponseDto> updateCoin(@PathVariable Long id, @RequestBody CoinRequestDto coinRequestDto){
+    public ResponseEntity<CoinResponseDto> updateCoin(@Valid @PathVariable Long id, @RequestBody CoinRequestDto coinRequestDto){
         CoinResponseDto responseEntity = service.updateCoin(id, coinRequestDto);
+        return  ResponseEntity.ok().body(responseEntity);
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteCoin(@PathVariable Long id){
+        CoinResponseDto responseEntity = service.deleteCoin(id);
         return  ResponseEntity.ok().body(responseEntity);
     }
 }
