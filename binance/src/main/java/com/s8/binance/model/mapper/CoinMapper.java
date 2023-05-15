@@ -13,20 +13,17 @@ public class CoinMapper {
         return CoinResponseDto.builder()
         .id(coin.getId())
         .name(coin.getName())
-        .currentValue(coin.getCurrentValue())
         .build();
     }
     
     public Coin fromDtoToEntity(CoinRequestDto coinRequestDto){
         return Coin.builder()
         .name(coinRequestDto.getName())
-        .currentValue(coinRequestDto.getCurrentValue())
         .build();
     }
 
     public Coin updateCoin(Coin coin, CoinRequestDto coinRequestDto){
         coin.setName(coinRequestDto.getName());
-        coin.setCurrentValue(coinRequestDto.getCurrentValue());
         return coin;
     }
 }
