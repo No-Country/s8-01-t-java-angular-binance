@@ -14,6 +14,4 @@ import lombok.NoArgsConstructor;
 public class CoinRequestDto {
 
     private String name;
-
-    private BigDecimal currentValue;
 }
