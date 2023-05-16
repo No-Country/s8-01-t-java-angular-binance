@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "binance-clone",
+    "public": "dist/binance-clone",
     "ignore": [
       "firebase.json",
       "**/.*",
