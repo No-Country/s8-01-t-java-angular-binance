@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { faDiscord,faTelegram,faTwitter,faFacebook,faYoutube,faTiktok,faInstagram   } from '@fortawesome/free-brands-svg-icons';
+
+
 
 @Component({
   selector: 'app-footer',
@@ -7,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  faDiscord=faDiscord;
+  faTelegram=faTelegram;
+  faTwitter=faTwitter;
+  faFacebook=faFacebook;
+  faYoutube=faYoutube;
+  faTiktok=faTiktok;
+  faInstagram=faInstagram
 }
