@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'mustard': '#C99400',
-        'yellow': '#FCD535',
-        'light-gray': '#FAFAFA',
-        'gray': '#F5F5F5',
-        'dark-gray': '#1E2329'
+        'binance-mustard': '#C99400',
+        'binance-yellow': '#FCD535',
+        'binance-light-gray': '#FAFAFA',
+        'binance-gray': '#F5F5F5',
+        'binance-dark-gray': '#1E2329'
       }
     },
   },
