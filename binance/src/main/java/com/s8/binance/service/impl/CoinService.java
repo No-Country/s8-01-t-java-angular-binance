@@ -1,18 +1,20 @@
 package com.s8.binance.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import com.s8.binance.model.entity.Coin;
 import com.s8.binance.model.mapper.CoinMapper;
 import com.s8.binance.model.request.CoinRequestDto;
 import com.s8.binance.model.response.CoinResponseDto;
 import com.s8.binance.repository.ICoinRepository;
 import com.s8.binance.service.ICoinService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
