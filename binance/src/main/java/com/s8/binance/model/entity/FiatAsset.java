@@ -1,5 +1,7 @@
 package com.s8.binance.model.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,22 +20,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE COIN SET status = true WHERE id=?")
-@Where(clause = "status=false")
-// @FilterDef(name = "deletedMarcaFilter",parameters = @ParamDef(name = "isDeleted", type = "boolean"))
-// @Filter(name = "deletedMarcaFilter",condition = "deleted = :isDeleted")
-@Table(name = "COIN")
-public class Coin {
+@Table(name = "FIAT_ASSET")
+public class FiatAsset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "DESCRIPTION")
     @NotBlank(message = "Empty")
-    private String name;
+    private String description;
 
-    @Column(name = "STATUS")
-    @Default
-    private boolean status = Boolean.FALSE;
+    @Column(name = "TOTAL")
+    private BigDecimal total;
+
+    @Column(name = "COIN_ID")
+    private Coin coinId;
 }
