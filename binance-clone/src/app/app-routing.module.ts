@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'landing',
     component: LandingComponent,
     title: 'Binance: Exchange de criptomonedas de Bitcoin, Ethereum y altcoins'
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/sign-up/sign-up.component').then(c => c.SignUpComponent)
   }
 ];
 
