@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-landing',
@@ -10,5 +10,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 export class LandingComponent {
 
   faUser = faUser;
+  faAngleRight = faAngleRight;
 
 }
