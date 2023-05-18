@@ -28,12 +28,11 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "CRYPTO_ASSETS")
-    private List<CryptoAsset> cryptoAssets;
+//    @Column(name = "CRYPTO_ASSET")
+//    private List<CryptoAsset> cryptoAssets;
+//
+//    @Column(name = "FIAT_ASSET")
+//    private List<FiatAsset> fiatAssets;
 
-    @Column(name = "FIAT_ASSETS")
-    private List<FiatAsset> fiatAssets;
 
-    // @Column(name = "BALANCE")
-    // private BigDecimal balance;
 }

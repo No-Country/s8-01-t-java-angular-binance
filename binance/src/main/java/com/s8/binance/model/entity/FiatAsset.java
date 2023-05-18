@@ -34,6 +34,6 @@ public class FiatAsset {
     @Column(name = "TOTAL")
     private BigDecimal total;
 
-    @Column(name = "COIN_ID")
-    private Coin coinId;
+    //@Column(name = "COIN_ID")
+    //private Coin coinId;
 }

@@ -31,21 +31,21 @@ public class Transaction {
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-    @Column(name = "PAYMENT_METHOD")
-    private PaymentMethod paymentMethod;
+//    @Column(name = "PAYMENT_METHOD")
+//    private PaymentMethod paymentMethod;
 
     @Column(name = "TYPE")
     @NotBlank(message = "Empty")
     private String type;
 
-    @Column(name = "PURCHASE_COIN")
-    private Coin purchaseCoinId;
+//    @Column(name = "PURCHASE_COIN")
+//    private Coin purchaseCoinId;
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
 
-    @Column(name = "SALE_COIN")
-    private Coin saleCoinId;
+//    @Column(name = "SALE_COIN")
+//    private Coin saleCoinId;
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
