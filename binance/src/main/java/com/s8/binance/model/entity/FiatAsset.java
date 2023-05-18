@@ -2,12 +2,7 @@ package com.s8.binance.model.entity;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -36,4 +31,8 @@ public class FiatAsset {
 
     //@Column(name = "COIN_ID")
     //private Coin coinId;
+
+    @ManyToOne
+    @JoinColumn(name = "WALLET_ID")
+    private Wallet wallet;
 }

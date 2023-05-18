@@ -4,12 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +29,9 @@ public class Wallet {
 //    @Column(name = "FIAT_ASSET")
 //    private List<FiatAsset> fiatAssets;
 
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
+    private List<CryptoAsset> cryptoAssets;
 
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
+    private List<FiatAsset> fiatAssets;
 }
