@@ -3,12 +3,7 @@ package com.s8.binance.model.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -31,21 +26,24 @@ public class Transaction {
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-    @Column(name = "PAYMENT_METHOD")
-    private PaymentMethod paymentMethod;
+   /* @Column(name = "PAYMENT_METHOD")
+   // @OneToOne
+    private PaymentMethod paymentMethod;*/
 
     @Column(name = "TYPE")
     @NotBlank(message = "Empty")
     private String type;
 
-    @Column(name = "PURCHASE_COIN")
-    private Coin purchaseCoinId;
+    /*@Column(name = "PURCHASE_COIN")
+    //@OneToOne
+    private Coin purchaseCoinId;*/
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
 
-    @Column(name = "SALE_COIN")
-    private Coin saleCoinId;
+   /* @Column(name = "SALE_COIN")
+    //@OneToOne
+    private Coin saleCoinId;*/
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
