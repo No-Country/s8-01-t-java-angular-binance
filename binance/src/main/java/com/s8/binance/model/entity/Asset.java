@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "FIAT_ASSET")
-public class FiatAsset {
+@Table(name = "ASSET")
+public class Asset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,8 @@ public class FiatAsset {
     @Column(name = "TOTAL")
     private BigDecimal total;
 
-    //@Column(name = "COIN_ID")
-    //private Coin coinId;
+    @OneToOne
+    private Coin coin;
 
     @ManyToOne
     @JoinColumn(name = "WALLET_ID")
