@@ -2,12 +2,7 @@ package com.s8.binance.model.entity;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "FIAT_ASSET")
-public class FiatAsset {
+@Table(name = "ASSET")
+public class Asset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +29,10 @@ public class FiatAsset {
     @Column(name = "TOTAL")
     private BigDecimal total;
 
-    @Column(name = "COIN_ID")
-    private Coin coinId;
+    @OneToOne
+    private Coin coin;
+
+    @ManyToOne
+    @JoinColumn(name = "WALLET_ID")
+    private Wallet wallet;
 }
