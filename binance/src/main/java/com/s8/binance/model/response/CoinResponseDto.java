@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class CoinResponseDto {
 
     private Long id;
+    
     private String name;
 }

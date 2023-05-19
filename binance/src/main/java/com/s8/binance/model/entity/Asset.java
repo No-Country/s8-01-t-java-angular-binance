@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +24,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ASSET")
+@Table(name = "ASSETS")
 public class Asset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ASSET")
     private Long id;
 
     @Column(name = "DESCRIPTION")
@@ -37,10 +39,14 @@ public class Asset {
     @Column(name = "TOTAL")
     private BigDecimal total;
 
-    @OneToOne
+    @Column(name = "FK_COIN")
+    private Long fkCoin;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
     private Coin coin;
 
-    @ManyToOne
-    @JoinColumn(name = "WALLET_ID")
-    private Wallet wallet;
+    // @ManyToOne
+    // @JoinColumn(name = "ID_WALLET")
+    // private Wallet wallet;
 }

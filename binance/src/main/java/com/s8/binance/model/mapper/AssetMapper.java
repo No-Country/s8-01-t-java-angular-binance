@@ -1,11 +1,10 @@
 package com.s8.binance.model.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.s8.binance.model.entity.Asset;
-import com.s8.binance.model.entity.Coin;
 import com.s8.binance.model.request.AssetRequestDto;
 import com.s8.binance.model.response.AssetResponseDto;
-import lombok.Builder;
-import org.springframework.stereotype.Component;
 
 @Component
 public class AssetMapper {
@@ -15,17 +14,16 @@ public class AssetMapper {
                 .id(asset.getId())
                 .description(asset.getDescription())
                 .total(asset.getTotal())
-                .coin(asset.getCoin())
-                .wallet(asset.getWallet())
-                .build();
+                .fkCoin(asset.getFkCoin())
+                .build(); 
     }
 
     public Asset fromDtoToEntity(AssetRequestDto assetRequestDto){
         return Asset.builder()
                 .description(assetRequestDto.getDescription())
                 .total(assetRequestDto.getTotal())
-                .coin(assetRequestDto.getCoin())
-                .wallet(assetRequestDto.getWallet())
+                .fkCoin(assetRequestDto.getFkCoin())
+                // .wallet(assetRequestDto.getWallet())
                 .build();
     }
 

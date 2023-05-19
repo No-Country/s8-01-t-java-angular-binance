@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.s8.binance.model.entity.Coin;
 import com.s8.binance.model.request.CoinRequestDto;
 import com.s8.binance.model.response.CoinResponseDto;
 import com.s8.binance.service.ICoinService;
@@ -39,8 +38,8 @@ public class CoinController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
     @PostMapping("/create")
-    public ResponseEntity<?> createCoin(@Valid @RequestBody CoinRequestDto coin){
-        Coin responseEntity = service.createCoin(coin);
+    public ResponseEntity<CoinResponseDto> createCoin(@Valid @RequestBody CoinRequestDto coin){
+        CoinResponseDto responseEntity = service.createCoin(coin);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
     @PutMapping("/update/{id}")

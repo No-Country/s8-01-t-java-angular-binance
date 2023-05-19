@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PAYMENT_METHOD")
+@Table(name = "PAYMENT_METHODS")
 public class PaymentMethod {
     
     @Id

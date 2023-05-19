@@ -5,13 +5,18 @@ import java.util.List;
 
 import com.s8.binance.model.entity.Asset;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- * DTO for {@link com.s8.binance.model.entity.Wallet}
- */
-@Value
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WalletResponseDto implements Serializable {
-    Long id;
-    List<Asset> asset;
+    
+    private Long id;
+
+    private List<Asset> assets;
 }

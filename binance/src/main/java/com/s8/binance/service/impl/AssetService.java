@@ -38,15 +38,16 @@ public class AssetService implements IAssetService {
     }
 
     @Override
-    public Asset getAssetByFilters() {
+    public List<AssetResponseDto> getAssetByFilters() {
         throw new UnsupportedOperationException("Unimplemented method 'getAssetsByFilters'");
     }
 
     @Override
-    public Asset createAsset(AssetRequestDto assetRequestDto) {
+    public AssetResponseDto createAsset(AssetRequestDto assetRequestDto) {
         Asset asset = mapper.fromDtoToEntity(assetRequestDto);
         repository.save(asset);
-        return asset;
+        AssetResponseDto response = mapper.fromEntityToDto(asset);
+        return response;
     }
 
     @Override

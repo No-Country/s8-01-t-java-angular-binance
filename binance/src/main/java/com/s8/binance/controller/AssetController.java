@@ -1,16 +1,25 @@
 package com.s8.binance.controller;
 
-import com.s8.binance.model.entity.Asset;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.s8.binance.model.request.AssetRequestDto;
 import com.s8.binance.model.response.AssetResponseDto;
 import com.s8.binance.service.IAssetService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/assets")
@@ -31,8 +40,9 @@ public class AssetController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
-    @PostMapping("/create") public ResponseEntity<?> createAsset(@Valid @RequestBody AssetRequestDto asset){
-        Asset responseEntity = service.createAsset(asset);
+    @PostMapping("/create")
+    public ResponseEntity<AssetResponseDto> createAsset(@Valid @RequestBody AssetRequestDto asset){
+        AssetResponseDto responseEntity = service.createAsset(asset);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
@@ -41,6 +51,7 @@ public class AssetController {
         AssetResponseDto responseEntity = service.updateAsset(id, assetRequestDto);
         return  ResponseEntity.ok().body(responseEntity);
     }
+    
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAsset(@PathVariable Long id){
         AssetResponseDto responseEntity = service.deleteAsset(id);

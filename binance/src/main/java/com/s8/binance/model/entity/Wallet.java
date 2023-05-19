@@ -3,6 +3,7 @@ package com.s8.binance.model.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,13 +21,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "WALLET")
+@Table(name = "WALLETS")
 public class Wallet {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_WALLET")
     private Long id;
 
-    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    private List<Asset> asset;
+    // @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
+    // @Column(name = "ASSETS")
+    // private List<Asset> assets;
 }

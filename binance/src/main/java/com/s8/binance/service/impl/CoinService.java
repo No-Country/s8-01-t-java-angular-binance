@@ -41,18 +41,22 @@ public class CoinService implements ICoinService {
 	}
 
 	@Override
-	public Coin getCoinsByFilters() {
+	public List<CoinResponseDto> getCoinsByFilters() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'getCoinsByFilters'");
 	}
 
 	@Override
-	@Transactional
-	public Coin createCoin(CoinRequestDto coinrRequestDto) {
-		Coin coin = mapper.fromDtoToEntity(coinrRequestDto);
-		repository.save(coin);
-		return coin;
-	}
+    @Transactional
+    public CoinResponseDto createCoin(CoinRequestDto coinrRequestDto) {
+        // Optional.ofNullable(repository.findByName(coinrRequestDto.getName())
+        //         .orElseThrow(() -> new RuntimeException("\n" + "it doesn't have to be empty")));
+        Coin coin = mapper.fromDtoToEntity(coinrRequestDto);
+        repository.save(coin);
+		CoinResponseDto response = mapper.fromEntityToDto(coin);
+        return response;
+    }
+	
     @Transactional
 	@Override
 	public CoinResponseDto updateCoin( Long id, CoinRequestDto coinRequestDto) {
