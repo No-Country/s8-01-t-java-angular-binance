@@ -1,18 +1,34 @@
-<!-- <form [formGroup]="registerForm" (ngSubmit)="signUp()"> -->
+<!-- (ngSubmit)="signUp()" -->
+<form [formGroup]="form">
 <div class="flex flex-col place-items-center h-screen justify-center">
-    <div class="flex flex-col w-[500px]">
+    <div *ngIf="step === 0" class="flex flex-col w-[500px]">
         <h1 class="text-3xl font-semibold mb-7">Crear cuenta personal</h1>
         <div class="flex flex-col gap-5">
-                <div>Email</div>
-                <input type="email" class="border border-spacing-1 h-11 p-3 rounded-md">
-                <div>Password</div>
-                <input type="password" class="border border-spacing-1 h-11 p-3 rounded-md">
-                <div class="flex items-start">
-                    <input type="checkbox" class="flex mx-2 my-1 text-binance-yellow">
-                    <p>Al crear una cuenta, acepto los <strong>Términos de servicio</strong> y la <strong>Política de privacidad</strong></p>
-                </div>
-                <button type="submit" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+            <div>Email</div>
+            <input type="email" class="border border-spacing-1 h-11 p-3 rounded-md" formControlName="email">
+            <div class="flex items-start">
+                <input type="checkbox" class="flex mx-2 my-1 text-binance-yellow" >
+                <p>Al crear una cuenta, acepto los <strong>Términos de servicio</strong> y la <strong>Política de privacidad</strong></p>
             </div>
+            <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
         </div>
     </div>
-<!-- </form> -->
+    <div *ngIf="step === 1" class="flex flex-col w-[500px]">
+        <h1 class="text-3xl font-semibold mb-7">Verificación de correo electrónico</h1>
+        <div class="flex flex-col gap-5">
+            <div>Ingresa el código de verificación de 6 dígitos enviado a <strong>{{ form.get('email')?.value }}</strong>. El código es válido durante 30 minutos.</div>
+            <div>Código de verificación por email</div>
+            <input type="number" class="border border-spacing-1 h-11 p-3 rounded-md text-end" placeholder="Código de verficación enviado">
+            <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Enviar</button>
+        </div>
+    </div>
+    <div *ngIf="step === 2" class="p-5 bg-binance-yellow">
+        <h1>Paso dos</h1>
+        <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+    </div>
+    <div *ngIf="step === 3" class="p-5 bg-binance-yellow">
+        <h1>Paso tres</h1>
+        <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+    </div>
+</div>
+</form>

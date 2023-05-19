@@ -1,33 +1,40 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
 
-  // form = this.formBuilder.nonNullable.group({
-  //   name: ['', [Validators.required]],
-  //   email: ['', [Validators.email, Validators.required]],
-  //   password: ['', [Validators.minLength(6), Validators.required]],
-  //   confirmPassword: ['', [Validators.required]],
-  // }, {
-  //   validators: [ CustomValidators.MatchValidator('password', 'confirmPassword') ]
-  // });
-  verificated: boolean = false;
+  form: FormGroup;
 
+  verificated: boolean = false;
+  
+  step: number = 0;
+  
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService
-  ) {}
+    ) {
+    this.form = this.formBuilder.nonNullable.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.minLength(6), Validators.required]],
+      code
+      
+    });
+  }
+
+  // Hay al menos 3 formularios
+  // Primero: email
 
   // signUp() {
   //   this.auth.signUpEmail(this.form.getRawValue('email'))
@@ -55,4 +62,9 @@ export class SignUpComponent {
   //     this.form.markAllAsTouched();
   //   }
   // }
+
+  increaseStep() {
+    this.step ++
+  }
+
 }
