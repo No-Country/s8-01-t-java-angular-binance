@@ -1,8 +1,8 @@
 package com.s8.binance.security.dto;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
 
 public class JwtDto {
 

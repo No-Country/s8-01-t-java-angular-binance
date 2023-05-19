@@ -1,10 +1,9 @@
 package com.s8.binance.controller;
 
-import java.util.Collections;
 import java.util.List;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,8 +21,6 @@ import com.s8.binance.model.response.CoinResponseDto;
 import com.s8.binance.service.ICoinService;
 
 import lombok.RequiredArgsConstructor;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/coins")
