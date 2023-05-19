@@ -2,6 +2,7 @@ package com.s8.binance.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -48,10 +49,12 @@ public class CoinService implements ICoinService {
 
 	@Override
 	@Transactional
-	public Coin createCoin(CoinRequestDto coinrRequestDto) {
-		Coin coin = mapper.fromDtoToEntity(coinrRequestDto);
-		repository.save(coin);
-		return coin;
+	public Coin createCoin(CoinRequestDto coinRequestDto) {
+		if (repository.existsByName(coinRequestDto.getName())) {
+			throw new RuntimeException("Coin already exists");
+		}
+		Coin coin = mapper.fromDtoToEntity(coinRequestDto);
+		return repository.save(coin);
 	}
     @Transactional
 	@Override

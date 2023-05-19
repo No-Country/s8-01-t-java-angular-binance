@@ -15,11 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ASSET")
+@Table(name = "ASSETS")
 public class Asset {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_ASSET")
     private Long id;
 
     @Column(name = "DESCRIPTION")
@@ -29,10 +30,15 @@ public class Asset {
     @Column(name = "TOTAL")
     private BigDecimal total;
 
-    @OneToOne
+
+    @Column(name = "FK_COIN")
+    private Long fkCoin;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
     private Coin coin;
 
-    @ManyToOne
-    @JoinColumn(name = "WALLET_ID")
-    private Wallet wallet;
+    //@ManyToOne
+    //@JoinColumn(name = "WALLET_ID")
+    //private Wallet wallet;
 }

@@ -14,8 +14,11 @@ import java.math.BigDecimal;
 @Value
 public class AssetRequestDto implements Serializable {
     @NotBlank(message = "Empty")
-    String description;
-    BigDecimal total;
-    Coin coin;
-    Wallet wallet;
+    private String description;
+
+    private BigDecimal total;
+
+    private Long fkCoin;
+
+    private Wallet wallet;
 }

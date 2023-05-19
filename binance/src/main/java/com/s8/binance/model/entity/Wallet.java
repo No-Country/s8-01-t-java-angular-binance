@@ -21,6 +21,6 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    private List<Asset> asset;
+    //@OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
+    //private List<Asset> asset;
 }

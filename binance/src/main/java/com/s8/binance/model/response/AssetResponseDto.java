@@ -17,10 +17,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class AssetResponseDto implements Serializable {
-    Long id;
+    private Long id;
+
     @NotBlank(message = "Empty")
-    String description;
-    BigDecimal total;
-    Coin coin;
-    Wallet wallet;
+    private String description;
+
+    private BigDecimal total;
+
+    private Long fkCoin;
+
+    private Wallet wallet;
 }

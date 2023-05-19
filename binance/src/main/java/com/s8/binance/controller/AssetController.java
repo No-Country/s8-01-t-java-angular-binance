@@ -31,8 +31,8 @@ public class AssetController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
-    @PostMapping("/create") public ResponseEntity<?> createAsset(@Valid @RequestBody AssetRequestDto asset){
-        Asset responseEntity = service.createAsset(asset);
+    @PostMapping("/create") public ResponseEntity<AssetResponseDto> createAsset(@Valid @RequestBody AssetRequestDto asset){
+        AssetResponseDto responseEntity = service.createAsset(asset);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 

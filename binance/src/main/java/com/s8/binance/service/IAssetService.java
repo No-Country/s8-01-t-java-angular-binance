@@ -14,7 +14,7 @@ public interface IAssetService {
     public List<AssetResponseDto> getAll();
     public AssetResponseDto getAssetById(Long id);
     public Asset getAssetByFilters(); //filtra por todo
-    public Asset createAsset(AssetRequestDto assetRequestDto);
+    public AssetResponseDto createAsset(AssetRequestDto assetRequestDto);
     public AssetResponseDto updateAsset(Long id, AssetRequestDto assetRequestDto);
     public AssetResponseDto deleteAsset(Long id);
 }

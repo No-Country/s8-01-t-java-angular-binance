@@ -1,5 +1,4 @@
 package com.s8.binance.service.impl;
-
 import com.s8.binance.model.entity.Asset;
 import com.s8.binance.model.mapper.AssetMapper;
 import com.s8.binance.model.request.AssetRequestDto;
@@ -8,7 +7,6 @@ import com.s8.binance.repository.IAssetRepository;
 import com.s8.binance.service.IAssetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +41,11 @@ public class AssetService implements IAssetService {
     }
 
     @Override
-    public Asset createAsset(AssetRequestDto assetRequestDto) {
+    public AssetResponseDto createAsset(AssetRequestDto assetRequestDto) {
         Asset asset = mapper.fromDtoToEntity(assetRequestDto);
         repository.save(asset);
-        return asset;
+        AssetResponseDto response = mapper.fromEntityToDto(asset);
+        return response;
     }
 
     @Override

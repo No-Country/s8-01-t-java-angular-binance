@@ -26,11 +26,12 @@ import lombok.NoArgsConstructor;
 @Where(clause = "status=false")
 // @FilterDef(name = "deletedMarcaFilter",parameters = @ParamDef(name = "isDeleted", type = "boolean"))
 // @Filter(name = "deletedMarcaFilter",condition = "deleted = :isDeleted")
-@Table(name = "COIN")
+@Table(name = "COINS")
 public class Coin {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_COIN")
     private Long id;
 
     @Column(name = "NAME")

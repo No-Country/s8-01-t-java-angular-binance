@@ -15,8 +15,8 @@ public class AssetMapper {
                 .id(asset.getId())
                 .description(asset.getDescription())
                 .total(asset.getTotal())
-                .coin(asset.getCoin())
-                .wallet(asset.getWallet())
+                .fkCoin(asset.getFkCoin())
+               // .wallet(asset.getWallet())
                 .build();
     }
 
@@ -24,8 +24,8 @@ public class AssetMapper {
         return Asset.builder()
                 .description(assetRequestDto.getDescription())
                 .total(assetRequestDto.getTotal())
-                .coin(assetRequestDto.getCoin())
-                .wallet(assetRequestDto.getWallet())
+                .fkCoin(assetRequestDto.getFkCoin())
+                //.wallet(assetRequestDto.getWallet())
                 .build();
     }
 
