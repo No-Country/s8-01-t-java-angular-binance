@@ -1,24 +1,29 @@
 package com.s8.binance.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import com.s8.binance.model.entity.Asset;
 import com.s8.binance.model.mapper.AssetMapper;
 import com.s8.binance.model.request.AssetRequestDto;
 import com.s8.binance.model.response.AssetResponseDto;
 import com.s8.binance.repository.IAssetRepository;
 import com.s8.binance.service.IAssetService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AssetService implements IAssetService {
 
     private final IAssetRepository repository;
+
     private final AssetMapper mapper;
+
     @Override
     public List<AssetResponseDto> getAll() {
         List<Asset> assets = repository.findAll();
@@ -38,7 +43,7 @@ public class AssetService implements IAssetService {
     }
 
     @Override
-    public List<AssetResponseDto> getAssetByFilters() {
+    public List<AssetResponseDto> getAssetsByFilters() {
         throw new UnsupportedOperationException("Unimplemented method 'getAssetsByFilters'");
     }
 
@@ -54,9 +59,9 @@ public class AssetService implements IAssetService {
     @Transactional
     public AssetResponseDto updateAsset(Long id, AssetRequestDto assetRequestDto) {
         Asset asset = repository.findById(id).orElseThrow();
-        Asset updateAsset = mapper.updateAsset(asset, assetRequestDto);
-        repository.save(updateAsset);
-        AssetResponseDto response = mapper.fromEntityToDto(updateAsset);
+        Asset updatedAsset = mapper.updateAsset(asset, assetRequestDto);
+        repository.save(updatedAsset);
+        AssetResponseDto response = mapper.fromEntityToDto(updatedAsset);
         return response;
     }
 

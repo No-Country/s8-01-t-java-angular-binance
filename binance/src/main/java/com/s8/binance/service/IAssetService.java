@@ -8,9 +8,14 @@ import com.s8.binance.model.response.AssetResponseDto;
 public interface IAssetService {
 
     public List<AssetResponseDto> getAll();
+
     public AssetResponseDto getAssetById(Long id);
-    public List<AssetResponseDto> getAssetByFilters(); //filtra por todo
+
+    public List<AssetResponseDto> getAssetsByFilters();
+
     public AssetResponseDto createAsset(AssetRequestDto assetRequestDto);
+
     public AssetResponseDto updateAsset(Long id, AssetRequestDto assetRequestDto);
+
     public AssetResponseDto deleteAsset(Long id);
 }

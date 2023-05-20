@@ -25,31 +25,37 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/v1/coins")
 @RequiredArgsConstructor
 public class CoinController {
-    
+
     private final ICoinService service;
+
     @GetMapping
-    public ResponseEntity<List<CoinResponseDto>> getAllCoins(){
-         List<CoinResponseDto> coins = service.getAll();
-        return ResponseEntity.ok().body( coins);
+    public ResponseEntity<List<CoinResponseDto>> getAllCoins() {
+        List<CoinResponseDto> responseEntity = service.getAll();
+        return ResponseEntity.ok().body(responseEntity);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<CoinResponseDto> getCoinById(@PathVariable Long id){
-         CoinResponseDto responseEntity =  service.getCoinById(id);
+    public ResponseEntity<CoinResponseDto> getCoinById(@PathVariable Long id) {
+        CoinResponseDto responseEntity = service.getCoinById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
+
     @PostMapping("/create")
-    public ResponseEntity<CoinResponseDto> createCoin(@Valid @RequestBody CoinRequestDto coin){
+    public ResponseEntity<CoinResponseDto> createCoin(@Valid @RequestBody CoinRequestDto coin) {
         CoinResponseDto responseEntity = service.createCoin(coin);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<CoinResponseDto> updateCoin(@Valid @PathVariable Long id, @RequestBody CoinRequestDto coinRequestDto){
+    public ResponseEntity<CoinResponseDto> updateCoin(@Valid @PathVariable Long id,
+            @RequestBody CoinRequestDto coinRequestDto) {
         CoinResponseDto responseEntity = service.updateCoin(id, coinRequestDto);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCoin(@PathVariable Long id){
+    public ResponseEntity<?> deleteCoin(@PathVariable Long id) {
         CoinResponseDto responseEntity = service.deleteCoin(id);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
 }

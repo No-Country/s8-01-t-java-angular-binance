@@ -1,4 +1,5 @@
 package com.s8.binance.security.jwt;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -20,11 +21,11 @@ public class JwtEntryPoint implements AuthenticationEntryPoint {
     // Implementamos un logger para ver cual metodo da error en caso de falla
     private final static Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
 
-    //Metodo implementado de AuthenticationEntryPoint
+    // Metodo implementado de AuthenticationEntryPoint
     @Override
     public void commence(HttpServletRequest request,
-                         HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
+            HttpServletResponse response,
+            AuthenticationException authException) throws IOException, ServletException {
         logger.error("Fallo el metodo commence");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No esta autorizado");
     }

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Builder.Default;
@@ -19,23 +22,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-// @SQLDelete(sql = "UPDATE COIN SET status = true WHERE id=?")
-// @Where(clause = "status=false")
-// @FilterDef(name = "deletedMarcaFilter",parameters = @ParamDef(name = "isDeleted", type = "boolean"))
-// @Filter(name = "deletedMarcaFilter",condition = "deleted = :isDeleted")
+@SQLDelete(sql = "UPDATE COIN SET status = true WHERE id=?")
+@Where(clause = "status = false")
 @Table(name = "COINS")
 public class Coin {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_COIN")
     private Long id;
 
     @Column(name = "NAME")
-    @NotBlank(message = "Empty")
+    @NotBlank(message = "empty")
     private String name;
 
     @Column(name = "STATUS")
     @Default
-    private Boolean status = false;
+    private boolean status = Boolean.FALSE;
 }

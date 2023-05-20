@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WalletRequestDto {
-    
+
     private List<Asset> assets;
 }

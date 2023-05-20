@@ -9,21 +9,24 @@ import com.s8.binance.model.response.WalletResponseDto;
 @Component
 public class WalletMapper {
 
-    // public WalletResponseDto fromEntityToDto(Wallet wallet) {
-    //     return WalletResponseDto.builder()
-    //             .id(wallet.getId())
-    //             .assets(wallet.getAssets())
-    //             .build(); 
-    // }
+    public WalletResponseDto fromEntityToDto(Wallet wallet) {
+        return WalletResponseDto.builder()
+                .id(wallet.getId())
+                .paymentDate(wallet.getPaymentDate())
+                .paymentType(wallet.getPaymentType())
+                .build();
+    }
 
-    // public Wallet fromDtoToEntity(WalletRequestDto walletRequestDto){
-    //     return Wallet.builder()
-    //             .assets(walletRequestDto.getAssets())
-    //             .build();
-    // }
+    public Wallet fromDtoToEntity(WalletRequestDto walletRequestDto) {
+        return Wallet.builder()
+                .paymentDate(walletRequestDto.getPaymentDate())
+                .paymentType(walletRequestDto.getPaymentType())
+                .build();
+    }
 
-    // public Wallet updateWallet(Wallet wallet, WalletRequestDto walletRequestDto){
-        
-    //     return Wallet;
-    // }
+    public Wallet updateWallet(Wallet wallet, WalletRequestDto walletRequestDto) {
+        wallet.setPaymentDate(walletRequestDto.getPaymentDate());
+        wallet.setPaymentDate(walletRequestDto.getPaymentDate());
+        return wallet;
+    }
 }

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WalletResponseDto implements Serializable {
-    
+
     private Long id;
 
     private List<Asset> assets;

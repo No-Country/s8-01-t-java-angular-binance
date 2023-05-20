@@ -15,23 +15,21 @@ import com.s8.binance.security.repository.UsuarioRepository;
 public class UsuarioService {
 
 	@Autowired
-	UsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
-	public Optional<Usuario> getByUsuario(String nombreUsuario){
+	public Optional<Usuario> getByUsuario(String nombreUsuario) {
 		return usuarioRepository.findByNombreUsuario(nombreUsuario);
 	}
 
-	public Boolean existsByUsuario(String nombreUsuario){
+	public Boolean existsByUsuario(String nombreUsuario) {
 		return usuarioRepository.existsByNombreUsuario(nombreUsuario);
 	}
 
-	public Boolean existsByEmail(String email){
+	public Boolean existsByEmail(String email) {
 		return usuarioRepository.existsByEmail(email);
 	}
 
-	public void save(Usuario usuario){
+	public void save(Usuario usuario) {
 		usuarioRepository.save(usuario);
 	}
-
-
 }

@@ -20,57 +20,54 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WalletService implements IWalletService {
 
-	// private final IWalletRepository repository;
-	
-    // private final WalletMapper mapper;
+    private final IWalletRepository repository;
 
-	// @Override
-	// public List<WalletResponseDto> getAll() {
-	// 	List<Wallet> wallets = repository.findAll();
-	// 	List<WalletResponseDto> walletResponseDtoList = new ArrayList<>();
-	// 	wallets.forEach(wallet -> {
-	// 		WalletResponseDto response = mapper.fromEntityToDto(wallet);
-	// 		walletResponseDtoList.add(response);
-	// 	});
-	// 	return walletResponseDtoList;
-	// }
+    private final WalletMapper mapper;
 
-	// @Override
-	// public WalletResponseDto getWalletById(Long id) {
-	// 	Wallet wallet = repository.findById(id).orElseThrow();
-	// 	WalletResponseDto response = mapper.fromEntityToDto(wallet);
-	// 	return response;
-	// }
+    @Override
+    public List<WalletResponseDto> getAll() {
+        List<Wallet> wallets = repository.findAll();
+        List<WalletResponseDto> WalletResponseDtoList = new ArrayList<>();
+        wallets.forEach(wallet -> {
+            WalletResponseDto response = mapper.fromEntityToDto(wallet);
+            WalletResponseDtoList.add(response);
+        });
+        return WalletResponseDtoList;
+    }
 
-	// @Override
-	// public List<WalletResponseDto> getWalletsByFilters() {
-	// 	// TODO Auto-generated method stub
-	// 	throw new UnsupportedOperationException("Unimplemented method 'getWalletsByFilters'");
-	// }
+    @Override
+    public WalletResponseDto getWalletById(Long id) {
+        Wallet wallet = repository.findById(id).orElseThrow();
+        WalletResponseDto response = mapper.fromEntityToDto(wallet);
+        return response;
+    }
 
-	// @Override
-    // @Transactional
-    // public WalletResponseDto createWallet(WalletRequestDto walletRequestDto) {
-    //     Wallet wallet = mapper.fromDtoToEntity(walletRequestDto);
-    //     repository.save(wallet);
-    //     WalletResponseDto response = mapper.fromEntityToDto(wallet);
-    //     return response;
-    // }
-	
-    // // @Transactional
-	// // @Override
-	// // public WalletResponseDto updateWallet( Long id, WalletRequestDto walletRequestDto) {
-	// // 	Wallet wallet = repository.findById(id).orElseThrow();
-	// // 	Wallet updatedWallet = mapper.updateWallet(wallet, walletRequestDto);
-	// // 	repository.save(updatedWallet);
-	// // 	WalletResponseDto response = mapper.fromEntityToDto(updatedWallet);
-	// // 	return response;
-	// // }
+    @Override
+    public List<WalletResponseDto> getWalletsByFilters() {
+        throw new UnsupportedOperationException("Unimplemented method 'getWalletsByFilters'");
+    }
 
-	// @Override
-    // @Transactional
-	// public WalletResponseDto deleteWallet(Long id) {
-	// 	repository.deleteById(id);
-	// 	return null;
-	// }
+    @Override
+    public WalletResponseDto createWallet(WalletRequestDto walletRequestDto) {
+        Wallet wallet = mapper.fromDtoToEntity(walletRequestDto);
+        repository.save(wallet);
+        WalletResponseDto response = mapper.fromEntityToDto(wallet);
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public WalletResponseDto updateWallet(Long id, WalletRequestDto walletRequestDto) {
+        Wallet wallet = repository.findById(id).orElseThrow();
+        Wallet updatedWallet = mapper.updateWallet(wallet, walletRequestDto);
+        repository.save(updatedWallet);
+        WalletResponseDto response = mapper.fromEntityToDto(updatedWallet);
+        return response;
+    }
+
+    @Override
+    public WalletResponseDto deleteWallet(Long id) {
+        repository.deleteById(id);
+        return null;
+    }
 }

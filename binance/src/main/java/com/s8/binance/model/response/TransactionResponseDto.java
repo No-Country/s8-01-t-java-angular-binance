@@ -6,18 +6,27 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- * DTO for {@link com.s8.binance.model.entity.Transaction}
- */
-@Value
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TransactionResponseDto implements Serializable {
-    Long id;
-    Long orderId;
-    @NotBlank(message = "Empty")
-    String type;
-    BigDecimal purchaseAmount;
-    BigDecimal saleAmount;
-    LocalDate transactionDate;
+
+    private Long id;
+
+    private Long orderId;
+
+    @NotBlank(message = "empty")
+    private String type;
+
+    private BigDecimal purchaseAmount;
+
+    private BigDecimal saleAmount;
+
+    private LocalDate transactionDate;
 }

@@ -11,20 +11,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AssetResponseDto {
-    
+
     private Long id;
-    
-    @NotBlank(message = "Empty")
+
+    @NotBlank(message = "empty")
     private String description;
-    
+
     private BigDecimal total;
-    
+
     private Long fkCoin;
 
     private Wallet wallet;

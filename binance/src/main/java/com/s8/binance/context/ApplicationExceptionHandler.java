@@ -15,6 +15,7 @@ import com.s8.binance.security.util.Mensaje;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
+
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -26,9 +27,10 @@ public class ApplicationExceptionHandler {
 		});
 		return errors;
 	}
- @ExceptionHandler(RuntimeException.class)
+
+	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<Mensaje> runtimeException(RuntimeException runtimeException) {
-	 Mensaje mensaje= Mensaje.builder().mensaje(runtimeException.getMessage()).build();
-			 return new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST) ;
- }
+		Mensaje mensaje = Mensaje.builder().mensaje(runtimeException.getMessage()).build();
+		return new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+	}
 }

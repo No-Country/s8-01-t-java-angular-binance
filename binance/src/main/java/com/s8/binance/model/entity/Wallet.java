@@ -23,13 +23,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "WALLETS")
 public class Wallet {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_WALLET")
     private Long id;
 
-    // @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    // @Column(name = "ASSETS")
-    // private List<Asset> assets;
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
+    @Column(name = "ASSETS")
+    private List<Asset> assets;
 }

@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssetRequestDto{
-    
-    @NotBlank(message = "Empty")
+public class AssetRequestDto {
+
+    @NotBlank(message = "empty")
     private String description;
 
     private BigDecimal total;
-    
+
     private Long fkCoin;
 
     private Wallet wallet;

@@ -29,31 +29,32 @@ public class WalletController {
     private final IWalletService service;
 
     @GetMapping
-    public ResponseEntity<List<WalletResponseDto>> getAllWallets(){
-        List<WalletResponseDto> wallets = service.getAll();
-        return ResponseEntity.ok().body(wallets);
+    public ResponseEntity<List<WalletResponseDto>> getAllWallets() {
+        List<WalletResponseDto> responseEntity = service.getAll();
+        return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WalletResponseDto> getWalletById(@PathVariable Long id){
-        WalletResponseDto responseEntity =  service.getWalletById(id);
+    public ResponseEntity<WalletResponseDto> getWalletById(@PathVariable Long id) {
+        WalletResponseDto responseEntity = service.getWalletById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<WalletResponseDto> createWallet(@Valid @RequestBody WalletRequestDto wallet){
+    public ResponseEntity<WalletResponseDto> createWallet(@Valid @RequestBody WalletRequestDto wallet) {
         WalletResponseDto responseEntity = service.createWallet(wallet);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<WalletResponseDto> updateWallet(@Valid @PathVariable Long id, @RequestBody WalletRequestDto walletRequestDto){
+    public ResponseEntity<WalletResponseDto> updateWallet(@Valid @PathVariable Long id,
+            @RequestBody WalletRequestDto walletRequestDto) {
         WalletResponseDto responseEntity = service.updateWallet(id, walletRequestDto);
         return ResponseEntity.ok().body(responseEntity);
     }
-    
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteWallet(@PathVariable Long id){
+    public ResponseEntity<?> deleteWallet(@PathVariable Long id) {
         WalletResponseDto responseEntity = service.deleteWallet(id);
         return ResponseEntity.ok().body(responseEntity);
     }

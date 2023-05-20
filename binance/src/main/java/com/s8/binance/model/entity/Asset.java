@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "ASSETS")
 public class Asset {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ASSET")
@@ -46,7 +46,7 @@ public class Asset {
     @JoinColumn(name = "FK_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
     private Coin coin;
 
-    // @ManyToOne
-    // @JoinColumn(name = "ID_WALLET")
-    // private Wallet wallet;
+    @ManyToOne
+    @JoinColumn(name = "ID_WALLET")
+    private Wallet wallet;
 }

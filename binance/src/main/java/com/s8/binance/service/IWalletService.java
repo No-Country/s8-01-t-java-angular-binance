@@ -7,15 +7,15 @@ import com.s8.binance.model.response.WalletResponseDto;
 
 public interface IWalletService {
 
-    // public List<WalletResponseDto> getAll();
-    
-    // public WalletResponseDto getWalletById(Long id);
-    
-    // public List<WalletResponseDto> getWalletsByFilters();
-    
-    // public WalletResponseDto createWallet(WalletRequestDto WalletRequestDto);
-    
-    // // public WalletResponseDto updateWallet(Long id, WalletRequestDto WalletRequestDto);
-    
-    // public WalletResponseDto deleteWallet(Long id);
+    public List<WalletResponseDto> getAll();
+
+    public WalletResponseDto getWalletById(Long id);
+
+    public List<WalletResponseDto> getWalletsByFilters();
+
+    public WalletResponseDto createWallet(WalletRequestDto WalletRequestDto);
+
+    public WalletResponseDto updateWallet(Long id, WalletRequestDto WalletRequestDto);
+
+    public WalletResponseDto deleteWallet(Long id);
 }

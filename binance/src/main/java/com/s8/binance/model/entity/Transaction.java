@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -23,32 +24,33 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "TRANSACTIONS")
 public class Transaction {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TRANSACTION_ID")
     private Long id;
 
     @Column(name = "ORDER_ID")
     private Long orderId;
 
-   /* @Column(name = "PAYMENT_METHOD")
-   // @OneToOne
-    private PaymentMethod paymentMethod;*/
+    @Column(name = "PAYMENT_METHOD")
+    @OneToOne
+    private PaymentMethod paymentMethod;
 
     @Column(name = "TYPE")
-    @NotBlank(message = "Empty")
+    @NotBlank(message = "empty")
     private String type;
 
-    /*@Column(name = "PURCHASE_COIN")
-    //@OneToOne
-    private Coin purchaseCoinId;*/
+    @Column(name = "PURCHASE_COIN")
+    @OneToOne
+    private Coin purchaseCoinId;
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
 
-   /* @Column(name = "SALE_COIN")
-    //@OneToOne
-    private Coin saleCoinId;*/
+    @Column(name = "SALE_COIN")
+    @OneToOne
+    private Coin saleCoinId;
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;

@@ -14,8 +14,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Mensaje {
-	private  String mensaje;
 
-	public Mensaje(String isEmptyNotDeleted, HttpStatus httpStatus) {
-	}
+	private String mensaje;
+
+	public Mensaje(String isEmptyNotDeleted, HttpStatus httpStatus) {}
 }

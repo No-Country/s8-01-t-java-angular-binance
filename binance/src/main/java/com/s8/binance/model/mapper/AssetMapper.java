@@ -12,24 +12,21 @@ public class AssetMapper {
     public AssetResponseDto fromEntityToDto(Asset asset) {
         return AssetResponseDto.builder()
                 .id(asset.getId())
-                .description(asset.getDescription())
-                .total(asset.getTotal())
-                .fkCoin(asset.getFkCoin())
-                .build(); 
-    }
-
-    public Asset fromDtoToEntity(AssetRequestDto assetRequestDto){
-        return Asset.builder()
-                .description(assetRequestDto.getDescription())
-                .total(assetRequestDto.getTotal())
-                .fkCoin(assetRequestDto.getFkCoin())
-                // .wallet(assetRequestDto.getWallet())
+                .paymentDate(asset.getPaymentDate())
+                .paymentType(asset.getPaymentType())
                 .build();
     }
 
-    public Asset updateAsset(Asset asset, AssetRequestDto assetRequestDto){
-        asset.setTotal(assetRequestDto.getTotal());
-        asset.setDescription(asset.getDescription());
+    public Asset fromDtoToEntity(AssetRequestDto assetRequestDto) {
+        return Asset.builder()
+                .paymentDate(assetRequestDto.getPaymentDate())
+                .paymentType(assetRequestDto.getPaymentType())
+                .build();
+    }
+
+    public Asset updateAsset(Asset asset, AssetRequestDto assetRequestDto) {
+        asset.setPaymentDate(assetRequestDto.getPaymentDate());
+        asset.setPaymentDate(assetRequestDto.getPaymentDate());
         return asset;
     }
 }

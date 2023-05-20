@@ -16,13 +16,13 @@ import com.s8.binance.security.repository.RolRepository;
 public class RolService {
 
 	@Autowired
-	RolRepository rolRepository;
+	private RolRepository rolRepository;
 
-	public Optional<Rol> getByRolNombre(RolNombre rolNombre){
-		return  rolRepository.findByRolNombre(rolNombre);
+	public Optional<Rol> getByRolNombre(RolNombre rolNombre) {
+		return rolRepository.findByRolNombre(rolNombre);
 	}
 
-	public void save(Rol rol){
+	public void save(Rol rol) {
 		rolRepository.save(rol);
 	}
 }

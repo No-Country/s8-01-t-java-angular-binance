@@ -29,32 +29,34 @@ public class TransactionController {
     private final ITransactionService service;
 
     @GetMapping
-    public ResponseEntity<List<TransactionResponseDto>> getAllTransactions(){
-        List<TransactionResponseDto> transactions = service.getAll();
-        return ResponseEntity.ok().body(transactions);
+    public ResponseEntity<List<TransactionResponseDto>> getAllTransactions() {
+        List<TransactionResponseDto> responseEntity = service.getAll();
+        return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TransactionResponseDto> getTransactionById(@PathVariable Long id){
-        TransactionResponseDto responseEntity =  service.getTransactionById(id);
+    public ResponseEntity<TransactionResponseDto> getTransactionById(@PathVariable Long id) {
+        TransactionResponseDto responseEntity = service.getTransactionById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TransactionResponseDto> createTransaction(@Valid @RequestBody TransactionRequestDto transaction){
+    public ResponseEntity<TransactionResponseDto> createTransaction(
+            @Valid @RequestBody TransactionRequestDto transaction) {
         TransactionResponseDto responseEntity = service.createTransaction(transaction);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<TransactionResponseDto> updateTransaction(@Valid @PathVariable Long id, @RequestBody TransactionRequestDto transactionRequestDto){
+    public ResponseEntity<TransactionResponseDto> updateTransaction(@Valid @PathVariable Long id,
+            @RequestBody TransactionRequestDto transactionRequestDto) {
         TransactionResponseDto responseEntity = service.updateTransaction(id, transactionRequestDto);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
-    
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTransaction(@PathVariable Long id){
+    public ResponseEntity<?> deleteTransaction(@PathVariable Long id) {
         TransactionResponseDto responseEntity = service.deleteTransaction(id);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
 }

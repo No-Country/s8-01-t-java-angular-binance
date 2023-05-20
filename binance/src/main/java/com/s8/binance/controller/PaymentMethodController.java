@@ -22,39 +22,41 @@ import com.s8.binance.service.IPaymentMethodService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/v1/paymentMethods")
+@RequestMapping("api/v1/payments")
 @RequiredArgsConstructor
 public class PaymentMethodController {
 
     private final IPaymentMethodService service;
 
     @GetMapping
-    public ResponseEntity<List<PaymentMethodResponseDto>> getAllPaymentMethods(){
-        List<PaymentMethodResponseDto> paymentMethods = service.getAll();
-        return ResponseEntity.ok().body(paymentMethods);
+    public ResponseEntity<List<PaymentMethodResponseDto>> getAllPaymentMethods() {
+        List<PaymentMethodResponseDto> responseEntity = service.getAll();
+        return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentMethodResponseDto> getPaymentMethodById(@PathVariable Long id){
-        PaymentMethodResponseDto responseEntity =  service.getPaymentMethodById(id);
+    public ResponseEntity<PaymentMethodResponseDto> getPaymentMethodById(@PathVariable Long id) {
+        PaymentMethodResponseDto responseEntity = service.getPaymentMethodById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PaymentMethodResponseDto> createPaymentMethod(@Valid @RequestBody PaymentMethodRequestDto paymentMethod){
+    public ResponseEntity<PaymentMethodResponseDto> createPaymentMethod(
+            @Valid @RequestBody PaymentMethodRequestDto paymentMethod) {
         PaymentMethodResponseDto responseEntity = service.createPaymentMethod(paymentMethod);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<PaymentMethodResponseDto> updatePaymentMethod(@Valid @PathVariable Long id, @RequestBody PaymentMethodRequestDto paymentMethodRequestDto){
+    public ResponseEntity<PaymentMethodResponseDto> updatePaymentMethod(@Valid @PathVariable Long id,
+            @RequestBody PaymentMethodRequestDto paymentMethodRequestDto) {
         PaymentMethodResponseDto responseEntity = service.updatePaymentMethod(id, paymentMethodRequestDto);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
-    
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deletePaymentMethod(@PathVariable Long id){
+    public ResponseEntity<?> deletePaymentMethod(@PathVariable Long id) {
         PaymentMethodResponseDto responseEntity = service.deletePaymentMethod(id);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
 }

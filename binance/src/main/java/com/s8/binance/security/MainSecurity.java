@@ -1,7 +1,5 @@
 package com.s8.binance.security;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,28 +20,28 @@ import com.s8.binance.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceImpl userDetailsService;
+	private UserDetailsServiceImpl userDetailsService;
 
-	//Devuelve el mensaje de no autorizado
+	// Devuelve el mensaje de no autorizado
 	@Autowired
-	JwtEntryPoint jwtEntryPoint;
+	private JwtEntryPoint jwtEntryPoint;
 
 	@Bean
-	public JwtTokenFilter jwtTokenFilter(){
+	public JwtTokenFilter jwtTokenFilter() {
 		return new JwtTokenFilter();
 	}
 
 	/**
 	 * Encripta el pasword
+	 * 
 	 * @return pasword ecriptado
 	 */
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
@@ -65,7 +63,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//Desactivamos cookies ya que enviamos un token
+		// Desactivamos cookies ya que enviamos un token
 		// cada vez que hacemos una petición
 		http.cors().and().csrf().disable()
 				.authorizeRequests()

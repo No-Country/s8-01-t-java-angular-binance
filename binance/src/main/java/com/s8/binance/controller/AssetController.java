@@ -29,32 +29,33 @@ public class AssetController {
     private final IAssetService service;
 
     @GetMapping
-    public ResponseEntity<List<AssetResponseDto>> getAllAssets(){
-        List<AssetResponseDto> assets = service.getAll();
-        return ResponseEntity.ok().body(assets);
+    public ResponseEntity<List<AssetResponseDto>> getAllAssets() {
+        List<AssetResponseDto> responseEntity = service.getAll();
+        return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AssetResponseDto> getAssetById(@PathVariable Long id){
-        AssetResponseDto responseEntity =  service.getAssetById(id);
+    public ResponseEntity<AssetResponseDto> getAssetById(@PathVariable Long id) {
+        AssetResponseDto responseEntity = service.getAssetById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<AssetResponseDto> createAsset(@Valid @RequestBody AssetRequestDto asset){
+    public ResponseEntity<AssetResponseDto> createAsset(@Valid @RequestBody AssetRequestDto asset) {
         AssetResponseDto responseEntity = service.createAsset(asset);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<AssetResponseDto> updateAsset(@Valid @PathVariable Long id, @RequestBody AssetRequestDto assetRequestDto){
+    public ResponseEntity<AssetResponseDto> updateAsset(@Valid @PathVariable Long id,
+            @RequestBody AssetRequestDto assetRequestDto) {
         AssetResponseDto responseEntity = service.updateAsset(id, assetRequestDto);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
-    
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteAsset(@PathVariable Long id){
+    public ResponseEntity<?> deleteAsset(@PathVariable Long id) {
         AssetResponseDto responseEntity = service.deleteAsset(id);
-        return  ResponseEntity.ok().body(responseEntity);
+        return ResponseEntity.ok().body(responseEntity);
     }
 }
