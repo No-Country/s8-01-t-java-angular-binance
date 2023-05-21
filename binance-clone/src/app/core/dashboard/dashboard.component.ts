@@ -1,7 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+
+
 import { tap } from 'rxjs';
 import { Coin } from 'src/interfaces/coin.model';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +18,14 @@ import { Coin } from 'src/interfaces/coin.model';
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+
+  faEye = faEye;
+  faArrowDown = faArrowDown;
+  faChart = faChartSimple;
+  faArrowRotate = faArrowsRotate;
+
+
   api: string =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
   coins: Coin[] = [];
@@ -21,6 +37,9 @@ export class DashboardComponent {
     {}
 
   ngOnInit() {
+
+    this.chart();
+
     this.http.get<Coin[]>(this.api).pipe(
       tap((res) => {
         this.coins = res;
@@ -30,6 +49,34 @@ export class DashboardComponent {
       error: (err) => console.error(err)
     });
   }
+
+  chart(){
+    const chart = new Chart('chart', {
+      type: 'line',
+      data:{
+        labels: ['04-11', '04-15', '04-19', '04-27', '05-01', '05-05', '05-10'],
+        datasets: [{
+          label: '',
+          data: [1000, 1000, 1000, 1000, 1000, 1000,1000],
+          borderWidth: 1,
+          borderColor:'#F0B90B',
+          backgroundColor: this.getDataColors(70),
+          fill: true,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+ getDataColors = (opacity: number): string => {
+  const baseColor = '#F0B90B';
+  return `${baseColor}${opacity}`;
+  };
 
   searchCoin() {
     this.filteredCoins = this.coins.filter(

@@ -1,53 +1,165 @@
-<main>
+<main class="h-full">
   <!-- profile min-->
-  <section class="profile">
-    <div class="image"></div>
-    <div class="">
-      <div class="user-nick">
-        <h5>L_Pbte</h5>
+  <section class="profile flex flex-row relative p-5 w-ful min-h-10 bg-gray-200">
+    <div class="w-[-64PX] h-[-64PX] rounded-full flex justify-center static">
+      <img src="./../../../assets/images/dashboard/Avatar.png" alt="" srcset="">
+    </div>
+    <div class="mx-5 relative">
+      <div class="user-nick text mb-2">
+        <h5 class="font-semibold">L_Pbte</h5>
       </div>
-      <div class="">
-        <div class="id-user">
-          <h5>ID de usuario</h5>
-          <span>78952130645</span>
+      <div class="flex flex-row ">
+        <div class="id-user flex flex-col mr-5">
+          <h5 class="text-sm text-gray-500">ID de usuario</h5>
+          <span class="text-sm">78952130645</span>
         </div>
-        <div class="user-type">
-          <h5>Tipo de usuario</h5>
-          <span>Usuario regular</span>
+        <div class="user-type flex flex-col mx-5">
+          <h5 class="text-sm text-gray-500 hover:text-black hover:cursor-pointer">Tipo de usuario</h5>
+          <span class="text-sm">Usuario regular</span>
         </div>
-        <div class="twitter">
-          <h5>Twitter</h5>
-          <span>No vinculado</span>
+        <div class="twitter flex flex-col mx-5">
+          <h5 class="text-sm text-gray-500 hover:text-black hover:cursor-pointer">Twitter</h5>
+          <span class="text-sm">No vinculado</span>
         </div>
-        <div class="last-conection">
-          <h5>Ultima inicio de sesión</h5>
-          <span>2023-05-13 17:12:04(24.232.44.76)</span>
+        <div class="last-conection flex flex-col mx-5">
+          <h5 class="text-sm text-gray-500 hover:text-black hover:cursor-pointer">Ultima inicio de sesión</h5>
+          <span class="text-sm">2023-05-13 17:12:04(24.232.44.76)</span>
         </div>
       </div>
     </div>
   </section>
 
    <!--profile resume-->
-  <section class="container">
-    <article class=""></article>
-    <aside class="explore">
+  <section class="flex flex-row p-8">
+    <article class="w-3/4">
+    <div class="Balance container flex flex-col items-center justify-center w-full h-full">
+      <div class="flex flex-row justify-around mb-7 w-full">
+        <div class="flex flex-row mx-5">
+          <h3 class="font-medium text-2xl" >Balance estimado</h3>
+          <button class="px-2 py-2 font-semibold bg-binance-gray">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </button>
+        </div>
+        <div class="buttons ">
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-mustard text-white rounded-full shadow-sm ">
+            Deposito
+          </button>
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+            Retirar
+          </button>
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+            Comprar cripto
+          </button>
+        </div>
+      </div>
+
+      <div class="flex flex-row w-3/6 justify-center items-center mr-[40%] mb-7">
+        <div class="flex flex-row items-center ml-2 text-3xl ">
+          <h3>0.00035 BTC</h3>
+          <button class="px-2 py-2 bg-binance-gray mx-2 text-xl">
+            <fa-icon [icon]="faArrowDown"></fa-icon>
+          </button>
+        </div>
+        <div class="mx-2 text-3xl">
+          <h3 class="">≈</h3>
+        </div>
+        <div class="text-3xl">
+          <h3>$1300.59</h3>
+        </div>
+      </div>
+
+      <div class="flex flex-row w-full justify-around mb-7">
+        <div class="flex flex-row">
+          <button class="px-4 py-2 mx-5 font-semibold text-sm text-white bg-binance-mustard rounded-full shadow-sm  hover:bg-binance-mustard hover:text-white"> 7 días</button>
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white"> 30 días</button>
+        </div>
+        <div class="flex flex-row">
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+            <fa-icon [icon]="faArrowRotate"></fa-icon>
+            Cartera
+          </button>
+          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+            <fa-icon [icon]="faChart"></fa-icon>
+            Resumen de billetera
+          </button>
+        </div>
+      </div>
+      <span class="font-light"> Los datos de cambio diario de los activos se actualizarán antes de las 8:00  (UTC) del día siguiente. </span>
+      <div class="flex w-3/4  justify-center">
+        <canvas id="chart" width="100%"  >
+
+        </canvas></div>
+    </div>
+    </article>
+    <aside class="explore w-1/4">
       <div class="">
-        <h3>
+        <h3 class="font-medium text-2xl">
           Explorar
         </h3>
-        <input type="">
+        <input class="my-5 w-[90%] outline-none border-[1px] border-gray-400 h-10" type="search" placeholder="Moneda, Funcion, Anuncios...">
       </div>
-      <div class="">
-        <h3>
-          Anuncios
+      <div class="mas-servicios grid grid-flow-row gap-2 divide-y divide-slate-200">
+        <h3 class="font-medium text-2xl">
+          Mas servicios
         </h3>
-        <div class="">
-          <h5></h5>
-          <span></span>
+        <div class="flex flex-row py-5 px-5">
+          <div class="flex justify-center items-center w-1/6">
+            <img class="w-[50%] h-auto" src="./../../../assets/images/dashboard/Gorrito.png" alt="">
+          </div>
+          <div class="flex flex-col ml-4 w-5/6">
+            <h5 class="font-semibold">Aprende y gana</h5>
+            <span>
+              Gana criptomonedas GRATIS mientras
+              aprendes con Binance
+            </span>
+          </div>
         </div>
-        <div class="">
-          <h5></h5>
-          <span></span>
+        <div class="flex flex-row border-gray-300 py-6 px-6">
+          <div class="flex justify-center items-center  w-1/6">
+            <img class="w-[50%] h-auto " src="./../../../assets/images/dashboard/Group.png" alt="">
+          </div>
+          <div class="flex flex-col ml-4 w-5/6">
+            <h5 class="font-semibold">Referido</h5>
+            <span>
+              Gana hasta un 40% de comisión
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row py-5 px-5">
+          <div class="flex justify-center items-center  w-1/6">
+            <img class="w-[40%] h-auto " src="./../../../assets/images/dashboard/notes.png" alt="">
+          </div>
+          <div class="flex flex-col ml-4 w-5/6">
+            <h5 class="font-semibold">Ordenes abiertas</h5>
+            <span>
+              Ver todas las Órdenes spot
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row py-5 px-5">
+          <div class="flex justify-center items-center  w-1/6">
+            <img class="w-[100%] h-100%" class="h-[-30px] w-[-30px]"src="./../../../assets/images/dashboard/settings.png" alt="">
+          </div>
+          <div class="flex flex-col ml-4 w-5/6">
+            <h5 class="font-semibold">Directo a la billetera</h5>
+            <span>
+              Transfiere monedas y tokens entre tu cuenta
+              de Binance.com y Binance Chain Wallet
+            </span>
+          </div>
+        </div>
+        <div class="flex flex-row py-5 px-5">
+          <div class="flex justify-center items-center  w-1/6">
+            <img class=""src="./../../../assets/images/dashboard/Porcentaje.png" alt="">
+          </div>
+          <div class="flex flex-col ml-4 w-5/6">
+            <h5 class="font-semibold">Comisiones de trading</h5>
+            <span>
+              Tu nivel de comisión VI: Usuario regular
+              Usar BNB para pagar comisiones (25%
+              de descuento)
+            </span>
+          </div>
         </div>
       </div>
     </aside>
@@ -55,27 +167,15 @@
 
   <!--crypto market-->
   <section>
-    <div class="Balance">
-      <div class="">
-        <h3>Balance estimado</h3>
-      </div>
-      <div class="">
-        <div class="">
-          <div class=""></div>
-          <div class=""></div>
-        </div>
-        <div class="">
-          <span></span>
-        </div>
-      </div>
-    </div>
     <div class="">
       <div class="">
-        <h4>Mercados</h4>
+        <h3 class="font-medium text-2xl">
+          Mercados
+        </h3>
       </div>
       <div class="market-options">
       </div>
-      <div class="container">
+      <!--<div class="container">
         <div class="row">
           <div class="col-xs-12">
             <h1>CoinMarket</h1>
@@ -128,7 +228,7 @@
             </table>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </main>
