@@ -12,6 +12,7 @@ import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SideBarComponent } from './core/side-bar/side-bar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LandingComponent,
     DashboardComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
