@@ -1,12 +1,12 @@
 package com.s8.binance.security.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 // * Clase Encargada de generar la seguridad
 // * Clase que implementa los privilegios de cada usuario
@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 public class UsuarioMain implements UserDetails {
 
 	private String nombre;
+
 	private String usuario;
+
 	private String email;
 	private String password;
 	// Variable que nos da la autorización (no confundir con autenticación)
@@ -23,8 +25,9 @@ public class UsuarioMain implements UserDetails {
 	// de GranthedAuthority de Spring security
 	private Collection<? extends GrantedAuthority> authorities;
 
-	//Constructor
-	public UsuarioMain(String nombre, String usuario, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+	// Constructor
+	public UsuarioMain(String nombre, String usuario, String email, String password,
+			Collection<? extends GrantedAuthority> authorities) {
 		this.nombre = nombre;
 		this.usuario = usuario;
 		this.email = email;
@@ -32,19 +35,18 @@ public class UsuarioMain implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	//Metodo que asigna los privilegios (autorización)
-	public static UsuarioMain build(Usuario usuario){
-		//Convertimos la clase Rol a la clase GrantedAuthority
-		List<GrantedAuthority> authorities =
-				usuario.getRoles()
-						.stream()
-						.map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name()))
-						.collect(Collectors.toList());
+	// Metodo que asigna los privilegios (autorización)
+	public static UsuarioMain build(Usuario usuario) {
+		// Convertimos la clase Rol a la clase GrantedAuthority
+		List<GrantedAuthority> authorities = usuario.getRoles()
+				.stream()
+				.map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name()))
+				.collect(Collectors.toList());
 		return new UsuarioMain(usuario.getNombre(), usuario.getUsuario(), usuario.getEmail(),
 				usuario.getPassword(), authorities);
 	}
 
-	//@Override los que tengan esta anotación
+	// @Override los que tengan esta anotación
 	// significa que son metodos de UserDetails de SpringSecurity
 
 	@Override

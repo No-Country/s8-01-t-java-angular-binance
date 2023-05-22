@@ -1,13 +1,16 @@
 package com.s8.binance.security.repository;
 
-import com.s8.binance.security.entity.Usuario;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
-@Repository
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.s8.binance.security.entity.Usuario;
+
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-	Optional<Usuario> findByNombreUsuario(String nombreUsuario);
-	boolean existsByNombreUsuario (String nombreUsuario);
-	boolean existsByEmail (String email);
+
+	public Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+
+	public boolean existsByNombreUsuario(String nombreUsuario);
+
+	public boolean existsByEmail(String email);
 }

@@ -1,12 +1,12 @@
 package com.s8.binance.repository;
 
-import com.s8.binance.model.entity.Coin;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
 
-public interface ICoinRepository extends JpaRepository<Coin, Long> {
-    Optional<Coin> findByName(String name);
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    boolean existsByName(String name);
+import com.s8.binance.model.entity.Coin;
+
+public interface ICoinRepository extends JpaRepository<Coin, Long> {
+
+    Optional<Coin> findByName(String name);
 }
