@@ -18,7 +18,6 @@ public class TransactionRequestDto {
 
     private String transactionType;
 
-    private LocalDate transactionDate;
 
     private Long fkPurchaseCoin;
 

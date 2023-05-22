@@ -12,22 +12,15 @@ public class PaymentMethodMapper {
     public PaymentMethodResponseDto fromEntityToDto(PaymentMethod paymentMethod) {
         return PaymentMethodResponseDto.builder()
                 .id(paymentMethod.getId())
-                .paymentDate(paymentMethod.getPaymentDate())
                 .paymentType(paymentMethod.getPaymentType())
                 .build();
     }
 
     public PaymentMethod fromDtoToEntity(PaymentMethodRequestDto paymentMethodRequestDto) {
         return PaymentMethod.builder()
-                .paymentDate(paymentMethodRequestDto.getPaymentDate())
                 .paymentType(paymentMethodRequestDto.getPaymentType())
                 .build();
     }
 
-    public PaymentMethod updatePaymentMethod(PaymentMethod paymentMethod,
-            PaymentMethodRequestDto paymentMethodRequestDto) {
-        paymentMethod.setPaymentDate(paymentMethodRequestDto.getPaymentDate());
-        paymentMethod.setPaymentDate(paymentMethodRequestDto.getPaymentDate());
-        return paymentMethod;
-    }
+ 
 }

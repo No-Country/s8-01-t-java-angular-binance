@@ -19,5 +19,5 @@ public class PaymentMethodRequestDto implements Serializable {
     @NotBlank(message = "empty")
     private String paymentType;
 
-    private LocalDate paymentDate;
+
 }
