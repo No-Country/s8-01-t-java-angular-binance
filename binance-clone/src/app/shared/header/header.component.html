@@ -1,1 +1,40 @@
-<p>header works!</p>
+<div class="fixed w-full  z-10 ">
+  <!-- navbar -->
+  <div class="absolute flex justify-between w-full p-5  lg:justify-between">
+    <div class="flex gap-3  lg:flex">
+      <img src="../../../assets/images/Binance_Logo.png" class="w-7 h-7" alt="">
+      <h1 class="text-binance-yellow">BINANCE</h1>
+    </div>
+    <div class="flex flex-row gap-2 mr-5">
+      <button class="hidden p-1 hover:text-binance-yellow border-black lg:block ">Iniciar session</button>
+      <button class="hidden p-1 rounded border-black lg:block bg-binance-yellow">Registrase</button>
+      <fa-icon [icon]="faBars" class="block p-1 bg-white lg:hidden" (click)="menu()">menu</fa-icon>
+    </div>
+  </div>
+
+  <!-- sidebar -->
+  <div [ngClass]="isMenuOpen? 'right-0' : 'right-[-400px]'"
+    class="lg:hidden absolute min-h-screen max-w-[420px] w-full bg-gray-100 duration-200 flex p-5 overflow-y-scroll ">
+    <div class="flex-grow ">
+      <div class="flex justify-end">
+        <fa-icon [icon]="faX" class="flex  p-1  lg:hidden text-sm" (click)="menu()">menu</fa-icon>
+      </div>
+      <div class="flex flex-col gap-10  max-h-screen justify-center">
+
+        <div class="flex flex-col gap-2">
+          <button class=" p-1 hover:text-binance-yellow border-black lg:hidden ">Iniciar session</button>
+          <button class=" p-1 rounded border-black lg:hidden bg-binance-yellow hover:text-white">Registrase</button>
+        </div>
+
+        <div class="flex flex-col gap-2 ">
+          <h1 class="flex gap-2 "><fa-icon [icon]="faCoin" class=" p-1 rounded  lg:hidden hover:text-binance-yellow"></fa-icon>Comprar cripto</h1>
+          <h1 class="flex gap-2"><fa-icon [icon]="faChart" class=" p-1 rounded border-black lg:hidden hover:text-binance-yellow"></fa-icon>Mercados</h1>
+          <h1 class="flex gap-2"><fa-icon [icon]="faChart" class=" p-1 rounded border-black lg:hidden hover:text-binance-yellow"></fa-icon>Comercio</h1>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
