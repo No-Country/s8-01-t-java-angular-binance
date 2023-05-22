@@ -12,21 +12,18 @@ public class CoinMapper {
     public CoinResponseDto fromEntityToDto(Coin coin) {
         return CoinResponseDto.builder()
                 .id(coin.getId())
-                .paymentDate(coin.getPaymentDate())
-                .paymentType(coin.getPaymentType())
+                .name(coin.getName())
                 .build();
     }
 
     public Coin fromDtoToEntity(CoinRequestDto coinRequestDto) {
         return Coin.builder()
-                .paymentDate(coinRequestDto.getPaymentDate())
-                .paymentType(coinRequestDto.getPaymentType())
+                .name(coinRequestDto.getName())
                 .build();
     }
 
     public Coin updateCoin(Coin coin, CoinRequestDto coinRequestDto) {
-        coin.setPaymentDate(coinRequestDto.getPaymentDate());
-        coin.setPaymentDate(coinRequestDto.getPaymentDate());
+        coin.setName(coinRequestDto.getName());
         return coin;
     }
 }

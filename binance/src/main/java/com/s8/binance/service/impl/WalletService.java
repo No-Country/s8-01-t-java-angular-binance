@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class WalletService implements IWalletService {
 
     private final IWalletRepository repository;
@@ -55,15 +56,15 @@ public class WalletService implements IWalletService {
         return response;
     }
 
-    @Override
-    @Transactional
-    public WalletResponseDto updateWallet(Long id, WalletRequestDto walletRequestDto) {
-        Wallet wallet = repository.findById(id).orElseThrow();
-        Wallet updatedWallet = mapper.updateWallet(wallet, walletRequestDto);
-        repository.save(updatedWallet);
-        WalletResponseDto response = mapper.fromEntityToDto(updatedWallet);
-        return response;
-    }
+    // @Override
+    // @Transactional
+    // public WalletResponseDto updateWallet(Long id, WalletRequestDto walletRequestDto) {
+    //     Wallet wallet = repository.findById(id).orElseThrow();
+    //     Wallet updatedWallet = mapper.updateWallet(wallet, walletRequestDto);
+    //     repository.save(updatedWallet);
+    //     WalletResponseDto response = mapper.fromEntityToDto(updatedWallet);
+    //     return response;
+    // }
 
     @Override
     public WalletResponseDto deleteWallet(Long id) {

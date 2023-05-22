@@ -1,9 +1,9 @@
 package com.s8.binance.model.response;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.s8.binance.model.entity.Asset;
+import com.s8.binance.model.entity.Transaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WalletResponseDto implements Serializable {
+public class WalletResponseDto {
 
     private Long id;
 
-    private List<Asset> assets;
+    private List<Transaction> transactions = new ArrayList<>();
 }

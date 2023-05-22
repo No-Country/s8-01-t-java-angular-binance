@@ -3,8 +3,6 @@ package com.s8.binance.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Transaction;
@@ -55,15 +53,15 @@ public class TransactionService implements ITransactionService {
         return response;
     }
 
-    @Override
-    @Transactional
-    public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto) {
-        Transaction transaction = repository.findById(id).orElseThrow();
-        Transaction updatedTransaction = mapper.updateTransaction(transaction, transactionRequestDto);
-        repository.save(updatedTransaction);
-        TransactionResponseDto response = mapper.fromEntityToDto(updatedTransaction);
-        return response;
-    }
+    // @Override
+    // @Transactional
+    // public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto) {
+    //     Transaction transaction = repository.findById(id).orElseThrow();
+    //     Transaction updatedTransaction = mapper.updateTransaction(transaction, transactionRequestDto);
+    //     repository.save(updatedTransaction);
+    //     TransactionResponseDto response = mapper.fromEntityToDto(updatedTransaction);
+    //     return response;
+    // }
 
     @Override
     public TransactionResponseDto deleteTransaction(Long id) {

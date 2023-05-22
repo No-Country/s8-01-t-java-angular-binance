@@ -1,5 +1,6 @@
 package com.s8.binance.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +34,10 @@ public class Wallet {
     private Long id;
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    @Column(name = "ASSETS")
-    private List<Asset> assets;
+    @Column(name = "TRANSACTIONS")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Transaction> transactions = new ArrayList<>();
+
+    // relacion con usuario
+    // private User user;
 }

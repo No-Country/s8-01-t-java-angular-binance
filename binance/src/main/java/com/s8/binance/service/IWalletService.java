@@ -13,9 +13,9 @@ public interface IWalletService {
 
     public List<WalletResponseDto> getWalletsByFilters();
 
-    public WalletResponseDto createWallet(WalletRequestDto WalletRequestDto);
+    public WalletResponseDto createWallet(WalletRequestDto walletRequestDto);
 
-    public WalletResponseDto updateWallet(Long id, WalletRequestDto WalletRequestDto);
+    // public WalletResponseDto updateWallet(Long id, WalletRequestDto WalletRequestDto);
 
     public WalletResponseDto deleteWallet(Long id);
 }

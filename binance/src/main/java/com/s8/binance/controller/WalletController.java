@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,12 +45,12 @@ public class WalletController {
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<WalletResponseDto> updateWallet(@Valid @PathVariable Long id,
-            @RequestBody WalletRequestDto walletRequestDto) {
-        WalletResponseDto responseEntity = service.updateWallet(id, walletRequestDto);
-        return ResponseEntity.ok().body(responseEntity);
-    }
+    // @PutMapping("/update/{id}")
+    // public ResponseEntity<WalletResponseDto> updateWallet(@Valid @PathVariable Long id,
+    //         @RequestBody WalletRequestDto walletRequestDto) {
+    //     WalletResponseDto responseEntity = service.updateWallet(id, walletRequestDto);
+    //     return ResponseEntity.ok().body(responseEntity);
+    // }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteWallet(@PathVariable Long id) {

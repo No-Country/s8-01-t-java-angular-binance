@@ -15,7 +15,7 @@ public interface ITransactionService {
 
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto);
 
-    public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto);
+    // public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto);
 
     public TransactionResponseDto deleteTransaction(Long id);
 }

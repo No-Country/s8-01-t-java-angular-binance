@@ -6,27 +6,23 @@ import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.model.request.WalletRequestDto;
 import com.s8.binance.model.response.WalletResponseDto;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class WalletMapper {
+
 
     public WalletResponseDto fromEntityToDto(Wallet wallet) {
         return WalletResponseDto.builder()
                 .id(wallet.getId())
-                .paymentDate(wallet.getPaymentDate())
-                .paymentType(wallet.getPaymentType())
+                .transactions(wallet.getTransactions())
                 .build();
     }
 
     public Wallet fromDtoToEntity(WalletRequestDto walletRequestDto) {
         return Wallet.builder()
-                .paymentDate(walletRequestDto.getPaymentDate())
-                .paymentType(walletRequestDto.getPaymentType())
+                .id(walletRequestDto.getId())
                 .build();
-    }
-
-    public Wallet updateWallet(Wallet wallet, WalletRequestDto walletRequestDto) {
-        wallet.setPaymentDate(walletRequestDto.getPaymentDate());
-        wallet.setPaymentDate(walletRequestDto.getPaymentDate());
-        return wallet;
     }
 }

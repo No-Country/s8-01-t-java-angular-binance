@@ -1,8 +1,9 @@
 package com.s8.binance.model.request;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.s8.binance.model.entity.Asset;
+import com.s8.binance.model.entity.Transaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WalletRequestDto {
 
-    private List<Asset> assets;
+    private Long id;
+
+    private List<Transaction> transaction = new ArrayList<>();
 }

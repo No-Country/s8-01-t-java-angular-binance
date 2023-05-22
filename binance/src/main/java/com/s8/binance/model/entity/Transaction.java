@@ -5,9 +5,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -29,32 +32,45 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRANSACTION_ID")
     private Long id;
+    
+    // @Column(name = "FK_PAYMENT_METHOD")
+    // private Long fkPaymentMethod;
 
-    @Column(name = "ORDER_ID")
-    private Long orderId;
+    // @OneToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "FK_PAYMENT_METHOD", referencedColumnName = "ID_PAYMENT_METHOD", insertable = false, updatable = false)
+    // private PaymentMethod paymentMethod;
 
-    @Column(name = "PAYMENT_METHOD")
-    @OneToOne
-    private PaymentMethod paymentMethod;
-
-    @Column(name = "TYPE")
+    @Column(name = "TRANSACTION_TYPE")
     @NotBlank(message = "empty")
-    private String type;
+    private String transactionType;
 
-    @Column(name = "PURCHASE_COIN")
-    @OneToOne
-    private Coin purchaseCoinId;
+    @Column(name = "TRANSACTION_DATE")
+    private LocalDate transactionDate;
+
+    @Column(name = "FK_PURCHASE_COIN")
+    private Long fkPurchaseCoin;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_PURCHASE_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
+    private Coin purchaseCoin;
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
 
-    @Column(name = "SALE_COIN")
-    @OneToOne
-    private Coin saleCoinId;
+    @Column(name = "FK_SALE_COIN")
+    private Long fkSaleCoin;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_SALE_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
+    private Coin saleCoin;
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
 
-    @Column(name = "TRANSACTION_DATE")
-    private LocalDate transactionDate;
+    @Column(name = "FK_WALLET")
+    private Long fkWallet;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_WALLET",referencedColumnName = "ID_WALLET", insertable = false, updatable = false)
+    private Wallet wallet;
 }

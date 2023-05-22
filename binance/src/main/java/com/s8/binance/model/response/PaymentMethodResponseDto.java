@@ -1,6 +1,5 @@
 package com.s8.binance.model.response;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentMethodResponseDto implements Serializable {
+public class PaymentMethodResponseDto {
 
     private Long id;
     
