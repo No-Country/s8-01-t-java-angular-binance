@@ -34,6 +34,7 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_WALLET")
     private Long id;
+
     @OneToOne
     @JoinColumn(name = "id_socio")
     private Usuario usuario;
@@ -41,5 +42,4 @@ public class Wallet {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "wallets")
     @JsonIgnore
     private List<Transaction> transactions = new ArrayList<>();
-
 }
