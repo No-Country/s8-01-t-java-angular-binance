@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'register',
     loadComponent: () => import('./pages/sign-up/sign-up.component').then(c => c.SignUpComponent)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/sign-in/sign-in.component').then(c => c.SignInComponent)
   }
 ];
 
