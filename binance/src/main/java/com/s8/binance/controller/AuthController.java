@@ -1,4 +1,4 @@
-package com.s8.binance.security.controller;
+package com.s8.binance.controller;
 
 import java.util.HashSet;
 import java.util.Set;
