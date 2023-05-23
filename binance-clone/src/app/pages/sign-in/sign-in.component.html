@@ -1,0 +1,51 @@
+<div class="flex flex-col place-items-center h-screen justify-center">
+    <form [formGroup]="form" (ngSubmit)="signIn()">
+        <div *ngIf="step === 0" class="flex flex-col w-[500px]">
+            <p class="text-3xl font-semibold mb-7">Iniciar sesión</p>
+            <div class="flex flex-col gap-5">
+                <div>Email</div>
+                <input type="email" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" formControlName="email">
+                <div *ngIf="form.controls.email.touched && form.controls.email.invalid">
+                    <p
+                      *ngIf="form.controls.email.hasError('required')"
+                      class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                      Este campo es obligatorio
+                    </p>
+                    <p
+                      *ngIf="form.controls.email.hasError('email')"
+                      class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                      Este campo debe contener un email
+                    </p>
+                </div>
+                <button (click)="increaseStep()" type="submit" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+                <a routerLink="/register" class="text-binance-mustard">Crear una cuenta de Binance</a>
+            </div>
+        </div>
+        <div *ngIf="step === 1" class="flex flex-col w-[500px]">
+            <p class="text-3xl font-semibold mb-7">¡Bienvenido de nuevo!</p>
+            <div class="flex flex-col gap-5">
+                <div><strong>{{ form.get('email')?.value }}</strong></div>
+                <p>Contraseña</p>
+                <input type="password" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" formControlName="password">
+                <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
+                <p
+                *ngIf="form.controls.password.hasError('required')"
+                class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                Este campo es obligatorio
+                </p>
+                <p
+                *ngIf="form.controls.password.hasError('minlength')"
+                class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                Este campo debe contener al menos 6 caracteres
+                </p>
+            </div>
+            <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+            <a class="text-binance-mustard">¿Olvidaste la contraseña?</a>
+        </div>
+        </div>
+    </form>
+</div>
