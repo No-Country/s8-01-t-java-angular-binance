@@ -1,22 +1,26 @@
 package com.s8.binance.security.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class NuevoUsuario {
 
 	@NotBlank
 	private String nombre;
+
 	@NotBlank
 	private String nombreUsuario;
+
 	@Email
 	private String email;
+
 	@NotBlank
 	private String password;
-	//Por defecto crea un usuario normal
-	//Si quiero un usuario Admin debo pasar este campo roles
+	// Por defecto crea un usuario normal
+	// Si quiero un usuario Admin debo pasar este campo roles
 	private Set<String> roles = new HashSet<>();
 
 	public String getNombre() {

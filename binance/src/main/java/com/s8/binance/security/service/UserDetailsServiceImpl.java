@@ -1,15 +1,15 @@
 package com.s8.binance.security.service;
 
-import com.s8.binance.security.entity.Usuario;
-import com.s8.binance.security.entity.UsuarioMain;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.Optional;
+import com.s8.binance.security.entity.Usuario;
+import com.s8.binance.security.entity.UsuarioMain;
 
 /**
  * Clase que convierte la clase usuario en un UsuarioMain
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	UsuarioService usuarioService;
+	private UsuarioService usuarioService;
 
 	@Override
 	public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {

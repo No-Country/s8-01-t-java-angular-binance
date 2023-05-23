@@ -6,6 +6,7 @@ public class LoginUsuario {
 
 	@NotBlank
 	private String nombreUsuario;
+
 	@NotBlank
 	private String password;
 

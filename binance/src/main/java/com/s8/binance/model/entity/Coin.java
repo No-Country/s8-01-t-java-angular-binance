@@ -23,18 +23,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @SQLDelete(sql = "UPDATE COIN SET status = true WHERE id=?")
-@Where(clause = "status=false")
-// @FilterDef(name = "deletedMarcaFilter",parameters = @ParamDef(name = "isDeleted", type = "boolean"))
-// @Filter(name = "deletedMarcaFilter",condition = "deleted = :isDeleted")
-@Table(name = "COIN")
+@Where(clause = "status = false")
+@Table(name = "COINS")
 public class Coin {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_COIN")
     private Long id;
 
     @Column(name = "NAME")
-    @NotBlank(message = "Empty")
+    @NotBlank(message = "empty")
     private String name;
 
     @Column(name = "STATUS")

@@ -1,20 +1,22 @@
 package com.s8.binance.model.request;
 
-import lombok.Value;
-
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * DTO for {@link com.s8.binance.model.entity.Transaction}
- */
-@Value
-public class TransactionRequestDto implements Serializable {
-    @NotBlank(message = "Empty")
-    String type;
-    BigDecimal purchaseAmount;
-    BigDecimal saleAmount;
-    LocalDate transactionDate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class TransactionRequestDto {
+    private String transactionType;
+    private Long fkPurchaseCoin;
+    private BigDecimal purchaseAmount;
+    private Long fkSaleCoin;
+    private BigDecimal saleAmount;
+    private Long fkWallet;
 }
