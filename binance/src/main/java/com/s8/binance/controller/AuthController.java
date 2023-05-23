@@ -1,11 +1,14 @@
 package com.s8.binance.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.s8.binance.model.entity.Wallet;
+import com.s8.binance.repository.IWalletRepository;
+import com.s8.binance.security.repository.UsuarioRepository;
 import com.s8.binance.service.impl.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.s8.binance.security.dto.JwtDto;
 import com.s8.binance.security.dto.LoginUsuario;
 import com.s8.binance.security.dto.NuevoUsuario;
@@ -44,9 +44,13 @@ public class AuthController {
 	@Autowired
 	RolService rolService;
 	@Autowired
+	UsuarioRepository usuarioRepository;
+	@Autowired
 	JwtProvider jwtProvider;
     @Autowired
 	WalletService walletService;
+	@Autowired
+	IWalletRepository walletRepository;
 	@PostMapping("/add")
 	public ResponseEntity<?> nuevoUsuario(@Valid @RequestBody NuevoUsuario nuevoUsuario,
 			BindingResult bindingResult) {
