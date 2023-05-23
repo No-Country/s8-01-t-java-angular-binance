@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.s8.binance.security.entity.Usuario;
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Wallet;
@@ -49,8 +50,9 @@ public class WalletService implements IWalletService {
     }
 
     @Override
-    public WalletResponseDto createWallet(WalletRequestDto walletRequestDto) {
-        Wallet wallet = mapper.fromDtoToEntity(walletRequestDto);
+    public WalletResponseDto createWallet(Usuario usuario) {
+        Wallet wallet = new Wallet();
+        wallet.setUsuario(usuario);
         repository.save(wallet);
         WalletResponseDto response = mapper.fromEntityToDto(wallet);
         return response;

@@ -13,7 +13,7 @@ public interface ITransactionService {
 
     public List<TransactionResponseDto> getTransactionsByFilters();
 
-    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto);
+    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto,Long id);
 
     // public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto);
 

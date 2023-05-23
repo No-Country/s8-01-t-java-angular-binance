@@ -39,11 +39,11 @@ public class WalletController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<WalletResponseDto> createWallet(@Valid @RequestBody WalletRequestDto wallet) {
-        WalletResponseDto responseEntity = service.createWallet(wallet);
-        return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<WalletResponseDto> createWallet(@Valid @RequestBody WalletRequestDto wallet) {
+//        WalletResponseDto responseEntity = service.createWallet(wallet);
+//        return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
+//    }
 
     // @PutMapping("/update/{id}")
     // public ResponseEntity<WalletResponseDto> updateWallet(@Valid @PathVariable Long id,

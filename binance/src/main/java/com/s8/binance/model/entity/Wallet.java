@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import com.s8.binance.security.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,12 +24,9 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_WALLET")
     private Long id;
-
-
-
-//    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-//  @Column(name = "TRANSACTIONS")
-//    private List<Transaction> transactions = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name= "id_socio")
+    private Usuario usuario;
 
 @OneToMany(fetch = FetchType.EAGER, mappedBy = "wallets")
 @JsonIgnore

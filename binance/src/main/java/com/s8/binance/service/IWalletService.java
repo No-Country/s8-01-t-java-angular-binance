@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.s8.binance.model.request.WalletRequestDto;
 import com.s8.binance.model.response.WalletResponseDto;
+import com.s8.binance.security.entity.Usuario;
 
 public interface IWalletService {
 
@@ -13,7 +14,7 @@ public interface IWalletService {
 
     public List<WalletResponseDto> getWalletsByFilters();
 
-    public WalletResponseDto createWallet(WalletRequestDto walletRequestDto);
+    public WalletResponseDto createWallet(Usuario usuario);
 
     // public WalletResponseDto updateWallet(Long id, WalletRequestDto WalletRequestDto);
 
