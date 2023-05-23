@@ -1,27 +1,18 @@
 package com.s8.binance.security.entity;
 
+import com.s8.binance.model.entity.Wallet;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Usuario {
+	@Id
 
-		//Id de la tabla
-		@Id
-		//Id Auto Increment
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int idUsuario;
-		//Decorador para indicar que no puede ser null el campo
 		@NotNull
 		private String nombre;
 		@NotNull
@@ -33,15 +24,11 @@ public class Usuario {
 		@NotNull
 		private String password;
 
-		// private boolean  STATUS = false ;
+		@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+		Wallet wallet;
+
 		@NotNull
-		//Relación many to many
-		//Un usuario puede tener MUCHOS roles y un rol puede PERTENECER a varios usuarios
-		//Tabla intermedia que tiene dos campos que va a tener idUsuario y idRol
 		@ManyToMany
-		// join columns hace referencia a la columna que hace referencia hacia esta
-		// Es decir la tabla usuario_rol va a tener un campo que se llama id_usuario
-		// inverseJoinColumns = el inverso, hace referencia a rol
 		@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario"),
 				inverseJoinColumns = @JoinColumn(name = "rol_id"))
 		private Set<Rol> roles = new HashSet<>();
@@ -49,7 +36,6 @@ public class Usuario {
 		public Usuario() {
 		}
 
-		//Constuctor sin Id ni Roles
 		public Usuario(@NotNull String nombre,
 					   @NotNull String nombreUsuario,
 					   @NotNull String email,

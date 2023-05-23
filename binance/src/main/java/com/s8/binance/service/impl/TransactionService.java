@@ -3,6 +3,8 @@ package com.s8.binance.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.s8.binance.model.entity.Wallet;
+import com.s8.binance.repository.IWalletRepository;
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Transaction;
@@ -18,8 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TransactionService implements ITransactionService {
 
+    private final IWalletRepository walletRepository ;
     private final ITransactionRepository repository;
-
     private final TransactionMapper mapper;
 
     @Override
@@ -46,9 +48,13 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto) {
+    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto,Long id ) {
+         Wallet wallet = walletRepository.findById(id).orElseThrow();
         Transaction transaction = mapper.fromDtoToEntity(transactionRequestDto);
+        transaction.setTransactionDate(transaction.getTransactionDate().now());
+        transaction.setWallets(wallet);
         repository.save(transaction);
+
         TransactionResponseDto response = mapper.fromEntityToDto(transaction);
         return response;
     }

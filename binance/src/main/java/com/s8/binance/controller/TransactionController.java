@@ -40,9 +40,8 @@ public class TransactionController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TransactionResponseDto> createTransaction(
-            @Valid @RequestBody TransactionRequestDto transaction) {
-        TransactionResponseDto responseEntity = service.createTransaction(transaction);
+    public ResponseEntity<TransactionResponseDto> createTransaction(@Valid @RequestBody TransactionRequestDto transaction, Long id) {
+        TransactionResponseDto responseEntity = service.createTransaction(transaction,id);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 

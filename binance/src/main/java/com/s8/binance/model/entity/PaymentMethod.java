@@ -27,11 +27,9 @@ public class PaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PAYMENT_METHOD_ID")
     private Long id;
-
     @Column(name = "PAYMENT_TYPE")
     @NotBlank(message = "empty")
     private String paymentType;
 
-    @Column(name = "PAYMENT_DATE")
-    private LocalDate paymentDate;
+
 }

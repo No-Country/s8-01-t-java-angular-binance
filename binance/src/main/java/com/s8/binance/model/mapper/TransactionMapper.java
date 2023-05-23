@@ -14,12 +14,11 @@ public class TransactionMapper {
                 .id(transaction.getId())
                 // .fkPaymentMethod(transaction.getFkPaymentMethod())
                 .transactionType(transaction.getTransactionType())
-                .transactionDate(transaction.getTransactionDate())
                 .fkPurchaseCoin(transaction.getFkPurchaseCoin())
                 .purchaseAmount(transaction.getPurchaseAmount())
                 .fkSaleCoin(transaction.getFkSaleCoin())
                 .saleAmount(transaction.getSaleAmount())
-                .fkWallet(transaction.getFkWallet())
+
                 .build();
     }
 
@@ -44,17 +43,14 @@ public class TransactionMapper {
     
     //     return dtoList;
     // }
-
     public Transaction fromDtoToEntity(TransactionRequestDto transactionRequestDto) {
         return Transaction.builder()
                 // .fkPaymentMethod(transactionRequestDto.getFkPaymentMethod())
                 .transactionType(transactionRequestDto.getTransactionType())
-                .transactionDate(transactionRequestDto.getTransactionDate())
                 .fkPurchaseCoin(transactionRequestDto.getFkPurchaseCoin())
                 .purchaseAmount(transactionRequestDto.getPurchaseAmount())
                 .fkSaleCoin(transactionRequestDto.getFkSaleCoin())
                 .saleAmount(transactionRequestDto.getSaleAmount())
-                .fkWallet(transactionRequestDto.getFkWallet())
                 .build();
     }
 }

@@ -58,11 +58,8 @@ public class PaymentMethodService implements IPaymentMethodService {
     @Override
     @Transactional
     public PaymentMethodResponseDto updatePaymentMethod(Long id, PaymentMethodRequestDto paymentMethodRequestDto) {
-        PaymentMethod paymentMethod = repository.findById(id).orElseThrow();
-        PaymentMethod updatedPaymentMethod = mapper.updatePaymentMethod(paymentMethod, paymentMethodRequestDto);
-        repository.save(updatedPaymentMethod);
-        PaymentMethodResponseDto response = mapper.fromEntityToDto(updatedPaymentMethod);
-        return response;
+
+        return null;
     }
 
     @Override

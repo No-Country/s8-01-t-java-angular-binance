@@ -13,20 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionRequestDto {
-
-    // private Long fkPaymentMethod;
-
     private String transactionType;
-
-    private LocalDate transactionDate;
-
     private Long fkPurchaseCoin;
-
     private BigDecimal purchaseAmount;
-
     private Long fkSaleCoin;
-
     private BigDecimal saleAmount;
-
     private Long fkWallet;
 }

@@ -20,8 +20,6 @@ public class TransactionResponseDto {
 
     private String transactionType;
 
-    private LocalDate transactionDate;
-
     private Long fkPurchaseCoin;
 
     private BigDecimal purchaseAmount;

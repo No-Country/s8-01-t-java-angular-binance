@@ -20,5 +20,4 @@ public class PaymentMethodResponseDto {
     @NotBlank(message = "empty")
     private String paymentType;
 
-    private LocalDate paymentDate;
 }
