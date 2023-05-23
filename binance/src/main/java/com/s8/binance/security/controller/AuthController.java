@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.s8.binance.model.entity.Wallet;
+import com.s8.binance.service.impl.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.s8.binance.security.dto.JwtDto;
 import com.s8.binance.security.dto.LoginUsuario;
 import com.s8.binance.security.dto.NuevoUsuario;
@@ -44,8 +45,8 @@ public class AuthController {
 	RolService rolService;
 	@Autowired
 	JwtProvider jwtProvider;
-
-	// Espera un json y lo convierte a tipo clase NuevoUsuario
+    @Autowired
+	WalletService walletService;
 	@PostMapping("/add")
 	public ResponseEntity<?> nuevoUsuario(@Valid @RequestBody NuevoUsuario nuevoUsuario,
 			BindingResult bindingResult) {
@@ -58,7 +59,6 @@ public class AuthController {
 		if (usuarioService.existsByEmail(nuevoUsuario.getEmail())) {
 			return new ResponseEntity<>(new Mensaje("Ese email ya existe"), HttpStatus.BAD_REQUEST);
 		}
-
 		Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(),
 				nuevoUsuario.getEmail(), passwordEncoder.encode(nuevoUsuario.getPassword()));
 
@@ -68,9 +68,9 @@ public class AuthController {
 			roles.add(rolService.getByRolNombre(RolNombre.ROLE_ADMIN).get());
 		usuario.setRoles(roles);
 		usuarioService.save(usuario);
+		walletService.createWallet(usuario);
 		return new ResponseEntity<>(new Mensaje("Usuario creado"), HttpStatus.CREATED);
 	}
-
 	@PostMapping("/login")
 	public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
