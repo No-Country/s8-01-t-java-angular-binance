@@ -1,13 +1,11 @@
-<div class="sidenav bg-gray-200" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
-  <div class="logo-container">
-      <button class="logo" (click)="toggleCollapse()">
-        <fa-icon class="" [icon]="faBars"></fa-icon>
-      </button>
-      <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
-          <fa-icon class="close-icon" [icon]="faClose"></fa-icon>
-      </button>
-  </div>
 
+<div class="logo-container mb-5 w-10 ">
+  <button class="logo hover:bg-gray-400" (click)="toggleCollapse()">
+    <fa-icon [icon]="faBars"></fa-icon>
+  </button>
+</div>
+
+<div class="sidenav bg-gray-200" [ngClass]="collapsed ? 'left-0' : 'left-[-50vw]'">
         <nav class="sidenav-nav" >
           <li class="sidenav-nav-item">
             <a href="" class="sidenav-nav-link hover:bg-gray-300">
@@ -63,8 +61,8 @@
           <a href="" class="w-full h-20 sidenav-nav-link flex justify-center items-center">
             <fa-icon class="sidenav-link-icon" [icon]="faArrowRightFromBracket"></fa-icon>
             <span class="sidenav-link-text" *ngIf="collapsed"> Cerrar sesion</span>
-
           </a>
           </li>
         </nav>
 </div>
+
