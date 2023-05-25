@@ -40,15 +40,14 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 	 * 
 	 * @return pasword ecriptado
 	 */
-	@Bean
+	/*@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-	}
-
-	@Override
+	}*/
+	/*@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
+	}*/
 
 	@Bean
 	@Override

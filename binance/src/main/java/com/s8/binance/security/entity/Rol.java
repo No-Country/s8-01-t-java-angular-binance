@@ -8,8 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import com.s8.binance.security.enums.RolNombre;
+import com.s8.binance.security.enums.RolName;
 
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Rol {
 	@Id
@@ -19,13 +21,13 @@ public class Rol {
 	@NotNull
 	//Se indica que va a ser un Enum de tipo String
 	@Enumerated(EnumType.STRING)
-	private RolNombre rolNombre;
+	private RolName rolName;
 
 	public Rol() {
 	}
 
-	public Rol(@NotNull RolNombre rolNombre) {
-		this.rolNombre = rolNombre;
+	public Rol(@NotNull RolName rolName) {
+		this.rolName = rolName;
 	}
 
 	public int getId() {
@@ -36,11 +38,11 @@ public class Rol {
 		this.id = id;
 	}
 
-	public RolNombre getRolNombre() {
-		return rolNombre;
+	public RolName getRolName() {
+		return rolName;
 	}
 
-	public void setRolNombre(RolNombre rolNombre) {
-		this.rolNombre = rolNombre;
+	public void setRolName(RolName rolName) {
+		this.rolName = rolName;
 	}
 }

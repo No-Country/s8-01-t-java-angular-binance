@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.s8.binance.security.entity.Rol;
-import com.s8.binance.security.enums.RolNombre;
+import com.s8.binance.security.enums.RolName;
 import com.s8.binance.security.repository.RolRepository;
 import com.s8.binance.security.service.RolService;
 
@@ -25,8 +25,8 @@ public class CreateRoles implements CommandLineRunner {
 
 		List<Rol> rol = rolRepository.findAll();
 		if (rol.isEmpty()) {
-			Rol rolAdmin = new Rol(RolNombre.ROLE_ADMIN);
-			Rol rolUser = new Rol(RolNombre.ROLE_USER);
+			Rol rolAdmin = new Rol(RolName.ROLE_ADMIN);
+			Rol rolUser = new Rol(RolName.ROLE_USER);
 			rolService.save(rolAdmin);
 			rolService.save(rolUser);
 		}

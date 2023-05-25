@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.security.entity.Rol;
-import com.s8.binance.security.enums.RolNombre;
+import com.s8.binance.security.enums.RolName;
 import com.s8.binance.security.repository.RolRepository;
 
 @Service
@@ -18,8 +18,8 @@ public class RolService {
 	@Autowired
 	private RolRepository rolRepository;
 
-	public Optional<Rol> getByRolNombre(RolNombre rolNombre) {
-		return rolRepository.findByRolNombre(rolNombre);
+	public Optional<Rol> getByRolName(RolName rolName) {
+		return rolRepository.findByRolName(rolName);
 	}
 
 	public void save(Rol rol) {

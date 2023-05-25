@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.s8.binance.security.util.Mensaje;
+import com.s8.binance.security.util.Message;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
@@ -29,8 +29,8 @@ public class ApplicationExceptionHandler {
 	}
 
 	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<Mensaje> runtimeException(RuntimeException runtimeException) {
-		Mensaje mensaje = Mensaje.builder().mensaje(runtimeException.getMessage()).build();
-		return new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<Message> runtimeException(RuntimeException runtimeException) {
+		Message message = Message.builder().message(runtimeException.getMessage()).build();
+		return new ResponseEntity(message, HttpStatus.BAD_REQUEST);
 	}
 }
