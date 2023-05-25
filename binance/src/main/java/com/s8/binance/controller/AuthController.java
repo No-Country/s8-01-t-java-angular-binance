@@ -2,6 +2,8 @@ package com.s8.binance.controller;
 
 import javax.validation.Valid;
 
+import com.s8.binance.model.entity.Wallet;
+import com.s8.binance.repository.IWalletRepository;
 import com.s8.binance.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import com.s8.binance.security.dto.Register;
 import com.s8.binance.security.service.UserService;
 import com.s8.binance.security.util.Message;
 
+import java.util.List;
 import java.util.Random;
 
 @RestController
@@ -24,6 +27,8 @@ public class AuthController {
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 
+	@Autowired
+	IWalletRepository repository;
 
 	@PostMapping("/add")
 	public ResponseEntity<?> newUser(@Valid @RequestBody Register register){
@@ -39,5 +44,10 @@ public class AuthController {
 	@PostMapping("/sendMail")
 	public void emailVerification(@RequestParam String email, @RequestParam Integer num){
 		userService.emailVerification(email, num);
+	}
+	@GetMapping("/all-wallets")
+	private List<Wallet> all (){
+		List <Wallet> list= repository.findAll();
+		return list;
 	}
 }

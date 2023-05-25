@@ -1,6 +1,9 @@
 package com.s8.binance.security.entity;
 
 import com.s8.binance.model.entity.Wallet;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,8 @@ import javax.validation.constraints.NotNull;
 //@AllArgsConstructor
 //@NoArgsConstructor
 @Entity
+@Data
+@AllArgsConstructor
 public class User {
 	@Id
 
@@ -27,7 +32,8 @@ public class User {
 		private String password;
 
 
-		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+		@OneToOne(  fetch = FetchType.EAGER , cascade = CascadeType.ALL)
+		@JoinColumn( name ="id_user")
 		Wallet wallet;
 
 		@NotNull

@@ -18,9 +18,9 @@ public class WalletService implements IWalletService {
     private final IWalletRepository repository;
     @Override
     public void createWallet(User user) {
-        Wallet wallet = new Wallet();
-        wallet.setUser(user);
-        repository.save(wallet);
+//        Wallet wallet = new Wallet();
+//        wallet.setUser(user);
+//        repository.save(wallet);
     }
     
     @Override

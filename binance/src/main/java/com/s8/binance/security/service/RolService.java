@@ -14,14 +14,11 @@ import com.s8.binance.security.repository.RolRepository;
 @Service
 @Transactional
 public class RolService {
-
 	@Autowired
 	private RolRepository rolRepository;
-
 	public Optional<Rol> getByRolName(RolName rolName) {
 		return rolRepository.findByRolName(rolName);
 	}
-
 	public void save(Rol rol) {
 		rolRepository.save(rol);
 	}
