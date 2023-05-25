@@ -36,15 +36,14 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public Integer emailVerification(String email) {
-		int n = (int) (Math.random() * 100000 + 1);
+	/*public String emailVerification(String email) {
 		emailService.sendMail(email,
 				"BINANCE - Confirme your Registration",
 				"Your Crypto Journey Starts Now\n" +
 						"Welcome to Binance. Confirm your registration by using the activation code below. \n" +
 						"\n" +
-						"Account activation code: \n" +
-						n);
-		return n;
-	}
+						"Account activation code: \n"
+						);
+		return "mail enviado";
+	}*/
 }

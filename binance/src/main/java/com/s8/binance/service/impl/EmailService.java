@@ -5,10 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.s8.binance.service.IEmailService;
-
 @Service
-public class EmailService implements IEmailService {
+public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;

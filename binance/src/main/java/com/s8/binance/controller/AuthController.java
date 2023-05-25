@@ -14,6 +14,8 @@ import com.s8.binance.security.dto.Register;
 import com.s8.binance.security.service.UserService;
 import com.s8.binance.security.util.Message;
 
+import java.util.Random;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -24,13 +26,9 @@ public class AuthController {
 
 
 	@PostMapping("/add")
-	public ResponseEntity<?> newUser(@Valid @RequestBody Register register, @RequestParam boolean status){
-		if (status = true) {
+	public ResponseEntity<?> newUser(@Valid @RequestBody Register register){
 			userDetailsService.newUser(register);
 			return new ResponseEntity<>(new Message("Usuario creado"), HttpStatus.CREATED);
-		} else {
-			return new ResponseEntity<>(new Message("Email no verificado"), HttpStatus.UNAUTHORIZED);
-		}
 	}
 
 	@PostMapping("/login")
@@ -38,8 +36,9 @@ public class AuthController {
 		return userDetailsService.login(login, bindingResult);
 	}
 
-	@PostMapping()
-	public Integer emailVerification(@RequestParam String email){
-		return userService.emailVerification(email);
-	}
+	/*@PostMapping("/sendMail")
+	public String emailVerification(@RequestParam String email){
+		userService.emailVerification(email);
+		return "mail enviado";
+	}*/
 }
