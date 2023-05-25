@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,8 @@ Chart.register(...registerables);
 })
 
 export class DashboardComponent implements OnInit {
+
+  @Input() collapsed = false;
 
   faEye = faEye;
   faArrowDown = faArrowDown;
