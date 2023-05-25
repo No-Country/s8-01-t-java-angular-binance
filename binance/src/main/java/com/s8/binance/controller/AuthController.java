@@ -36,9 +36,8 @@ public class AuthController {
 		return userDetailsService.login(login, bindingResult);
 	}
 
-	/*@PostMapping("/sendMail")
-	public String emailVerification(@RequestParam String email){
-		userService.emailVerification(email);
-		return "mail enviado";
-	}*/
+	@PostMapping("/sendMail")
+	public void emailVerification(@RequestParam String email, @RequestParam Integer num){
+		userService.emailVerification(email, num);
+	}
 }
