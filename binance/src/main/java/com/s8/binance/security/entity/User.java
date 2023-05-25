@@ -7,67 +7,70 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
-public class Usuario {
+public class User {
 	@Id
 
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int idUsuario;
+		private int userId;
 		@NotNull
-		private String nombre;
+		private String name;
 		@NotNull
 		@Column(unique = true)
-		private String nombreUsuario;
+		private String username;
 		@NotNull
 		@Column(unique = true)
 		private String email;
 		@NotNull
 		private String password;
 
-		@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+
+		@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 		Wallet wallet;
 
 		@NotNull
 		@ManyToMany
-		@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "id_usuario"),
+		@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "id_user"),
 				inverseJoinColumns = @JoinColumn(name = "rol_id"))
 		private Set<Rol> roles = new HashSet<>();
 
-		public Usuario() {
+		public User() {
 		}
 
-		public Usuario(@NotNull String nombre,
-					   @NotNull String nombreUsuario,
-					   @NotNull String email,
-					   @NotNull String password) {
-			this.nombre = nombre;
-			this.nombreUsuario = nombreUsuario;
+		public User(@NotNull String name,
+					@NotNull String username,
+					@NotNull String email,
+					@NotNull String password) {
+			this.name = name;
+			this.username = username;
 			this.email = email;
 			this.password = password;
 		}
 
-		public int getIdUsuario() {
-			return idUsuario;
+		public int getUserId() {
+			return userId;
 		}
 
-		public void setIdUsuario(int idUsuario) {
-			this.idUsuario = idUsuario;
+		public void setUserId(int userId) {
+			this.userId = userId;
 		}
 
-		public String getNombre() {
-			return nombre;
+		public String getName() {
+			return name;
 		}
 
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
+		public void setName(String name) {
+			this.name = name;
 		}
 
-		public String getUsuario() {
-			return nombreUsuario;
+		public String getUser() {
+			return username;
 		}
 
-		public void setUsuario(String usuario) {
-			this.nombreUsuario = usuario;
+		public void setUser(String user) {
+			this.username = user;
 		}
 
 		public String getEmail() {

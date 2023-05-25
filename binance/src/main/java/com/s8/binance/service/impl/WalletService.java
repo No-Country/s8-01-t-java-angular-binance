@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.repository.IWalletRepository;
-import com.s8.binance.security.entity.Usuario;
+import com.s8.binance.security.entity.User;
 import com.s8.binance.service.IWalletService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 public class WalletService implements IWalletService {
     private final IWalletRepository repository;
     @Override
-    public void createWallet(Usuario usuario) {
+    public void createWallet(User user) {
         Wallet wallet = new Wallet();
-        wallet.setUsuario(usuario);
+        wallet.setUser(user);
         repository.save(wallet);
     }
     

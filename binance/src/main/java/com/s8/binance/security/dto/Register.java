@@ -6,13 +6,13 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class NuevoUsuario {
+public class Register {
 
 	@NotBlank
-	private String nombre;
+	private String name;
 
 	@NotBlank
-	private String nombreUsuario;
+	private String username;
 
 	@Email
 	private String email;
@@ -23,20 +23,20 @@ public class NuevoUsuario {
 	// Si quiero un usuario Admin debo pasar este campo roles
 	private Set<String> roles = new HashSet<>();
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {

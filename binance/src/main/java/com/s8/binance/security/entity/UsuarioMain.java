@@ -14,9 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 // */
 public class UsuarioMain implements UserDetails {
 
-	private String nombre;
+	private String name;
 
-	private String usuario;
+	private String user;
 
 	private String email;
 	private String password;
@@ -26,24 +26,24 @@ public class UsuarioMain implements UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 
 	// Constructor
-	public UsuarioMain(String nombre, String usuario, String email, String password,
-			Collection<? extends GrantedAuthority> authorities) {
-		this.nombre = nombre;
-		this.usuario = usuario;
+	public UsuarioMain(String name, String user, String email, String password,
+					   Collection<? extends GrantedAuthority> authorities) {
+		this.name = name;
+		this.user = user;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
 	// Metodo que asigna los privilegios (autorización)
-	public static UsuarioMain build(Usuario usuario) {
+	public static UsuarioMain build(User user) {
 		// Convertimos la clase Rol a la clase GrantedAuthority
-		List<GrantedAuthority> authorities = usuario.getRoles()
+		List<GrantedAuthority> authorities = user.getRoles()
 				.stream()
-				.map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name()))
+				.map(rol -> new SimpleGrantedAuthority(rol.getRolName().name()))
 				.collect(Collectors.toList());
-		return new UsuarioMain(usuario.getNombre(), usuario.getUsuario(), usuario.getEmail(),
-				usuario.getPassword(), authorities);
+		return new UsuarioMain(user.getName(), user.getUser(), user.getEmail(),
+				user.getPassword(), authorities);
 	}
 
 	// @Override los que tengan esta anotación
@@ -61,7 +61,7 @@ public class UsuarioMain implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return usuario;
+		return user;
 	}
 
 	@Override
@@ -84,8 +84,8 @@ public class UsuarioMain implements UserDetails {
 		return true;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
 	public String getEmail() {

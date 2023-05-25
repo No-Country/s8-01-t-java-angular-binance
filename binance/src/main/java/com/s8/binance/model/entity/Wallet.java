@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.s8.binance.security.entity.Usuario;
+import com.s8.binance.security.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +37,7 @@ public class Wallet {
 
     @OneToOne
     @JoinColumn(name = "id_socio")
-    private Usuario usuario;
+    private User user;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "wallets")
     @JsonIgnore
