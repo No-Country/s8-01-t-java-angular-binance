@@ -1,24 +1,17 @@
 package com.s8.binance.model.entity;
 
-import static javax.persistence.FetchType.EAGER;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,12 +31,9 @@ public class Transaction {
     @Column(name = "TRANSACTION_ID")
     private Long id;
 
-    // @Column(name = "FK_PAYMENT_METHOD")
-    // private Long fkPaymentMethod;
-
-    // @OneToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "FK_PAYMENT_METHOD", referencedColumnName = "ID_PAYMENT_METHOD", insertable = false, updatable = false)
-    // private PaymentMethod paymentMethod;
+    @ManyToOne
+    @JoinColumn(name = "PAYMENT_METHOD_ID")
+    private PaymentMethod paymentMethod;
 
     @Column(name = "TRANSACTION_TYPE")
     @NotBlank(message = "empty")
@@ -52,24 +42,22 @@ public class Transaction {
     @Column(name = "TRANSACTION_DATE")
     private LocalDate transactionDate;
 
-    @Column(name = "FK_PURCHASE_COIN")
-    private Long fkPurchaseCoin;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_PURCHASE_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "PURCHASE_COIN_ID", referencedColumnName = "COIN_ID")
     private Coin purchaseCoin;
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
 
-    @Column(name = "FK_SALE_COIN")
-    private Long fkSaleCoin;
+    @ManyToOne
+    @JoinColumn(name = "SALE_COIN_ID", referencedColumnName = "COIN_ID")
+    private Coin saleCoin;
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
 
-    @JsonIgnore
-    @ManyToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "walet_id")
-    private Wallet wallets;
+    // @JsonIgnore
+    // @ManyToOne(fetch = EAGER, cascade = CascadeType.ALL)
+    // @JoinColumn(name = "WALLET_ID")
+    // private Wallet wallet;
 }

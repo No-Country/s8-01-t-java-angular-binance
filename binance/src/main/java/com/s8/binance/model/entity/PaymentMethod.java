@@ -1,7 +1,5 @@
 package com.s8.binance.model.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +25,8 @@ public class PaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PAYMENT_METHOD_ID")
     private Long id;
+
     @Column(name = "PAYMENT_TYPE")
     @NotBlank(message = "empty")
     private String paymentType;
-
-
 }

@@ -7,15 +7,13 @@ import com.s8.binance.model.response.TransactionResponseDto;
 
 public interface ITransactionService {
 
-    public List<TransactionResponseDto> getAll();
-
-    public TransactionResponseDto getTransactionById(Long id);
+    public List<TransactionResponseDto> getAllTransactions();
 
     public List<TransactionResponseDto> getTransactionsByFilters();
 
-    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto,Long id);
+    public TransactionResponseDto getTransactionById(Long id);
 
-    // public TransactionResponseDto updateTransaction(Long id, TransactionRequestDto transactionRequestDto);
+    public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto);
 
-    public TransactionResponseDto deleteTransaction(Long id);
+    public void deleteTransaction(Long id);
 }

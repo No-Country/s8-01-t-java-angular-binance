@@ -25,36 +25,30 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TransactionController {
 
-    private final ITransactionService service;
+    private final ITransactionService transactionService;
 
     @GetMapping
     public ResponseEntity<List<TransactionResponseDto>> getAllTransactions() {
-        List<TransactionResponseDto> responseEntity = service.getAll();
+        List<TransactionResponseDto> responseEntity = transactionService.getAllTransactions();
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TransactionResponseDto> getTransactionById(@PathVariable Long id) {
-        TransactionResponseDto responseEntity = service.getTransactionById(id);
+        TransactionResponseDto responseEntity = transactionService.getTransactionById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TransactionResponseDto> createTransaction(@Valid @RequestBody TransactionRequestDto transaction, Long id) {
-        TransactionResponseDto responseEntity = service.createTransaction(transaction,id);
+    public ResponseEntity<TransactionResponseDto> createTransaction(
+            @Valid @RequestBody TransactionRequestDto transaction) {
+        TransactionResponseDto responseEntity = transactionService.createTransaction(transaction);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 
-    // @PutMapping("/update/{id}")
-    // public ResponseEntity<TransactionResponseDto> updateTransaction(@Valid @PathVariable Long id,
-    //         @RequestBody TransactionRequestDto transactionRequestDto) {
-    //     TransactionResponseDto responseEntity = service.updateTransaction(id, transactionRequestDto);
-    //     return ResponseEntity.ok().body(responseEntity);
-    // }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTransaction(@PathVariable Long id) {
-        TransactionResponseDto responseEntity = service.deleteTransaction(id);
-        return ResponseEntity.ok().body(responseEntity);
+        transactionService.deleteTransaction(id);
+        return ResponseEntity.ok().body("Transaction successfully removed");
     }
 }

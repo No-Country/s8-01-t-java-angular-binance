@@ -1,7 +1,7 @@
 package com.s8.binance.model.request;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,11 +12,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionRequestDto {
+public class TransactionRequestDto implements Serializable {
+
+    private Long paymentMethodId;
+
     private String transactionType;
-    private Long fkPurchaseCoin;
+
+    private Long purchaseCoinId;
+
     private BigDecimal purchaseAmount;
-    private Long fkSaleCoin;
+
+    private Long saleCoinId;
+
     private BigDecimal saleAmount;
-    private Long fkWallet;
+    
+    private Long walletId;
 }

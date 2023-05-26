@@ -21,6 +21,4 @@ public class PaymentMethodMapper {
                 .paymentType(paymentMethodRequestDto.getPaymentType())
                 .build();
     }
-
- 
 }

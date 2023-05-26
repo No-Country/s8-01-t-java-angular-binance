@@ -7,15 +7,11 @@ import com.s8.binance.model.response.PaymentMethodResponseDto;
 
 public interface IPaymentMethodService {
 
-    public List<PaymentMethodResponseDto> getAll();
+    public List<PaymentMethodResponseDto> getAllPaymentMethods();
 
     public PaymentMethodResponseDto getPaymentMethodById(Long id);
 
-    public List<PaymentMethodResponseDto> getPaymentMethodsByFilters();
+    public void createPaymentMethod(PaymentMethodRequestDto paymentMethodRequestDto);
 
-    public PaymentMethodResponseDto createPaymentMethod(PaymentMethodRequestDto paymentMethodRequestDto);
-
-    public PaymentMethodResponseDto updatePaymentMethod(Long id, PaymentMethodRequestDto paymentMethodRequestDto);
-
-    public PaymentMethodResponseDto deletePaymentMethod(Long id);
+    public void deletePaymentMethod(Long id);
 }
