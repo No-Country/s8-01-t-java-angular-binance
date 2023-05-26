@@ -1,5 +1,7 @@
 package com.s8.binance.controller;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.s8.binance.model.request.TransactionRequestDto;
@@ -31,6 +34,24 @@ public class TransactionController {
     public ResponseEntity<List<TransactionResponseDto>> getAllTransactions() {
         List<TransactionResponseDto> responseEntity = transactionService.getAllTransactions();
         return ResponseEntity.ok().body(responseEntity);
+    }
+
+    @GetMapping("/filters")
+    public ResponseEntity<List<TransactionResponseDto>> getTransactionsByFilters(
+            @RequestParam(required = false) Long paymentMethodId,
+            @RequestParam(required = false) String transactionType,
+            @RequestParam(required = false) LocalDate transactionDate,
+            @RequestParam(required = false) Long purchaseCoinId,
+            @RequestParam(required = false) BigDecimal purchaseAmount,
+            @RequestParam(required = false) Long saleCoinId,
+            @RequestParam(required = false) BigDecimal saleAmount) {
+        List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(paymentMethodId, transactionType,
+                transactionDate, purchaseCoinId, purchaseAmount, saleCoinId, saleAmount);
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(transactions, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/{id}")

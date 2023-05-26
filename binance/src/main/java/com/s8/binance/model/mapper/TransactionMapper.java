@@ -18,7 +18,7 @@ public class TransactionMapper {
         return TransactionResponseDto.builder()
                 .id(transaction.getId())
                 .paymentMethod(transaction.getPaymentMethod())
-                .transactionType(transaction.getTransactionType())
+                .transactionType(transaction.getTransactionType().name())
                 .transactionDate(transaction.getTransactionDate())
                 .purchaseCoin(transaction.getPurchaseCoin())
                 .purchaseAmount(transaction.getPurchaseAmount())

@@ -3,6 +3,8 @@ package com.s8.binance.model.request;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.s8.binance.util.enums.TransactionType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +18,7 @@ public class TransactionRequestDto implements Serializable {
 
     private Long paymentMethodId;
 
-    private String transactionType;
+    private TransactionType transactionType;
 
     private Long purchaseCoinId;
 

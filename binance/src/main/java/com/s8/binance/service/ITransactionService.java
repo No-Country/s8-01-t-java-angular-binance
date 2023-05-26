@@ -1,5 +1,7 @@
 package com.s8.binance.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.s8.binance.model.request.TransactionRequestDto;
@@ -9,7 +11,9 @@ public interface ITransactionService {
 
     public List<TransactionResponseDto> getAllTransactions();
 
-    public List<TransactionResponseDto> getTransactionsByFilters();
+    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, String transactionType,
+            LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
+            BigDecimal saleAmount);
 
     public TransactionResponseDto getTransactionById(Long id);
 

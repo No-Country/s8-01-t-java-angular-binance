@@ -1,8 +1,11 @@
 package com.s8.binance.service.impl;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Coin;
@@ -17,6 +20,7 @@ import com.s8.binance.repository.IPaymentMethodRepository;
 import com.s8.binance.repository.ITransactionRepository;
 import com.s8.binance.repository.IWalletRepository;
 import com.s8.binance.service.ITransactionService;
+import com.s8.binance.specification.TransactionSpecification;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,8 +50,49 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public List<TransactionResponseDto> getTransactionsByFilters() {
-        throw new UnsupportedOperationException("Unimplemented method 'getTransactionsByFilters'");
+    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, String transactionType,
+            LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
+            BigDecimal saleAmount) {
+
+        Specification<Transaction> spec = Specification.where(null);
+
+        if (paymentMethodId != null) {
+            spec = spec.and(TransactionSpecification.hasPaymentMethod(paymentMethodId));
+        }
+
+        if (transactionType != null) {
+            spec = spec.and(TransactionSpecification.hasTransactionType(transactionType));
+        }
+
+        if (transactionDate != null) {
+            spec = spec.and(TransactionSpecification.hasTransactionDate(transactionDate));
+        }
+
+        if (purchaseCoinId != null) {
+            spec = spec.and(TransactionSpecification.hasPurchaseCoin(purchaseCoinId));
+        }
+
+        if (purchaseAmount != null) {
+            spec = spec.and(TransactionSpecification.hasPurchaseAmount(purchaseAmount));
+        }
+
+        if (saleCoinId != null) {
+            spec = spec.and(TransactionSpecification.hasSaleCoin(saleCoinId));
+        }
+
+        if (saleAmount != null) {
+            spec = spec.and(TransactionSpecification.hasSaleAmount(saleAmount));
+        }
+
+        List<Transaction> transactionsFiltered = transactionRepository.findAll(spec);
+        
+        List<TransactionResponseDto> TransactionResponseDtoList = new ArrayList<>();
+        for (Transaction transaction : transactionsFiltered) {
+            TransactionResponseDto transactionResponseDto = transactionMapper.fromEntityToDto(transaction);
+            TransactionResponseDtoList.add(transactionResponseDto);
+        }
+        
+        return TransactionResponseDtoList;
     }
 
     @Override
@@ -59,13 +104,15 @@ public class TransactionService implements ITransactionService {
 
     @Override
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto) {
-        
-        PaymentMethod paymentMethod = paymentMethodRepository.findById(transactionRequestDto.getPaymentMethodId()).orElseThrow();
+
+        PaymentMethod paymentMethod = paymentMethodRepository.findById(transactionRequestDto.getPaymentMethodId())
+                .orElseThrow();
         Coin purchaseCoin = coinRepository.findById(transactionRequestDto.getPurchaseCoinId()).orElseThrow();
         Coin saleCoin = coinRepository.findById(transactionRequestDto.getSaleCoinId()).orElseThrow();
         Wallet wallet = new Wallet(); // walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
-        
-        Transaction transaction = transactionMapper.fromDtoToEntity(transactionRequestDto, paymentMethod, purchaseCoin, saleCoin, wallet);
+
+        Transaction transaction = transactionMapper.fromDtoToEntity(transactionRequestDto, paymentMethod, purchaseCoin,
+                saleCoin, wallet);
         transactionRepository.save(transaction);
 
         return transactionMapper.fromEntityToDto(transaction);

@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+
+import com.s8.binance.util.enums.TransactionType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,8 +37,7 @@ public class Transaction {
     private PaymentMethod paymentMethod;
 
     @Column(name = "TRANSACTION_TYPE")
-    @NotBlank(message = "empty")
-    private String transactionType;
+    private TransactionType transactionType;
 
     @Column(name = "TRANSACTION_DATE")
     private LocalDate transactionDate;
