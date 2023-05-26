@@ -26,36 +26,36 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CoinController {
 
-    private final ICoinService service;
+    private final ICoinService coinService;
 
     @GetMapping
     public ResponseEntity<List<CoinResponseDto>> getAllCoins() {
-        List<CoinResponseDto> responseEntity = service.getAll();
+        List<CoinResponseDto> responseEntity = coinService.getAllCoins();
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CoinResponseDto> getCoinById(@PathVariable Long id) {
-        CoinResponseDto responseEntity = service.getCoinById(id);
+        CoinResponseDto responseEntity = coinService.getCoinById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CoinResponseDto> createCoin(@Valid @RequestBody CoinRequestDto coin) {
-        CoinResponseDto responseEntity = service.createCoin(coin);
-        return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
+    public ResponseEntity<?> createCoin(@Valid @RequestBody CoinRequestDto coin) {
+        coinService.createCoin(coin);
+        return ResponseEntity.status(HttpStatus.OK).body("Coin successfully created");
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<CoinResponseDto> updateCoin(@Valid @PathVariable Long id,
             @RequestBody CoinRequestDto coinRequestDto) {
-        CoinResponseDto responseEntity = service.updateCoin(id, coinRequestDto);
+        CoinResponseDto responseEntity = coinService.updateCoin(id, coinRequestDto);
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCoin(@PathVariable Long id) {
-        CoinResponseDto responseEntity = service.deleteCoin(id);
-        return ResponseEntity.ok().body(responseEntity);
+        coinService.deleteCoin(id);
+        return ResponseEntity.ok().body("Coin successfully removed");
     }
 }

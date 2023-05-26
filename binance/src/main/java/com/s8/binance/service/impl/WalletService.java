@@ -15,16 +15,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 public class WalletService implements IWalletService {
-    private final IWalletRepository repository;
+
+    private final IWalletRepository walletRepository;
+
     @Override
     public void createWallet(User user) {
-//        Wallet wallet = new Wallet();
-//        wallet.setUser(user);
-//        repository.save(wallet);
+        Wallet wallet = new Wallet();
+        wallet.setUser(user);
+        walletRepository.save(wallet);
     }
-    
+
     @Override
     public void deleteWallet(Long id) {
-        repository.deleteById(id);
+        walletRepository.deleteById(id);
     }
 }

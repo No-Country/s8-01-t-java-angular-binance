@@ -20,16 +20,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CoinService implements ICoinService {
 
-    private final ICoinRepository repository;
+    private final CoinMapper coinMapper;
 
-    private final CoinMapper mapper;
+    private final ICoinRepository coinRepository;
 
     @Override
-    public List<CoinResponseDto> getAll() {
-        List<Coin> coins = repository.findAll();
+    public List<CoinResponseDto> getAllCoins() {
+        List<Coin> coins = coinRepository.findAll();
         List<CoinResponseDto> coinResponseDtoList = new ArrayList<>();
         coins.forEach(coin -> {
-            CoinResponseDto response = mapper.fromEntityToDto(coin);
+            CoinResponseDto response = coinMapper.fromEntityToDto(coin);
             coinResponseDtoList.add(response);
         });
         return coinResponseDtoList;
@@ -37,37 +37,29 @@ public class CoinService implements ICoinService {
 
     @Override
     public CoinResponseDto getCoinById(Long id) {
-        Coin coin = repository.findById(id).orElseThrow();
-        CoinResponseDto response = mapper.fromEntityToDto(coin);
+        Coin coin = coinRepository.findById(id).orElseThrow();
+        CoinResponseDto response = coinMapper.fromEntityToDto(coin);
         return response;
     }
 
     @Override
-    public List<CoinResponseDto> getCoinsByFilters() {
-        throw new UnsupportedOperationException("Unimplemented method 'getCoinsByFilters'");
-    }
-
-    @Override
-    public CoinResponseDto createCoin(CoinRequestDto coinRequestDto) {
-        Coin coin = mapper.fromDtoToEntity(coinRequestDto);
-        repository.save(coin);
-        CoinResponseDto response = mapper.fromEntityToDto(coin);
-        return response;
+    public void createCoin(CoinRequestDto coinRequestDto) {
+        Coin coin = coinMapper.fromDtoToEntity(coinRequestDto);
+        coinRepository.save(coin);
     }
 
     @Override
     @Transactional
     public CoinResponseDto updateCoin(Long id, CoinRequestDto coinRequestDto) {
-        Coin coin = repository.findById(id).orElseThrow();
-        Coin updatedCoin = mapper.updateCoin(coin, coinRequestDto);
-        repository.save(updatedCoin);
-        CoinResponseDto response = mapper.fromEntityToDto(updatedCoin);
+        Coin coin = coinRepository.findById(id).orElseThrow();
+        Coin updatedCoin = coinMapper.updateCoin(coin, coinRequestDto);
+        coinRepository.save(updatedCoin);
+        CoinResponseDto response = coinMapper.fromEntityToDto(updatedCoin);
         return response;
     }
 
     @Override
-    public CoinResponseDto deleteCoin(Long id) {
-        repository.deleteById(id);
-        return null;
+    public void deleteCoin(Long id) {
+        coinRepository.deleteById(id);
     }
 }

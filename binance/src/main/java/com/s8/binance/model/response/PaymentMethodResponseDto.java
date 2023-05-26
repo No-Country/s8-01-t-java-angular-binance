@@ -1,6 +1,6 @@
 package com.s8.binance.model.response;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,11 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentMethodResponseDto {
+public class PaymentMethodResponseDto implements Serializable {
 
     private Long id;
-    
+
     @NotBlank(message = "empty")
     private String paymentType;
-
 }

@@ -1,7 +1,6 @@
 package com.s8.binance.model.request;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,6 +17,4 @@ public class PaymentMethodRequestDto implements Serializable {
 
     @NotBlank(message = "empty")
     private String paymentType;
-
-
 }

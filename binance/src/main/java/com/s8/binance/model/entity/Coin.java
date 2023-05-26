@@ -22,19 +22,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE COIN SET status = true WHERE id=?")
+@SQLDelete(sql = "UPDATE CURRENCY SET status = true WHERE id=?")
 @Where(clause = "status = false")
 @Table(name = "COINS")
 public class Coin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_COIN")
+    @Column(name = "COIN_ID")
     private Long id;
 
     @Column(name = "NAME")
     @NotBlank(message = "empty")
     private String name;
+
+    @Column(name = "DESCRIPTION")
+    @NotBlank(message = "empty")
+    private String description;
 
     @Column(name = "STATUS")
     @Default

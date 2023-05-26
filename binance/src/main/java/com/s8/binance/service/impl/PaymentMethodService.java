@@ -3,8 +3,6 @@ package com.s8.binance.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.PaymentMethod;
@@ -20,16 +18,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PaymentMethodService implements IPaymentMethodService {
 
-    private final IPaymentMethodRepository repository;
+    private final PaymentMethodMapper paymentMethodMapper;
 
-    private final PaymentMethodMapper mapper;
+    private final IPaymentMethodRepository paymentMethodRepository;
 
     @Override
-    public List<PaymentMethodResponseDto> getAll() {
-        List<PaymentMethod> paymentMethods = repository.findAll();
+    public List<PaymentMethodResponseDto> getAllPaymentMethods() {
+        List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
         List<PaymentMethodResponseDto> paymentMethodResponseDtoList = new ArrayList<>();
         paymentMethods.forEach(paymentMethod -> {
-            PaymentMethodResponseDto response = mapper.fromEntityToDto(paymentMethod);
+            PaymentMethodResponseDto response = paymentMethodMapper.fromEntityToDto(paymentMethod);
             paymentMethodResponseDtoList.add(response);
         });
         return paymentMethodResponseDtoList;
@@ -37,34 +35,19 @@ public class PaymentMethodService implements IPaymentMethodService {
 
     @Override
     public PaymentMethodResponseDto getPaymentMethodById(Long id) {
-        PaymentMethod paymentMethod = repository.findById(id).orElseThrow();
-        PaymentMethodResponseDto response = mapper.fromEntityToDto(paymentMethod);
+        PaymentMethod paymentMethod = paymentMethodRepository.findById(id).orElseThrow();
+        PaymentMethodResponseDto response = paymentMethodMapper.fromEntityToDto(paymentMethod);
         return response;
     }
 
     @Override
-    public List<PaymentMethodResponseDto> getPaymentMethodsByFilters() {
-        throw new UnsupportedOperationException("Unimplemented method 'getPaymentMethodsByFilters'");
+    public void createPaymentMethod(PaymentMethodRequestDto paymentMethodRequestDto) {
+        PaymentMethod paymentMethod = paymentMethodMapper.fromDtoToEntity(paymentMethodRequestDto);
+        paymentMethodRepository.save(paymentMethod);
     }
 
     @Override
-    public PaymentMethodResponseDto createPaymentMethod(PaymentMethodRequestDto paymentMethodRequestDto) {
-        PaymentMethod paymentMethod = mapper.fromDtoToEntity(paymentMethodRequestDto);
-        repository.save(paymentMethod);
-        PaymentMethodResponseDto response = mapper.fromEntityToDto(paymentMethod);
-        return response;
-    }
-
-    @Override
-    @Transactional
-    public PaymentMethodResponseDto updatePaymentMethod(Long id, PaymentMethodRequestDto paymentMethodRequestDto) {
-
-        return null;
-    }
-
-    @Override
-    public PaymentMethodResponseDto deletePaymentMethod(Long id) {
-        repository.deleteById(id);
-        return null;
+    public void deletePaymentMethod(Long id) {
+        paymentMethodRepository.deleteById(id);
     }
 }
