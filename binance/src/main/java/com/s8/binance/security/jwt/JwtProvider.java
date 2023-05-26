@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import com.s8.binance.security.entity.UsuarioMain;
+import com.s8.binance.security.entity.UserMain;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -39,7 +39,7 @@ public class JwtProvider {
      * signWith --> Firma
      */
     public String generateToken(Authentication authentication) {
-        UsuarioMain usuarioMain = (UsuarioMain) authentication.getPrincipal();
+        UserMain usuarioMain = (UserMain) authentication.getPrincipal();
         return Jwts.builder().setSubject(usuarioMain.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration * 1000))

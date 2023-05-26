@@ -3,8 +3,10 @@ package com.s8.binance.model.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.s8.binance.util.enums.TransactionType;
 
 import lombok.AllArgsConstructor;
@@ -56,8 +59,8 @@ public class Transaction {
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
 
-    // @JsonIgnore
-    // @ManyToOne(fetch = EAGER, cascade = CascadeType.ALL)
-    // @JoinColumn(name = "WALLET_ID")
-    // private Wallet wallet;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "WALLET_ID")
+    private Wallet wallet;
 }

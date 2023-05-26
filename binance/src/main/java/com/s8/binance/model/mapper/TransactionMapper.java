@@ -24,7 +24,7 @@ public class TransactionMapper {
                 .purchaseAmount(transaction.getPurchaseAmount())
                 .saleCoin(transaction.getSaleCoin())
                 .saleAmount(transaction.getSaleAmount())
-                // .walletId(transaction.getWallet().getId())
+                .walletId(transaction.getWallet().getId())
                 .build();
     }
 
@@ -38,7 +38,7 @@ public class TransactionMapper {
                 .purchaseAmount(transactionRequestDto.getPurchaseAmount())
                 .saleCoin(saleCoin)
                 .saleAmount(transactionRequestDto.getSaleAmount())
-                // .wallet(wallet)
+                .wallet(wallet)
                 .build();
     }
 }

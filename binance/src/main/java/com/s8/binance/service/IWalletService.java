@@ -1,10 +1,16 @@
 package com.s8.binance.service;
 
-import com.s8.binance.security.entity.User;
+import java.util.List;
+
+import com.s8.binance.model.entity.Wallet;
 
 public interface IWalletService {
 
-    public void createWallet(User user);
+    public List<Wallet> getAllWallets();
+
+    public Wallet getWalletById(Long id);
+
+    // public void createWallet(User user);
 
     public void deleteWallet(Long id);
 }

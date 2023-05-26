@@ -110,7 +110,7 @@ public class TransactionService implements ITransactionService {
                 .orElseThrow();
         Coin purchaseCoin = coinRepository.findById(transactionRequestDto.getPurchaseCoinId()).orElseThrow();
         Coin saleCoin = coinRepository.findById(transactionRequestDto.getSaleCoinId()).orElseThrow();
-        Wallet wallet = new Wallet(); // walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
+        Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
 
         Transaction transaction = transactionMapper.fromDtoToEntity(transactionRequestDto, paymentMethod, purchaseCoin,
                 saleCoin, wallet);

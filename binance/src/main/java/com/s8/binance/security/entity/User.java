@@ -1,106 +1,84 @@
 package com.s8.binance.security.entity;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import com.s8.binance.model.entity.Wallet;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-//@AllArgsConstructor
-//@NoArgsConstructor
-@Entity
 @Data
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "USERS")
 public class User {
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "USER_ID")
+	private int userId;
 
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int userId;
-		@NotNull
-		private String name;
-		@NotNull
-		@Column(unique = true)
-		private String username;
-		@NotNull
-		@Column(unique = true)
-		private String email;
-		@NotNull
-		private String password;
+	@NotNull
+	private String legalName;
 
+	@NotNull
+	private String legalLastName;
 
-		@OneToOne(  fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-		@JoinColumn( name ="id_user")
-		Wallet wallet;
+	@NotNull
+	private String birthdate;
 
-		@NotNull
-		@ManyToMany
-		@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "id_user"),
-				inverseJoinColumns = @JoinColumn(name = "rol_id"))
-		private Set<Rol> roles = new HashSet<>();
+	@NotNull
+	private String fullAddress;
 
-		public User() {
-		}
+	@NotNull
+	private String postalCode;
 
-		public User(@NotNull String name,
-					@NotNull String username,
-					@NotNull String email,
-					@NotNull String password) {
-			this.name = name;
-			this.username = username;
-			this.email = email;
-			this.password = password;
-		}
+	@NotNull
+	private String nationality;
+	
+	@NotNull
+	private String city;
 
-		public int getUserId() {
-			return userId;
-		}
+	@NotNull
+	private String country;
 
-		public void setUserId(int userId) {
-			this.userId = userId;
-		}
+	@NotNull
+	@Column(unique = true)
+	private String username;
 
-		public String getName() {
-			return name;
-		}
+	@NotNull
+	@Column(unique = true)
+	private String email;
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	@NotNull
+	private String password;
 
-		public String getUser() {
-			return username;
-		}
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "USER_ID")
+	private Wallet wallet;
 
-		public void setUser(String user) {
-			this.username = user;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
-		public Set<Rol> getRoles() {
-			return roles;
-		}
-
-		public void setRoles(Set<Rol> roles) {
-			this.roles = roles;
-		}
-	}
-
+	@NotNull
+	@ManyToMany
+	@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
+	private Set<Rol> roles = new HashSet<>();
+}

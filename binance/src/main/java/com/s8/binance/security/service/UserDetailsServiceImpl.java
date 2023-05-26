@@ -1,40 +1,36 @@
 package com.s8.binance.security.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.security.dto.JwtDto;
 import com.s8.binance.security.dto.Login;
 import com.s8.binance.security.dto.Register;
 import com.s8.binance.security.entity.Rol;
+import com.s8.binance.security.entity.User;
+import com.s8.binance.security.entity.UserMain;
 import com.s8.binance.security.enums.RolName;
 import com.s8.binance.security.jwt.JwtProvider;
-import com.s8.binance.security.repository.UserRepository;
 import com.s8.binance.security.util.Message;
-import com.s8.binance.service.impl.EmailService;
-import com.s8.binance.service.impl.WalletService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-import com.s8.binance.security.entity.User;
-import com.s8.binance.security.entity.UsuarioMain;
-import org.springframework.validation.BindingResult;
-
-import java.util.HashSet;
-import java.util.Set;
+import lombok.NoArgsConstructor;
 
 /**
  * Clase que convierte la clase usuario en un UsuarioMain
@@ -42,53 +38,58 @@ import java.util.Set;
  */
 @Service
 @Transactional
+@NoArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private EmailService emailService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private RolService rolService;
-	@Autowired
-	WalletService walletService;
 
 	@Autowired
-	JwtProvider jwtProvider;
+	private JwtProvider jwtProvider;
+	
 	@Autowired
-	AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
 
-	public UserDetailsServiceImpl() {
-	}
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userService.getByUser(username).get();
-		return UsuarioMain.build(user);
+		return UserMain.build(user);
 	}
+
 	public User newUser(Register register) {
-		User user = new User(register.getName(), register.getUsername(),
-				register.getEmail(), passwordEncoder.encode(register.getPassword()));
+		User user = User.builder()
+		.email(register.getEmail())
+		.password(passwordEncoder.encode(register.getPassword()))
+		.username(register.getUsername())
+		.legalName(register.getLegalName())
+		.legalLastName(register.getLegalLastName())
+		.birthdate(register.getBirthdate())
+		.fullAddress(register.getFullAddress())
+		.postalCode(register.getPostalCode())
+		.nationality(register.getNationality())
+		.city(register.getCity())
+		.build();
+		
 		Set<Rol> roles = new HashSet<>();
 		roles.add(rolService.getByRolName(RolName.ROLE_USER).orElseThrow());
 		if (register.getRoles().contains("admin"))
 			roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
 		user.setRoles(roles);
-		Wallet walet = new Wallet();
-		user.setWallet(walet);
-		userService.save(user);
-		walletService.createWallet(user);
+		
+		user.setWallet(new Wallet());
+		userService.save(user);		
 		return user;
 	}
+
 	public ResponseEntity<JwtDto> login(Login login, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
-			return new ResponseEntity(new Message("Campos mal"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(new Message("Bad request"), HttpStatus.BAD_REQUEST);
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(login.getUsername(),
 						login.getPassword()));
