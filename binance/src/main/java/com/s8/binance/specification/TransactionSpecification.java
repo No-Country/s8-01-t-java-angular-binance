@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.s8.binance.model.entity.Transaction;
+import com.s8.binance.util.enums.TransactionType;
 
 public class TransactionSpecification {
 
@@ -13,7 +14,7 @@ public class TransactionSpecification {
         return (root, query, cb) -> cb.equal(root.get("paymentMethod").get("id"), paymentMethodId);
     }
 
-    public static Specification<Transaction> hasTransactionType(String transactionType) {
+    public static Specification<Transaction> hasTransactionType(TransactionType transactionType) {
         return (root, query, cb) -> cb.equal(root.get("transactionType"), transactionType);
     }
 

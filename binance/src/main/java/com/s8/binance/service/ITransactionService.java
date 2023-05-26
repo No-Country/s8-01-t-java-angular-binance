@@ -6,12 +6,13 @@ import java.util.List;
 
 import com.s8.binance.model.request.TransactionRequestDto;
 import com.s8.binance.model.response.TransactionResponseDto;
+import com.s8.binance.util.enums.TransactionType;
 
 public interface ITransactionService {
 
     public List<TransactionResponseDto> getAllTransactions();
 
-    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, String transactionType,
+    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, TransactionType transactionType,
             LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
             BigDecimal saleAmount);
 

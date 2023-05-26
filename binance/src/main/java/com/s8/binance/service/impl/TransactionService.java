@@ -21,6 +21,7 @@ import com.s8.binance.repository.ITransactionRepository;
 import com.s8.binance.repository.IWalletRepository;
 import com.s8.binance.service.ITransactionService;
 import com.s8.binance.specification.TransactionSpecification;
+import com.s8.binance.util.enums.TransactionType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,7 +51,7 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, String transactionType,
+    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId, TransactionType transactionType,
             LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
             BigDecimal saleAmount) {
 
@@ -85,13 +86,13 @@ public class TransactionService implements ITransactionService {
         }
 
         List<Transaction> transactionsFiltered = transactionRepository.findAll(spec);
-        
+
         List<TransactionResponseDto> TransactionResponseDtoList = new ArrayList<>();
         for (Transaction transaction : transactionsFiltered) {
             TransactionResponseDto transactionResponseDto = transactionMapper.fromEntityToDto(transaction);
             TransactionResponseDtoList.add(transactionResponseDto);
         }
-        
+
         return TransactionResponseDtoList;
     }
 

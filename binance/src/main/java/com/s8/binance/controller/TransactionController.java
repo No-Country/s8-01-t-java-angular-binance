@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.s8.binance.model.request.TransactionRequestDto;
 import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.service.ITransactionService;
+import com.s8.binance.util.enums.TransactionType;
 
 import lombok.RequiredArgsConstructor;
 
@@ -39,13 +40,14 @@ public class TransactionController {
     @GetMapping("/filters")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionsByFilters(
             @RequestParam(required = false) Long paymentMethodId,
-            @RequestParam(required = false) String transactionType,
+            @RequestParam(required = false) TransactionType transactionType,
             @RequestParam(required = false) LocalDate transactionDate,
             @RequestParam(required = false) Long purchaseCoinId,
             @RequestParam(required = false) BigDecimal purchaseAmount,
             @RequestParam(required = false) Long saleCoinId,
             @RequestParam(required = false) BigDecimal saleAmount) {
-        List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(paymentMethodId, transactionType,
+        List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(paymentMethodId,
+                transactionType,
                 transactionDate, purchaseCoinId, purchaseAmount, saleCoinId, saleAmount);
         if (transactions.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
