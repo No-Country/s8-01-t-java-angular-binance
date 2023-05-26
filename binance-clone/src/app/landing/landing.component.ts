@@ -17,26 +17,18 @@ export class LandingComponent implements OnInit {
   popularCryptos: any[] | undefined;
 
   marketCap: number = 40000000000;
+  porcentaje: number = 0.53;
 
   constructor(private cryptoService: CryptoService) {}
 
   ngOnInit(): void {
 
-    // this.cryptoService.getPopularCryptos().subscribe({
-    //     next: (res: any) => {
-    //       console.log(res);
-    //       this.popularCryptos = res;
-    //     }
-    // });
-
-    // setInterval(() => {
-    //   this.cryptoService.getPopularCryptos().subscribe({
-    //     next: (res: any) => {
-    //       console.log(res);
-    //       this.popularCryptos = res;
-    //     }
-    //   })
-    // }, 10000);
+    this.cryptoService.getPopularCryptos().subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.popularCryptos = res;
+        }
+    });
 
   }
 

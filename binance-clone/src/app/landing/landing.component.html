@@ -64,7 +64,7 @@
           <div class="hidden md:col-span-2 md:block text-end">Cap. de mercado</div>
         </div>
 
-        <div class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
+        <!-- <div class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
           <div class="flex items-center col-span-5 md:col-span-4">
             <div class="w-6 md:w-8 aspect-square me-4">
               <img class="object-cover" src="" alt="">
@@ -73,11 +73,11 @@
             <p class="text-[#707A8A] ms-2">BTC</p>
           </div>
           <div class="flex items-center justify-end col-span-3 md:justify-start">$28.000</div>
-          <div [ngClass]="positivo? 'text-[#03a66d]' : 'text-[#cf304a]'" class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">+0.60%</div>
+          <div [ngClass]="positivo? 'text-[#03a66d]' : 'text-[#cf304a]'" class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{porcentaje > 0? '+' : ''}}{{porcentaje}}</div>
           <div class="items-center justify-end hidden col-span-2 md:flex">${{ marketCap | numberShortener }}</div>
-        </div>
+        </div> -->
 
-        <!-- <div *ngFor="let coin of popularCryptos" class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
+        <div *ngFor="let coin of popularCryptos" class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
           <div class="flex items-center col-span-5 md:col-span-4">
             <div class="w-6 md:w-8 aspect-square me-4">
               <img class="object-cover" src="{{ coin.image }}" alt="">
@@ -86,10 +86,10 @@
             <p class="text-[#707A8A] ms-2">{{ coin.symbol | uppercase }}</p>
           </div>
           <div class="flex items-center justify-end col-span-3 md:justify-start">{{ coin.current_price | currency }}</div>
-          <div [ngClass]="positivo? 'text-[#03a66d]' : 'text-[#cf304a]' "
-            class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{ coin.price_change_percentage_24h }}</div>
+          <div [ngClass]="coin.price_change_percentage_24h > 0? 'text-[#03a66d]' : 'text-[#cf304a]'"
+            class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{coin.price_change_percentage_24h > 0? '+' : ''}}{{ coin.price_change_percentage_24h | number:'1.2-2' }}%</div>
           <div class="items-center justify-end hidden col-span-2 md:flex">${{ coin.market_cap | numberShortener }}</div>
-        </div> -->
+        </div>
 
         <button class="w-full px-6 py-3 mt-10 text-base font-medium rounded-md md:w-[200px] bg-binance-yellow hover:opacity-90">Ver más</button>      
       </div>      
