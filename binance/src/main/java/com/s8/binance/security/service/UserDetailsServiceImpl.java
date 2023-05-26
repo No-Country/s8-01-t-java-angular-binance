@@ -2,6 +2,7 @@ package com.s8.binance.security.service;
 
 import javax.transaction.Transactional;
 
+import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.security.dto.JwtDto;
 import com.s8.binance.security.dto.Login;
 import com.s8.binance.security.dto.Register;
@@ -66,28 +67,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	public UserDetailsServiceImpl() {
 	}
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userService.getByUser(username).get();
 		return UsuarioMain.build(user);
 	}
-
 	public User newUser(Register register) {
-
 		User user = new User(register.getName(), register.getUsername(),
 				register.getEmail(), passwordEncoder.encode(register.getPassword()));
-
 		Set<Rol> roles = new HashSet<>();
 		roles.add(rolService.getByRolName(RolName.ROLE_USER).orElseThrow());
 		if (register.getRoles().contains("admin"))
 			roles.add(rolService.getByRolName(RolName.ROLE_ADMIN).get());
 		user.setRoles(roles);
+		Wallet walet = new Wallet();
+		user.setWallet(walet);
 		userService.save(user);
 		walletService.createWallet(user);
 		return user;
 	}
-
 	public ResponseEntity<JwtDto> login(Login login, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return new ResponseEntity(new Message("Campos mal"), HttpStatus.BAD_REQUEST);

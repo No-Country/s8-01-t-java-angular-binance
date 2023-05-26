@@ -2,6 +2,11 @@ package com.s8.binance.controller;
 
 import javax.validation.Valid;
 
+import com.s8.binance.model.entity.Wallet;
+import com.s8.binance.repository.IWalletRepository;
+import com.s8.binance.security.service.UserDetailsServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -43,5 +48,10 @@ public class AuthController {
 	@PostMapping("/sendMail")
 	public void emailVerification(@RequestParam String email, @RequestParam Integer num) {
 		userService.emailVerification(email, num);
+	}
+	@GetMapping("/all-wallets")
+	private List<Wallet> all (){
+		List <Wallet> list= repository.findAll();
+		return list;
 	}
 }
