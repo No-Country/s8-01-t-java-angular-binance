@@ -55,9 +55,9 @@ public class Transaction {
     @Column(name = "FK_PURCHASE_COIN")
     private Long fkPurchaseCoin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_PURCHASE_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
-    private Coin purchaseCoin;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "FK_PURCHASE_COIN", referencedColumnName = "ID_COIN", insertable = false, updatable = false)
+//    private Coin purchaseCoin;
 
     @Column(name = "PURCHASE_AMOUNT")
     private BigDecimal purchaseAmount;
