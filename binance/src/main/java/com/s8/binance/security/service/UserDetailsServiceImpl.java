@@ -66,6 +66,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = User.builder()
 		.email(register.getEmail())
 		.password(passwordEncoder.encode(register.getPassword()))
+		.country(register.getCountry())
 		.username(register.getUsername())
 		.legalName(register.getLegalName())
 		.legalLastName(register.getLegalLastName())
