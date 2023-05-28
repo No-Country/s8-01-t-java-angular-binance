@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
-import { faAngleLeft, faExclamationCircle, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -19,6 +19,11 @@ export class SignUpComponent {
   faAngleLeft = faAngleLeft;
   faExclamationCircle = faExclamationCircle;
   faEyeSlash = faEyeSlash;
+  faEye = faEye;
+
+  eyes = false;
+
+  // password: 'password' | 'text' = 'password';
 
   form: any;
   
@@ -34,8 +39,13 @@ export class SignUpComponent {
     ) {
     this.form = this.formBuilder.nonNullable.group({
       email: ['', [Validators.email, Validators.required]],
-      verificationCode: ['', [Validators.minLength(6), Validators.required], Validators.pattern('^[0-9]+$')],
-      password: ['', [Validators.minLength(6), Validators.required]],
+      verificationCode: ['', [Validators.minLength(6), Validators.required]],
+      password: ['', 
+      [Validators.minLength(8), 
+      Validators.maxLength(128), 
+      Validators.required, 
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]
+    ],
     });
   }
 
@@ -67,6 +77,10 @@ export class SignUpComponent {
   //     this.form.markAllAsTouched();
   //   }
   // }
+
+  faEyes() {
+    this.eyes = !this.eyes;
+  }
 
   increaseStep() {
     this.step ++
