@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="max-w-[1248px] relative px-4 md:px-6 mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 py-[107px]">
+    <div class="grid grid-cols-1 py-6 md:py-10 lg:grid-cols-2 lg:py-20">
       <div class="flex flex-col order-2 lg:items-start gap-14 lg:order-1">
         <p class="text-[32px] md:text-[40px] font-semibold">Compra, haz trading y holding de más de 350 criptomonedas en
           Binance.</p>
@@ -56,44 +56,82 @@
     <div class="max-w-[1248px] mx-auto px-4 md:px-6">      
       <div class="py-10 md:py-20">
         <p class="font-semibold mb-12 text-[32px] lg:text-[40px]">Criptomonedas populares</p>
-        <div>
-          lista de criptos populares
+
+        <div class="grid grid-cols-12 text-[#707A8A] text-xs md:text-sm p-3 md:p-4">
+          <div class="col-span-5 md:col-span-4">Nombre</div>
+          <div class="col-span-3 text-end md:text-start">Último precio</div>
+          <div class="col-span-4 md:col-span-3 text-end md:text-start">Cambios en 24h</div>
+          <div class="hidden md:col-span-2 md:block text-end">Cap. de mercado</div>
         </div>
-        <button class="w-full px-6 py-3 text-base font-medium rounded-md md:w-[200px] bg-binance-yellow hover:opacity-90">Ver más</button>      
+
+        <!-- <div class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
+          <div class="flex items-center col-span-5 md:col-span-4">
+            <div class="w-6 md:w-8 aspect-square me-4">
+              <img class="object-cover" src="" alt="">
+            </div>
+            <p class="font-medium">Bitcoin</p>
+            <p class="text-[#707A8A] ms-2">BTC</p>
+          </div>
+          <div class="flex items-center justify-end col-span-3 md:justify-start">$28.000</div>
+          <div [ngClass]="positivo? 'text-[#03a66d]' : 'text-[#cf304a]'" class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{porcentaje > 0? '+' : ''}}{{porcentaje}}</div>
+          <div class="items-center justify-end hidden col-span-2 md:flex">${{ marketCap | numberShortener }}</div>
+        </div> -->
+
+        <div *ngFor="let coin of popularCryptos" class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
+          <div class="flex items-center col-span-5 md:col-span-4">
+            <div class="w-6 md:w-8 aspect-square me-4">
+              <img class="object-cover" src="{{ coin.image }}" alt="">
+            </div>
+            <p class="font-medium">{{ coin.name }}</p>
+            <p class="text-[#707A8A] ms-2">{{ coin.symbol | uppercase }}</p>
+          </div>
+          <div class="flex items-center justify-end col-span-3 md:justify-start">{{ coin.current_price | currency }}</div>
+          <div [ngClass]="coin.price_change_percentage_24h > 0? 'text-[#03a66d]' : 'text-[#cf304a]'"
+            class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{coin.price_change_percentage_24h > 0? '+' : ''}}{{ coin.price_change_percentage_24h | number:'1.2-2' }}%</div>
+          <div class="items-center justify-end hidden col-span-2 md:flex">${{ coin.market_cap | numberShortener }}</div>
+        </div>
+
+        <button class="w-full px-6 py-3 mt-10 text-base font-medium rounded-md md:w-[200px] bg-binance-yellow hover:opacity-90">Ver más</button>      
       </div>      
       <div class="grid grid-cols-1 py-10 md:py-20 lg:grid-cols-2">
         <div class="flex flex-col">
           <div class="mb-8 md:mb-10 lg:mb-20">
             <p class="font-semibold text-[32px] lg:text-[40px]">Crea tu cartera de criptomonedas</p>
-            <p class="mt-4 text-xl text-[#474D57]">Inicia tu primer trading con estos sencillos pasos.</p>
+            <p class="mt-4 text-base md:text-xl text-[#474D57]">Inicia tu primer trading con estos sencillos pasos.</p>
           </div>
           <div class="flex justify-center lg:hidden">
             <img class="w-[190px] lg:w-auto aspect-auto" src="../../assets/images/landing/portfolio-section-1.png" alt="">
           </div>
           <div class="flex flex-col justify-between flex-grow gap-10 pt-10 lg:pt-0 md:gap-16">
             <div class="flex">
-              <div>
-                <img src="" alt="">
+              <div class="flex">
+                <div class="w-12 m-auto md:w-20 aspect-square">
+                  <img class="object-cover" src="../../assets/images/landing/11zon_cropped-1.png" alt="">
+                </div>
               </div>
-              <div class="ms-10">
+              <div class="ms-6 md:ms-10">
                 <p class="mb-2 text-2xl font-semibold">Deposita en tu cuenta</p>
                 <p class="text-[#474D57]">Agrega fondos a tu cuenta de criptomonedas para comenzar a hacer trading con tus criptos. Puedes agregar fondos con una gran variedad de métodos de pago.</p>
               </div>
             </div>
             <div class="flex">
-              <div>
-                <img src="" alt="">
+              <div class="flex">
+                <div class="w-12 m-auto md:w-20 aspect-square">
+                  <img class="object-cover" src="../../assets/images/landing/11zon_cropped-2.png" alt="">
+                </div>
               </div>
-              <div class="ms-10">
+              <div class="ms-6 md:ms-10">
                 <p class="mb-2 text-2xl font-semibold">Verifica tu identidad</p>
                 <p class="text-[#474D57]">Completa el proceso de verificación de identidad para proteger tu cuenta y tus transacciones.</p>
               </div>
             </div>
             <div class="flex">
-              <div>
-                <img src="" alt="">
+              <div class="flex">
+                <div class="w-12 m-auto md:w-20 aspect-square">
+                  <img class="object-cover" src="../../assets/images/landing/11zon_cropped-3.png" alt="">
+                </div>
               </div>
-              <div class="ms-10">
+              <div class="ms-6 md:ms-10">
                 <p class="mb-2 text-2xl font-semibold">Comienza a hacer trading</p>
                 <p class="text-[#474D57]">¡Todo listo! Compra o vende criptomonedas, configura compras recurrentes para tus inversiones y descubre lo que Binance tiene para ofrecer.</p>
               </div>
@@ -103,7 +141,7 @@
         <div class="justify-center hidden lg:flex">
           <img src="../../assets/images/landing/portfolio-section-1.png" alt="">
         </div>  
-        <div class="mt-16 lg:col-span-2">
+        <div class="mt-10 md:mt-16 lg:col-span-2">
           <button class="w-full px-6 py-3 text-base font-medium rounded-md md:w-[200px] bg-binance-yellow hover:opacity-90">Empezar</button>
         </div>      
       </div>      

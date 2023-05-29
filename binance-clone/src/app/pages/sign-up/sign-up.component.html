@@ -16,11 +16,11 @@
                       *ngIf="form.controls.email.hasError('email')"
                       class="mt-1 ml-1 text-xs font-medium text-red-500"
                     >
-                      Este campo debe contener un email
+                      Este campo debe contener un email válido
                     </p>
                 </div>
-                <div class="flex items-start">
-                    <input type="checkbox" class="flex mx-2 my-1 text-binance-yellow focus:border-binance-yellow">
+                <div class="flex items-start gap-2">
+                    <input type="checkbox" class="flex border cursor-pointer checked:bg-binance-yellow">
                     <p>Al crear una cuenta, acepto los <strong>Términos de servicio</strong> y la <strong>Política de privacidad</strong></p>
                 </div>
                 <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
@@ -60,10 +60,16 @@
                 <p>Contraseña</p>
                 <div class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow
                 cursor-pointer transition-all duration-300 hover:border-binance-yellow active:border-binance-yellow flex w-full
-                ">
+                "
+                >
+                <ng-container *ngIf="eyes === false">
                     <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
-                    <!-- <span><fa-icon [icon]="faEyeSlash"></fa-icon></span> -->
-                    <fa-icon [icon]="faEyeSlash"></fa-icon>
+                    <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
+                </ng-container>
+                <ng-container *ngIf="eyes === true">
+                    <input type="text" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
+                    <fa-icon [icon]="faEye" (click)="faEyes()"></fa-icon>
+                </ng-container>
                 </div>
                 <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
                     <p
@@ -73,10 +79,10 @@
                     Este campo es obligatorio
                     </p>
                     <p
-                    *ngIf="form.controls.password.hasError('minlength')"
+                    *ngIf="form.controls.password.hasError('pattern')"
                     class="mt-1 ml-1 text-xs font-medium text-red-500"
                     >
-                    Este campo debe contener al menos 6 caracteres
+                    Este campo debe contener al menos una letra mayúscula, una minúscula, un número, un caracter especial y un mínimo de 8 caracteres y un máximo de 128 caracteres.
                     </p>
                 </div>
                 <button type="submit"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
@@ -99,9 +105,6 @@
             <div class="h-6"></div>
             <p>Fecha de nacimiento</p>
             <div class="flex gap-2 w-auto">
-                <!-- <input type="number" class="w-full text-right border border-gray-400 rounded-md h-11 p-3 no-spinner focus:border-binance-yellow focus:outline-none" placeholder="YYYY">
-                <input type="number" class="w-full text-right border border-gray-400 rounded-md h-11 p-3 no-spinner focus:border-binance-yellow focus:outline-none" placeholder="MM">
-                <input type="number" class="w-full text-right border border-gray-400 rounded-md h-11 p-3 no-spinner focus:border-binance-yellow focus:outline-none" placeholder="DD"> -->
                 <input type="date" class="w-full text-right border border-gray-400 rounded-md h-11 p-3 no-spinner focus:border-binance-yellow focus:outline-none" placeholder="DD">
             </div>
             <div class="h-6"></div>

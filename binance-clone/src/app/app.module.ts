@@ -14,6 +14,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 
+import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SideBarComponent } from './core/side-bar/side-bar.component';
     DashboardComponent,
     LoginComponent,
     SignUpComponent,
-    SideBarComponent
+    SideBarComponent,
+    NumberShortenerPipe
   ],
   imports: [
     BrowserModule,
