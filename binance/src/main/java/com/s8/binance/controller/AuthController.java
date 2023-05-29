@@ -1,60 +1,52 @@
 package com.s8.binance.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.s8.binance.model.entity.Wallet;
-import com.s8.binance.security.dto.JwtDto;
-import com.s8.binance.security.dto.Login;
-import com.s8.binance.security.dto.Register;
-import com.s8.binance.security.service.UserDetailsServiceImpl;
-import com.s8.binance.security.service.UserService;
+import com.s8.binance.security.dto.LoginDto;
+import com.s8.binance.security.dto.RegisterDto;
+import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
+import com.s8.binance.security.service.impl.UserService;
 import com.s8.binance.security.util.Message;
-import com.s8.binance.service.IWalletService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
+@Api(tags = "Authentication", description = "Registration and login for Binance users")
 public class AuthController {
 
 	private final UserService userService;
 
-	private final IWalletService walletService;
-
 	private final UserDetailsServiceImpl userDetailsService;
 
-	@PostMapping("/add")
-	public ResponseEntity<?> newUser(@Valid @RequestBody Register register) {
+	@PostMapping("/register")
+	@ApiOperation("Register a user in Binance")
+	public ResponseEntity<?> register(@Valid @RequestBody RegisterDto register) {
 		userDetailsService.newUser(register);
 		return new ResponseEntity<>(new Message("User succesfully created"), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<JwtDto> login(@Valid @RequestBody Login login, BindingResult bindingResult) {
+	@ApiOperation("Login for a Binance user")
+	public ResponseEntity<?> login(@Valid @RequestBody LoginDto login, BindingResult bindingResult) {
 		return userDetailsService.login(login, bindingResult);
 	}
 
-	@PostMapping("/sendMail")
+	@PostMapping("/email")
+	@ApiOperation("Send a verification code via email")
 	public void emailVerification(@RequestParam String email, @RequestParam Integer num) {
 		userService.emailVerification(email, num);
-	}
-
-	@GetMapping("/wallets")
-	private List<Wallet> all() {
-		List<Wallet> list = walletService.getAllWallets();
-		return list;
 	}
 }

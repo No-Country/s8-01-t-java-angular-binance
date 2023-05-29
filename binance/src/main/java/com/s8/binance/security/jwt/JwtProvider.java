@@ -17,27 +17,17 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
-/**
- * Clase que genera el token y valida que este bien formado y no este expirado
- */
 @Component
 public class JwtProvider {
 
-    // Implementamos un logger para ver cual metodo da error en caso de falla
     private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    // Valores que tenemos en el aplicattion.properties
     @Value("${jwt.secret}")
     private String secret;
 
     @Value("${jwt.expiration}")
     private int expiration;
 
-    /**
-     * setIssuedAt --> Asigna fecha de creción del token
-     * setExpiration --> Asigna fehca de expiración
-     * signWith --> Firma
-     */
     public String generateToken(Authentication authentication) {
         UserMain usuarioMain = (UserMain) authentication.getPrincipal();
         return Jwts.builder().setSubject(usuarioMain.getUsername())
@@ -47,7 +37,6 @@ public class JwtProvider {
                 .compact();
     }
 
-    // subject --> Nombre del usuario
     public String getUsernameFromToken(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
     }
@@ -57,15 +46,15 @@ public class JwtProvider {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {
-            logger.error("Token mal formado");
+            logger.error("Malformed token");
         } catch (UnsupportedJwtException e) {
-            logger.error("Token no soportado");
+            logger.error("Unsupported token");
         } catch (ExpiredJwtException e) {
-            logger.error("Token expirado");
+            logger.error("Expired token");
         } catch (IllegalArgumentException e) {
-            logger.error("Token vacio");
+            logger.error("Empty token");
         } catch (SignatureException e) {
-            logger.error("Fallo con la firma");
+            logger.error("Signature verification failed");
         }
         return false;
     }

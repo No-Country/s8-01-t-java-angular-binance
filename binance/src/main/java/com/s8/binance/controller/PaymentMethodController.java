@@ -18,28 +18,34 @@ import com.s8.binance.model.request.PaymentMethodRequestDto;
 import com.s8.binance.model.response.PaymentMethodResponseDto;
 import com.s8.binance.service.IPaymentMethodService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/payments")
 @RequiredArgsConstructor
+@Api(tags = "Payment methods", description = "Management of payment methods available in Binance. It allows creating, modifying, and deleting payment methods, as well as obtaining detailed information about them")
 public class PaymentMethodController {
 
     private final IPaymentMethodService paymentMethodService;
 
     @GetMapping
+    @ApiOperation("Get all payment methods")
     public ResponseEntity<List<PaymentMethodResponseDto>> getAllPaymentMethods() {
         List<PaymentMethodResponseDto> responseEntity = paymentMethodService.getAllPaymentMethods();
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Get a payment method by Id")
     public ResponseEntity<PaymentMethodResponseDto> getPaymentMethodById(@PathVariable Long id) {
         PaymentMethodResponseDto responseEntity = paymentMethodService.getPaymentMethodById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
+    @ApiOperation("Create a new payment method")
     public ResponseEntity<?> createPaymentMethod(
             @Valid @RequestBody PaymentMethodRequestDto paymentMethod) {
         paymentMethodService.createPaymentMethod(paymentMethod);
@@ -47,8 +53,9 @@ public class PaymentMethodController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @ApiOperation("Delete an existing payment method by Id")
     public ResponseEntity<?> deletePaymentMethod(@PathVariable Long id) {
         paymentMethodService.deletePaymentMethod(id);
-        return ResponseEntity.ok().body("Payment method successfully removed");
+        return ResponseEntity.ok().body("Payment method successfully deleted");
     }
 }

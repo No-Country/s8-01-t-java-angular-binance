@@ -15,13 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.s8.binance.security.service.UserDetailsServiceImpl;
+import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
 
-/**
- * Se ejecuta por cada petición, comprueba que sea valido el token
- * Utiliza el provider para validar que sea valido
- * Si es valido permite acceso al recurso si no lanza una excepción
- */
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
@@ -33,14 +28,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         try {
             String token = getToken(request);
-
             if (token != null && jwtProvider.validateToken(token)) {
-
                 String username = jwtProvider.getUsernameFromToken(token);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
@@ -49,18 +41,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             }
         } catch (Exception e) {
-            logger.error("Fail en el método doFilter " + e.getMessage());
+            logger.error("doFilterInternal method failed" + e.getMessage());
         }
         filterChain.doFilter(request, response);
     }
 
-    // Obtenemos el token sin Bearer + el espacio
     private String getToken(HttpServletRequest request) {
-
         String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer"))
+        if (header != null && header.startsWith("Bearer")) {
             return header.replace("Bearer ", "");
+        }
         return null;
-
     }
 }

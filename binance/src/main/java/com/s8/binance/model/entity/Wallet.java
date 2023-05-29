@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,6 +34,7 @@ public class Wallet {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "wallet")
+    @Default
     @JsonIgnore
     private List<Transaction> transactions = new ArrayList<>();
 }

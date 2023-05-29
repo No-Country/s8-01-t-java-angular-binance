@@ -4,39 +4,45 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserMain implements UserDetails {
 
-	private String legalName;
-
-	private String legalLastName;
-
-	private String username;
-
+	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "PASSWORD")
 	private String password;
 
+	@Column(name = "USERNAME")
+	private String username;
+
+	@Column(name = "LEGAL_NAME")
+	private String legalName;
+
+	@Column(name = "LEGAL_LAST_NAME")
+	private String legalLastName;
+
+	@Column(name = "AUTHORITIES")
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public static UserMain build(User user) {
 		List<GrantedAuthority> authorities = user.getRoles()
 				.stream()
-				.map(rol -> new SimpleGrantedAuthority(rol.getRolName().name()))
+				.map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
 				.collect(Collectors.toList());
 		return new UserMain(user.getLegalName(), user.getLegalLastName(), user.getUsername(), user.getEmail(),
 				user.getPassword(), authorities);

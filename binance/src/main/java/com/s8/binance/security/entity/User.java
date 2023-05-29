@@ -1,6 +1,5 @@
 package com.s8.binance.security.entity;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.s8.binance.model.entity.Wallet;
@@ -36,49 +36,58 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID")
-	private int userId;
+	private Long id;
 
 	@NotNull
-	private String legalName;
-
-	@NotNull
-	private String legalLastName;
-
-	@NotNull
-	private String birthdate;
-
-	@NotNull
-	private String fullAddress;
-
-	@NotNull
-	private String postalCode;
-
-	@NotNull
-	private String nationality;
-	
-	@NotNull
-	private String city;
-
-	@NotNull
-	private String country;
-
-	@NotNull
-	@Column(unique = true)
-	private String username;
-
-	@NotNull
-	@Column(unique = true)
+	@Column(name = "EMAIL", unique = true)
 	private String email;
 
 	@NotNull
+	@Column(name = "PASSWORD")
 	private String password;
+
+	@NotNull
+	@Column(name = "USERNAME", unique = true)
+	private String username;
+
+	@NotNull
+	@Column(name = "LEGAL_NAME")
+	private String legalName;
+
+	@NotNull
+	@Column(name = "LEGAL_LAST_NAME")
+	private String legalLastName;
+
+	@NotNull
+	@NotBlank
+	@Column(name = "BIRTH_DATE")
+	private String birthdate;
+
+	@NotNull
+	@Column(name = "FULL_ADDRESS")
+	private String fullAddress;
+
+	@NotNull
+	@Column(name = "ZIP_CODE")
+	private String zipCode;
+
+	@NotNull
+	@Column(name = "NATIONALITY")
+	private String nationality;
+
+	@NotNull
+	@Column(name = "CITY")
+	private String city;
+
+	@NotNull
+	@Column(name = "COUNTRY")
+	private String country;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
 	private Wallet wallet;
 
-	@NotNull
 	@ManyToMany
-	@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
-	private Set<Rol> roles = new HashSet<>();
+	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+	private Set<Role> roles = new HashSet<>();
 }
