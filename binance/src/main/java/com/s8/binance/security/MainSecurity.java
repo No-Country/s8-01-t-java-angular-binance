@@ -16,30 +16,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.s8.binance.security.jwt.JwtEntryPoint;
 import com.s8.binance.security.jwt.JwtTokenFilter;
-import com.s8.binance.security.service.UserDetailsServiceImpl;
+import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 
-	// Devuelve el mensaje de no autorizado
-	@Autowired
-	private JwtEntryPoint jwtEntryPoint;
+	private final JwtEntryPoint jwtEntryPoint;
 
 	@Bean
 	public JwtTokenFilter jwtTokenFilter() {
 		return new JwtTokenFilter();
 	}
 
-	/**
-	 * Encripta el pasword
-	 * 
-	 * @return pasword ecriptado
-	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -63,9 +59,11 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// Desactivamos cookies ya que enviamos un token
-		// cada vez que hacemos una petición
-		http.cors().and().csrf().disable()
+		http
+				.cors()
+				.and()
+				.csrf()
+				.disable()
 				.authorizeRequests()
 				.antMatchers("/auth/**").permitAll()
 				.antMatchers("/**").permitAll()
@@ -74,6 +72,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
 				.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 		http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 }

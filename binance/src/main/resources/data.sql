@@ -1,3 +1,8 @@
+-- INSERT roles --
+INSERT INTO roles (ROLE_NAME) VALUES
+('ROLE_ADMIN'),
+('ROLE_USER');
+
 -- INSERT coins --
 INSERT INTO coins (NAME, DESCRIPTION, STATUS) VALUES
 ('BTC', 'Bitcoin', false),

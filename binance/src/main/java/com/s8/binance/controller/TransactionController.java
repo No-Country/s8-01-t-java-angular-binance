@@ -22,22 +22,27 @@ import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.service.ITransactionService;
 import com.s8.binance.util.enums.TransactionType;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/transactions")
 @RequiredArgsConstructor
+@Api(tags = "Transactions", description = "Management of transactions available in Binance. It allows creating, modifying, and deleting transactions, as well as obtaining detailed information about them")
 public class TransactionController {
 
     private final ITransactionService transactionService;
 
     @GetMapping
+    @ApiOperation("Get all transactions")
     public ResponseEntity<List<TransactionResponseDto>> getAllTransactions() {
         List<TransactionResponseDto> responseEntity = transactionService.getAllTransactions();
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/filters")
+    @ApiOperation("Get all transactions according to the specified filters")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionsByFilters(
             @RequestParam(required = false) Long paymentMethodId,
             @RequestParam(required = false) TransactionType transactionType,
@@ -57,12 +62,14 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Get a transaction by Id")
     public ResponseEntity<TransactionResponseDto> getTransactionById(@PathVariable Long id) {
         TransactionResponseDto responseEntity = transactionService.getTransactionById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PostMapping("/create")
+    @ApiOperation("Create a new transaction")
     public ResponseEntity<TransactionResponseDto> createTransaction(
             @Valid @RequestBody TransactionRequestDto transaction) {
         TransactionResponseDto responseEntity = transactionService.createTransaction(transaction);
@@ -70,8 +77,9 @@ public class TransactionController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @ApiOperation("Delete an existing transaction by Id")
     public ResponseEntity<?> deleteTransaction(@PathVariable Long id) {
         transactionService.deleteTransaction(id);
-        return ResponseEntity.ok().body("Transaction successfully removed");
+        return ResponseEntity.ok().body("Transaction successfully deleted");
     }
 }

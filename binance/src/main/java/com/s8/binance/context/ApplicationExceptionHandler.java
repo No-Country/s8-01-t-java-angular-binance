@@ -31,6 +31,6 @@ public class ApplicationExceptionHandler {
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<Message> runtimeException(RuntimeException runtimeException) {
 		Message message = Message.builder().message(runtimeException.getMessage()).build();
-		return new ResponseEntity(message, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
 	}
 }
