@@ -29,4 +29,6 @@ public class PaymentMethod {
     @Column(name = "PAYMENT_TYPE")
     @NotBlank(message = "empty")
     private String paymentType;
+
+
 }

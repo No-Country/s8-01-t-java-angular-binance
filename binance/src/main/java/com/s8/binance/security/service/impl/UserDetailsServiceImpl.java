@@ -50,10 +50,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	public User newUser(RegisterDto register) {
+		Set<Role> roles = new HashSet<>();
+		roles.add(roleService.getByRoleName(RoleName.ROLE_USER).orElseThrow());
+
 		User user = User.builder()
 				.email(register.getEmail())
 				.password(passwordEncoder.encode(register.getPassword()))
-				.country(register.getCountry())
 				.username(register.getUsername())
 				.legalName(register.getLegalName())
 				.legalLastName(register.getLegalLastName())
@@ -63,20 +65,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				.nationality(register.getNationality())
 				.city(register.getCity())
 				.country(register.getCountry())
+				.roles(roles)
 				.build();
 
-		Set<Role> roles = new HashSet<>();
-		roles.add(roleService.getByRoleName(RoleName.ROLE_USER).orElseThrow());
-
 		// if (register.getRoles().contains("ADMIN")) {
-		// 	roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN).get());
-		// 	user.setRoles(roles);
+		// roles.add(roleService.getByRoleName(RoleName.ROLE_ADMIN).get());
+		// user.setRoles(roles);
 		// }
 
 		user.setWallet(new Wallet());
 		userService.save(user);
 		return user;
 	}
+
+
 
 	public ResponseEntity<?> login(LoginDto login, BindingResult bindingResult) {
 
