@@ -49,18 +49,18 @@ public class Transaction {
     private LocalDate transactionDate;
 
     @ManyToOne
-    @JoinColumn(name = "PURCHASE_COIN_ID", referencedColumnName = "COIN_ID")
-    private Coin purchaseCoin;
-
-    @Column(name = "PURCHASE_AMOUNT")
-    private BigDecimal purchaseAmount;
-
-    @ManyToOne
     @JoinColumn(name = "SALE_COIN_ID", referencedColumnName = "COIN_ID")
     private Coin saleCoin;
 
     @Column(name = "SALE_AMOUNT")
     private BigDecimal saleAmount;
+
+    @ManyToOne
+    @JoinColumn(name = "PURCHASE_COIN_ID", referencedColumnName = "COIN_ID")
+    private Coin purchaseCoin;
+
+    @Column(name = "PURCHASE_AMOUNT")
+    private BigDecimal purchaseAmount;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -26,30 +26,30 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/users")
 @RequiredArgsConstructor
-@Api(tags = "Users", description = "Management of users available in Binance. It allows modifying and deleting users, as well as obtaining detailed information about them")
+@Api(tags = "Users", description = "Management of users available in Binance. It allows modifying and deleting users, as well as obtaining detailed information about them.")
 public class UserController {
 
     private final IUserService userService;
 
     @GetMapping
-    @ApiOperation("Get all users")
+    @ApiOperation("Get all users.")
     public ResponseEntity<List<UserListResponseDto>> getAllUsers() {
         List<UserListResponseDto> responseEntity = userService.getAllUsers();
         return ResponseEntity.ok().body(responseEntity);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation("Get a user by Id")
+    @ApiOperation("Get a user by Id.")
     public ResponseEntity<UserDetailsResponseDto> getUserById(@PathVariable Long id) {
         UserDetailsResponseDto responseEntity = userService.getUserById(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
     @PutMapping("/update/{id}")
-    @ApiOperation("Update an existing user by Id")
+    @ApiOperation("Update an existing user by Id.")
     public ResponseEntity<UserDetailsResponseDto> updateUser(@Valid @PathVariable Long id,
             @RequestBody UserRequestDto UserRequestDto) {
-                UserDetailsResponseDto responseEntity = userService.updateUser(id, UserRequestDto);
+        UserDetailsResponseDto responseEntity = userService.updateUser(id, UserRequestDto);
         return ResponseEntity.ok().body(responseEntity);
     }
 
