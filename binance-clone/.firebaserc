@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "s8-01-t-java-angular-binance"
+    "default": "fir-img-fe824"
+  },
+  "targets": {
+    "fir-img-fe824": {
+      "hosting": {
+        "binance-clone": [
+          "fir-img-fe824"
+        ]
+      }
+    }
   }
 }

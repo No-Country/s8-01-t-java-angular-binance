@@ -1,0 +1,49 @@
+<ng-container autocomplete="off" *ngIf="!loading">
+<div class="flex flex-col place-items-center h-screen justify-center">
+    <form [formGroup]="form" (ngSubmit)="signIn()">
+        <div *gIf="step === 0" class="flex flex-col w-[500px]">
+            <p class="text-3xl font-semibold mb-7">Iniciar sesión</p>
+            <div class="flex flex-col gap-5">
+                <div>Email</div>
+                <input type="email" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" formControlName="email">
+                <div *ngIf="isFieldInvalid('email')">
+                    <p
+                    *ngIf="isFieldInvalid('password')"
+                      class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                      Este campo es obligatorio
+                    </p>
+                </div>
+                <button (click)="increaseStep()" type="submit" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+                <a routerLink="/register" class="text-binance-mustard">Crear una cuenta de Binance</a>
+            </div>
+        </div>
+        <div *ngIf="step === 1" class="flex flex-col w-[500px]">
+            <p class="text-3xl font-semibold mb-7">¡Bienvenido de nuevo!</p>
+            <div class="flex flex-col gap-5">
+                <div><strong>{{ form.get('email')?.value }}</strong></div>
+                <p>Contraseña</p>
+                <input type="password" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" formControlName="password">
+                <div *ngIf="isFieldInvalid('password')">
+                <p
+                *ngIf="isFieldInvalid('password')"
+                class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                {{ getErrorMessage("password") }}
+                </p>
+            </div>
+            <ng-container *ngIf="!send" >
+            <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
+          </ng-container>
+          <ng-container *ngIf="send" >
+            <button type="submit" class="bg-red-600 hover:opacity-90 px-6 py-3 rounded-md" >Iniciar sesion</button>
+          </ng-container>
+            <a class="text-binance-mustard">¿Olvidaste la contraseña?</a>
+        </div>
+        </div>
+    </form>
+</div>
+</ng-container>
+<ng-container *ngIf="loading">
+<app-spinner></app-spinner>
+</ng-container>
