@@ -13,10 +13,6 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "User information")
 public class UserRequestDto {
 
-    // private String email;
-
-    // private String username;
-
     private String legalName;
 
     private String legalLastName;

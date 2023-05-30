@@ -29,13 +29,6 @@ public class WalletService implements IWalletService {
         return walletRepository.findById(id).orElseThrow();
     }
 
-    // @Override
-    // public void createWallet(User user) {
-    //     Wallet wallet = new Wallet();
-    //     wallet.setUser(user);
-    //     walletRepository.save(wallet);
-    // }
-
     @Override
     public void deleteWallet(Long id) {
         walletRepository.deleteById(id);

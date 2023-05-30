@@ -9,8 +9,6 @@ public interface IWalletService {
     public List<Wallet> getAllWallets();
 
     public Wallet getWalletById(Long id);
-
-    // public void createWallet(User user);
-
+    
     public void deleteWallet(Long id);
 }
