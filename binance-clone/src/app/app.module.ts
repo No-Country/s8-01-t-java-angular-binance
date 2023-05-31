@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SideBarComponent } from './core/side-bar/side-bar.component';
 
 import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
+import { CryptoComponent } from './pages/crypto/crypto.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
     LoginComponent,
     SignUpComponent,
     SideBarComponent,
-    NumberShortenerPipe
+    NumberShortenerPipe,
+    CryptoComponent
   ],
   imports: [
     BrowserModule,
