@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/users")
 @RequiredArgsConstructor
-@Api(tags = "Users", description = "Management of users available in Binance.")
+@Api(tags = "Users", description = "Management of available users on Binance.")
 public class UserController {
 
     private final IUserService userService;

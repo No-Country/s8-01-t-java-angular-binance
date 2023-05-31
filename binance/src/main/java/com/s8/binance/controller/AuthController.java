@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.s8.binance.security.dto.LoginDto;
 import com.s8.binance.security.dto.RegisterDto;
+import com.s8.binance.security.service.IUserService;
 import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
-import com.s8.binance.security.service.impl.UserService;
 import com.s8.binance.security.util.Message;
 
 import io.swagger.annotations.Api;
@@ -24,10 +24,10 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
-@Api(tags = "Authentication", description = "Registration and login for Binance users")
+@Api(tags = "Authentication", description = "Registration and login for Binance users.")
 public class AuthController {
 
-	private final UserService userService;
+	private final IUserService userService;
 
 	private final UserDetailsServiceImpl userDetailsService;
 

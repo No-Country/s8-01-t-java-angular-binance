@@ -10,12 +10,13 @@ SELECT * FROM (SELECT 'ROLE_USER') AS temp
 WHERE NOT EXISTS (
     SELECT ROLE_NAME FROM roles WHERE ROLE_NAME = 'ROLE_USER'
 );
+
 -- INSERT coins --
 INSERT INTO coins (NAME, DESCRIPTION, STATUS) VALUES
 ('BTC', 'Bitcoin', false),
 ('ETH', 'Ethereum', false),
 ('BNB', 'Binance Coin', false),
-('USDT', 'Tether', false),
+('USDT', 'TetherUS', false),
 ('ARS', 'Argentine Peso', false);
 
 -- INSERT payment methods --

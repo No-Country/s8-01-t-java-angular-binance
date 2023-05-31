@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/coins")
 @RequiredArgsConstructor
-@Api(tags = "Coins", description = "Management of coins available in Binance.")
+@Api(tags = "Coins", description = "Management of available coins on Binance.")
 public class CoinController {
 
     private final ICoinService coinService;

@@ -31,13 +31,13 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/transactions")
 @RequiredArgsConstructor
-@Api(tags = "Transactions", description = "Management of transactions available in Binance.")
+@Api(tags = "Transactions", description = "Management of available transactions on Binance.")
 public class TransactionController {
 
     private final ITransactionService transactionService;
 
     @GetMapping("/filters")
-    @ApiOperation("Get all transactions according to the specified filters. If no filters are specified, all transactions will be returned.")
+    @ApiOperation("Retrieve all transactions based on the specified filters. If no filters are specified, all transactions will be returned.")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionsByFilters(
             @RequestParam(required = false) Long paymentMethodId,
             @RequestParam(required = false) TransactionType transactionType,

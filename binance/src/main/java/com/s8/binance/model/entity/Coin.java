@@ -24,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE CURRENCY SET status = true WHERE id=?")
+@SQLDelete(sql = "UPDATE coin SET status = true WHERE id=?")
 @Where(clause = "status = false")
 @Table(name = "COINS")
 public class Coin {
@@ -41,6 +41,10 @@ public class Coin {
     @Column(name = "DESCRIPTION")
     @NotBlank(message = "empty")
     private String description;
+
+    @Column(name = "USD_VALUE")
+    @NotBlank(message = "empty")
+    private String usdValue;
 
     @Column(name = "STATUS")
     @Default
