@@ -20,46 +20,46 @@ import lombok.Setter;
 public class RegisterDto {
 
 	@Email
-	@ApiModelProperty(value = "User email", example = "antonelaroccuzzo@gmail.com")
+	@ApiModelProperty(example = "antonelaroccuzzo@gmail.com")
 	private String email;
 
 	@NotBlank
-	@ApiModelProperty(value = "New password", example = "password1234")
+	@ApiModelProperty(example = "password1234")
 	private String password;
 
 	@NotBlank
-	@ApiModelProperty(value = "New username", example = "antonelaroccuzzo")
+	@ApiModelProperty(example = "antonelaroccuzzo")
 	private String username;
 
 	@NotBlank
-	@ApiModelProperty(value = "First name", example = "Antonela")
+	@ApiModelProperty(example = "Antonela")
 	private String legalName;
 
 	@NotBlank
-	@ApiModelProperty(value = "Last name", example = "Roccuzzo")
+	@ApiModelProperty(example = "Roccuzzo")
 	private String legalLastName;
 
 	@NotBlank
-	@ApiModelProperty(value = "Birth date", example = "1988-02-26")
+	@ApiModelProperty(example = "1988-02-26")
 	private String birthdate;
 
 	@NotBlank
-	@ApiModelProperty(value = "Nationality", example = "Argentina")
+	@ApiModelProperty(example = "Argentina")
 	private String nationality;
 
 	@NotBlank
-	@ApiModelProperty(value = "Address", example = "Avenue Montaigne 123")
+	@ApiModelProperty(example = "Avenue Montaigne 123")
 	private String fullAddress;
 
 	@NotBlank
-	@ApiModelProperty(value = "City", example = "Paris")
+	@ApiModelProperty(example = "Paris")
 	private String city;
 
 	@NotBlank
-	@ApiModelProperty(value = "Zip Code", example = "70123")
+	@ApiModelProperty(example = "70123")
 	private String zipCode;
 
 	@NotBlank
-	@ApiModelProperty(value = "Country", example = "France")
+	@ApiModelProperty(example = "France")
 	private String country;
 }

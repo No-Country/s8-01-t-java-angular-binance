@@ -20,7 +20,6 @@ public class JwtDto {
 
 	private String token;
 
-	@Default
 	private String bearer = "Bearer";
 
 	private String username;

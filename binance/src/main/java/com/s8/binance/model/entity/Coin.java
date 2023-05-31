@@ -1,5 +1,7 @@
 package com.s8.binance.model.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +46,7 @@ public class Coin {
 
     @Column(name = "USD_VALUE")
     @NotBlank(message = "empty")
-    private String usdValue;
+    private BigDecimal usdValue;
 
     @Column(name = "STATUS")
     @Default

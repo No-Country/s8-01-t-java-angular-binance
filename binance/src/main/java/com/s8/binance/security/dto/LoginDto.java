@@ -19,10 +19,10 @@ import lombok.Setter;
 public class LoginDto {
 
 	@NotBlank
-	@ApiModelProperty(value = "Username", example = "antonelaroccuzzo")
+	@ApiModelProperty(example = "antonelaroccuzzo")
 	private String username;
 
 	@NotBlank
-	@ApiModelProperty(value = "Password", example = "password1234")
+	@ApiModelProperty(example = "password1234")
 	private String password;
 }

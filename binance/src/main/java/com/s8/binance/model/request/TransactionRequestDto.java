@@ -21,21 +21,21 @@ import lombok.Setter;
 @ApiModel(description = "Transaction information")
 public class TransactionRequestDto implements Serializable {
 
-    @ApiModelProperty(value = "Transaction type", example = "PURCHASE")
+    @ApiModelProperty(example = "PURCHASE")
     private TransactionType transactionType;
 
-    @ApiModelProperty(value = "Purchase coin Id", example = "1")
+    @ApiModelProperty(example = "1")
     private Long purchaseCoinId;
 
-    @ApiModelProperty(value = "Purchase amount", example = "200.00")
+    @ApiModelProperty(example = "200.00")
     private BigDecimal purchaseAmount;
 
-    @ApiModelProperty(value = "Sale coin Id", example = "1")
+    @ApiModelProperty(example = "1")
     private Long saleCoinId;
 
-    @ApiModelProperty(value = "Sale amount", example = "200.00")
+    @ApiModelProperty(example = "200.00")
     private BigDecimal saleAmount;
 
-    @ApiModelProperty(value = "Wallet Id", example = "1")
+    @ApiModelProperty(example = "1")
     private Long walletId;
 }

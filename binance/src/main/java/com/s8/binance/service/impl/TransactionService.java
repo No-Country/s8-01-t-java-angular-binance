@@ -130,8 +130,7 @@ public class TransactionService implements ITransactionService {
 
     @Override
     public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto) {
-        PaymentMethod paymentMethod = paymentMethodRepository.findById(depositRequestDto.getPaymentMethodId())
-                .orElseThrow();
+        PaymentMethod paymentMethod = paymentMethodRepository.findByPaymentType("Bank Deposit");
         Coin depositCoin = coinRepository.findById(depositRequestDto.getDepositCoinId()).orElseThrow();
         Wallet wallet = walletRepository.findById(depositRequestDto.getWalletId()).orElseThrow();
         Transaction deposit = transactionMapper.fromDepositDtoToEntity(depositRequestDto, paymentMethod,

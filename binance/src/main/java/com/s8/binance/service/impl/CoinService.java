@@ -62,5 +62,4 @@ public class CoinService implements ICoinService {
     public void deleteCoin(Long id) {
         coinRepository.deleteById(id);
     }
-
 }
