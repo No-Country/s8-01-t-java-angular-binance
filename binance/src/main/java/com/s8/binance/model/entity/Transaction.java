@@ -46,9 +46,9 @@ public class Transaction {
     @JoinColumn(name = "PAYMENT_METHOD_ID")
     private PaymentMethod paymentMethod;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "TRANSACTION_TYPE")
-    private TransactionType transactionType;
+    //@Enumerated(EnumType.STRING)
+    //@Column(name = "TRANSACTION_TYPE")
+    //private TransactionType transactionType;
 
     @Column(name = "TRANSACTION_DATE")
     private LocalDate transactionDate;

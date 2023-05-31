@@ -30,4 +30,6 @@ public interface ITransactionService {
     public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto);
 
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto);
+
+    public boolean checkBalance(Long id, BigDecimal amount);
 }

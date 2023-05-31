@@ -5,23 +5,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
+import com.s8.binance.model.entity.*;
+import com.s8.binance.repository.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.s8.binance.model.entity.Coin;
-import com.s8.binance.model.entity.PaymentMethod;
-import com.s8.binance.model.entity.Transaction;
-import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.model.mapper.TransactionMapper;
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
 import com.s8.binance.model.response.DepositResponseDto;
 import com.s8.binance.model.response.TransactionResponseDto;
-import com.s8.binance.repository.ICoinRepository;
-import com.s8.binance.repository.IPaymentMethodRepository;
-import com.s8.binance.repository.ITransactionRepository;
-import com.s8.binance.repository.IWalletRepository;
 import com.s8.binance.service.ITransactionService;
 import com.s8.binance.specification.TransactionSpecification;
 import com.s8.binance.util.enums.TransactionType;
@@ -41,6 +36,8 @@ public class TransactionService implements ITransactionService {
     private final ICoinRepository coinRepository;
 
     private final IWalletRepository walletRepository;
+
+    private final IPurchaseRepository purchaseRepository;
 
     @Override
     public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId,
@@ -147,6 +144,7 @@ public class TransactionService implements ITransactionService {
         Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
 
         // checkear si hay saldo suficiente
+        checkBalance(purchaseCoin.getId(), transactionRequestDto.getPurchaseAmount());
 
         // calcular tipo de cambio
 
@@ -155,5 +153,24 @@ public class TransactionService implements ITransactionService {
 
         transactionRepository.save(transaction);
         return transactionMapper.fromEntityToTransactionDto(transaction);
+    }
+
+
+    @Override
+    public boolean checkBalance(Long coinId, BigDecimal amount) {
+
+        List<Purchase> purchases = purchaseRepository.findAll();
+        BigDecimal total = new BigDecimal(0);
+        for(Purchase purchase : purchases){
+            if(purchase.getPurchaseCoin().getId() == coinId){
+                total.add(purchase.getPurchaseAmount());
+            }
+        }
+
+        Optional<Coin> coin = coinRepository.findById(coinId);
+        BigDecimal totalUsd = total.multiply(coin.get().getUsdValue());
+        if(totalUsd.compareTo(amount) == -1){
+            return false;
+        } else return true;
     }
 }
