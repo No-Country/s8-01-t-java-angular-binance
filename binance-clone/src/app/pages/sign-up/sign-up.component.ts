@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
 import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ButtonComponent } from 'src/app/components/button/button.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, RouterModule, FormsModule],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
@@ -24,12 +25,13 @@ export class SignUpComponent {
   eyes = false;
 
   // password: 'password' | 'text' = 'password';
-
+  
   form: any;
   
   step: number = 0;
-
+  
   emailVerificated: boolean = false;
+  checkboxActivated: boolean = false;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -39,13 +41,27 @@ export class SignUpComponent {
     ) {
     this.form = this.formBuilder.nonNullable.group({
       email: ['', [Validators.email, Validators.required]],
-      verificationCode: ['', [Validators.minLength(6), Validators.required]],
-      password: ['', 
-      [Validators.minLength(8), 
-      Validators.maxLength(128), 
-      Validators.required, 
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]
-    ],
+      verificationCode: ['', [
+        Validators.minLength(6), 
+        Validators.maxLength(6), 
+        Validators.required, 
+        Validators.pattern('^[0-9]*$')]],
+      password: ['', [
+        Validators.minLength(8), 
+        Validators.maxLength(128), 
+        Validators.required, 
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)]],
+      nationality: ['', [Validators.required]],
+      legalName: ['', [Validators.required]],
+      legalLastName: ['', [Validators.required]],
+      birthdate: ['', [Validators.required]],
+      fullAddress: ['', [Validators.required]],
+      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      roles: ['USER'],
+      username: ['', [Validators.required]],
+      checkbox: [false, [Validators.requiredTrue]]
     });
   }
 
@@ -82,6 +98,17 @@ export class SignUpComponent {
     this.eyes = !this.eyes;
   }
 
+  disabled = false;
+
+  checkbox(){
+    if(this.checkboxActivated === true) {
+      this.form.checkbox = true;
+      this.increaseStep();
+    } else {
+      this.disabled = false;
+    }
+  }
+
   increaseStep() {
     this.step ++
   }
@@ -103,5 +130,16 @@ export class SignUpComponent {
   }
 
   signUp() {}
+
+
+  toggleButton = false;
+
+  clickToggleButton(){
+    this.toggleButton = !this.toggleButton;
+  }
+
+  toggleCheckbox(){
+    this.checkboxActivated = !this.checkboxActivated;
+  }
 
 }
