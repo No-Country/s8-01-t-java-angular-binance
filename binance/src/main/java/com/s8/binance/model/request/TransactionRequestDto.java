@@ -24,16 +24,16 @@ public class TransactionRequestDto implements Serializable {
     @ApiModelProperty(example = "PURCHASE")
     private TransactionType transactionType;
 
-    @ApiModelProperty(example = "1")
+    @ApiModelProperty(example = "4")
     private Long purchaseCoinId;
 
-    @ApiModelProperty(example = "200.00")
+    @ApiModelProperty(example = "1.00")
     private BigDecimal purchaseAmount;
 
-    @ApiModelProperty(example = "1")
+    @ApiModelProperty(example = "5")
     private Long saleCoinId;
 
-    @ApiModelProperty(example = "200.00")
+    @ApiModelProperty(example = "474.50")
     private BigDecimal saleAmount;
 
     @ApiModelProperty(example = "1")
