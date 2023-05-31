@@ -85,6 +85,10 @@ public class User {
 	@Column(name = "COUNTRY")
 	private String country;
 
+	@NotNull
+	@Column(name = "AGREE TO TERMS")
+	private boolean agree;
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")
 	private Wallet wallet;

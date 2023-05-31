@@ -65,6 +65,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 					.nationality(register.getNationality())
 					.city(register.getCity())
 					.country(register.getCountry())
+					.agree(register.isAgree())
 					.roles(roles)
 					.build();
 
