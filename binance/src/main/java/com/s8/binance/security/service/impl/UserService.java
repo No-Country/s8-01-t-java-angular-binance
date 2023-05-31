@@ -48,7 +48,7 @@ public class UserService implements IUserService {
 	@Override
     public UserDetailsResponseDto getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow();
-		HashMap<String, BigDecimal> balance = transactionService.getWalletBalance(user.getId());
+		HashMap<String, BigDecimal> balance = transactionService.getWalletBalance(user.getWallet().getId());
         UserDetailsResponseDto response = userMapper.fromEntityToDto(user, balance);
         return response;
     }
