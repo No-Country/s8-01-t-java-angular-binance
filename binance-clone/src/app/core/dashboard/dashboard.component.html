@@ -1,12 +1,12 @@
 <main class= >
   <!-- profile min-->
-  <section class="profile flex flex-row relative p-5 w-ful min-h-10 bg-gray-200">
+  <section class="profile flex flex-col relative p-5 w-ful min-h-10 bg-gray-200  md:flex-row">
     <div class="w-[-64PX] h-[-64PX] rounded-full flex justify-center static">
       <img src="./../../../assets/images/dashboard/Avatar.png" alt="" srcset="">
     </div>
     <div class="mx-5 relative">
-      <div class="user-nick text mb-2">
-        <h5 class="font-semibold">L_Pbte</h5>
+      <div class="user-nick text mb-2 flex justify-center md:justify-start">
+        <h5 class="font-semibold">L_Pbte <!--{{user.username}}--></h5>
       </div>
       <div class="flex flex-row ">
         <div class="id-user flex flex-col mr-5">
@@ -31,32 +31,32 @@
   <!-- sidebar-->
   <app-side-bar></app-side-bar>
    <!--profile resume-->
-  <section class="flex flex-row p-8">
+  <section class="flex flex-col p-8 md:flex-row items-center md:content-center">
     <article class="w-3/4">
-    <div class="Balance container flex flex-col items-center justify-center w-full h-full">
-      <div class="flex flex-row justify-around mb-7 w-full">
+    <div class="Balance container flex flex-col items-center w-full h-full">
+      <div class="flex flex-col justify-around items-center mb-7 w-full md:flex-row">
         <div class="flex flex-row mx-5">
           <h3 class="font-medium text-2xl" >Balance estimado</h3>
           <button class="px-2 py-2 font-semibold bg-binance-gray">
             <fa-icon [icon]="faEye"></fa-icon>
           </button>
         </div>
-        <div class="buttons ">
-          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-mustard text-white rounded-full shadow-sm ">
+        <div class="buttons mt-5">
+          <button class="px-4 py-2 mx-2 font-semibold text-sm bg-binance-mustard text-white rounded-full shadow-sm ">
             Deposito
           </button>
-          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+          <button class="px-4 py-2 mx-2 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
             Retirar
           </button>
-          <button class="px-4 py-2 mx-5 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
+          <button class="px-4 py-2 mx-2 font-semibold text-sm bg-binance-gray text-black rounded-full shadow-sm hover:bg-binance-mustard hover:text-white">
             Comprar cripto
           </button>
         </div>
       </div>
 
-      <div class="flex flex-row w-3/6 justify-center items-center mr-[40%] mb-7">
+      <div class="flex flex-col w-full justify-center items-center mb-7 md:flex-row md:mr-[40%] md:w-3/6">
         <div class="flex flex-row items-center ml-2 text-3xl ">
-          <h3>0.00035 BTC</h3>
+          <h3>0.00035 BTC<!--{{user.balance}}--></h3>
           <button class="px-2 py-2 bg-binance-gray mx-2 text-xl">
             <fa-icon [icon]="faArrowDown"></fa-icon>
           </button>
@@ -65,7 +65,7 @@
           <h3 class="">≈</h3>
         </div>
         <div class="text-3xl">
-          <h3>$1300.59</h3>
+          <h3>$1300.59<!--{{user.usd}}--></h3>
         </div>
       </div>
 
@@ -86,13 +86,12 @@
         </div>
       </div>
       <span class="font-light"> Los datos de cambio diario de los activos se actualizarán antes de las 8:00  (UTC) del día siguiente. </span>
-      <div class="flex w-3/4  justify-center">
+      <div class="flex w-full  justify-center md:w-3/4">
         <canvas id="chart" width="100%"  >
-
         </canvas></div>
     </div>
     </article>
-    <aside class="explore w-1/4">
+    <aside class="explore w-full md:w-1/4">
       <div class="">
         <h3 class="font-medium text-2xl">
           Explorar
