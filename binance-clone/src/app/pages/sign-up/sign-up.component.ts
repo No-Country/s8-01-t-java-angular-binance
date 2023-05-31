@@ -50,7 +50,7 @@ export class SignUpComponent {
         Validators.minLength(8), 
         Validators.maxLength(128), 
         Validators.required, 
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)]],
       nationality: ['', [Validators.required]],
       legalName: ['', [Validators.required]],
       legalLastName: ['', [Validators.required]],
