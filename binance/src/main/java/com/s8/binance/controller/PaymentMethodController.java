@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/payments")
 @RequiredArgsConstructor
-@Api(tags = "Payment methods", description = "Management of payment methods available in Binance. It allows creating, modifying, and deleting payment methods, as well as obtaining detailed information about them.")
+@Api(tags = "Payment methods", description = "Management of payment methods available in Binance.")
 public class PaymentMethodController {
 
     private final IPaymentMethodService paymentMethodService;

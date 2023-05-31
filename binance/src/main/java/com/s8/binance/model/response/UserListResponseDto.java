@@ -13,6 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserListResponseDto {
     
+    private Long id;
+
     private String email;
 
     private String username;
@@ -20,4 +22,6 @@ public class UserListResponseDto {
     private String legalName;
 
     private String legalLastName;
+
+    private Long walletId;
 }

@@ -15,6 +15,8 @@ import lombok.Setter;
 @ApiModel(description = "User information")
 public class UserRequestDto {
 
+    private String email;
+
     private String legalName;
 
     private String legalLastName;
