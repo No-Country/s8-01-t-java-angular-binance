@@ -4,8 +4,7 @@
   position: fixed;
   z-index: 1;
   top: 22vh;
-  width: 20vw;
-  height: 70vh;
+  height: 80vh;
   box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
 }
 .logo-container {
@@ -46,7 +45,7 @@
   align-items: center;
   height: calc(100% - 3.65rem);
   cursor: pointer;
-  width: 20vw;
+  width: 100%;
 
   .sidenav-nav-item {
       width: 100%;

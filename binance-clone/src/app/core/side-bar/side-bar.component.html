@@ -5,7 +5,13 @@
   </button>
 </div>
 
-<div class="sidenav bg-gray-200" [ngClass]="collapsed ? 'left-0' : 'left-[-50vw]'">
+<div class="sidenav bg-gray-200 w-[80vw] lg:w-[20vw]" [ngClass]="collapsed ? 'left-0' : 'left-[-80vw]'">
+        <div  class="flex justify-end items-center">
+          <button class="hover:bg-gray-400 p-4" (click)="toggleCollapse()">
+            <fa-icon [icon]="faClose"></fa-icon>
+          </button>
+        </div>
+
         <nav class="sidenav-nav" >
           <li class="sidenav-nav-item">
             <a href="" class="sidenav-nav-link hover:bg-gray-300">
