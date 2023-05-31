@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
+import com.s8.binance.model.response.DepositResponseDto;
 import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.service.ITransactionService;
 import com.s8.binance.util.enums.TransactionType;
@@ -37,23 +39,16 @@ public class TransactionController {
     @GetMapping("/filters")
     @ApiOperation("Get all transactions according to the specified filters. If no filters are specified, all transactions will be returned.")
     public ResponseEntity<List<TransactionResponseDto>> getTransactionsByFilters(
-            @RequestParam(required = false) Long transactionId,
             @RequestParam(required = false) Long paymentMethodId,
             @RequestParam(required = false) TransactionType transactionType,
             @RequestParam(required = false) LocalDate transactionDate,
             @RequestParam(required = false) Long purchaseCoinId,
             @RequestParam(required = false) BigDecimal purchaseAmount,
             @RequestParam(required = false) Long saleCoinId,
-            @RequestParam(required = false) BigDecimal saleAmount) {
-        List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(
-                transactionId,
-                paymentMethodId,
-                transactionType,
-                transactionDate,
-                purchaseCoinId,
-                purchaseAmount,
-                saleCoinId,
-                saleAmount);
+            @RequestParam(required = false) BigDecimal saleAmount,
+            @RequestParam(required = false) Long walletId) {
+        List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(paymentMethodId,
+                transactionType, transactionDate, purchaseCoinId, purchaseAmount, saleCoinId, saleAmount, walletId);
         if (transactions.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -61,8 +56,15 @@ public class TransactionController {
         }
     }
 
+    @GetMapping("/{id}")
+    @ApiOperation("Get a transaction by Id.")
+    public ResponseEntity<TransactionResponseDto> getTransactionById(@PathVariable Long id) {
+        TransactionResponseDto responseEntity = transactionService.getTransactionById(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
+    }
+
     @GetMapping("/balance")
-    @ApiOperation("Get wallet balance.")
+    @ApiOperation("Get balance by wallet Id.")
     public ResponseEntity<HashMap<String, BigDecimal>> getWalletBalance(Long walletId) {
         HashMap<String, BigDecimal> responseEntity = transactionService.getWalletBalance(walletId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
@@ -70,8 +72,8 @@ public class TransactionController {
 
     @PostMapping("/deposit")
     @ApiOperation("Create a new deposit.")
-    public ResponseEntity<TransactionResponseDto> depositCoin(@Valid @RequestBody DepositRequestDto depositRequestDto) {
-        TransactionResponseDto responseEntity = transactionService.createDeposit(depositRequestDto);
+    public ResponseEntity<DepositResponseDto> createDeposit(@Valid @RequestBody DepositRequestDto depositRequestDto) {
+        DepositResponseDto responseEntity = transactionService.createDeposit(depositRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }
 

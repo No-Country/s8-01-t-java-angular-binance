@@ -37,4 +37,8 @@ public class TransactionSpecification {
     public static Specification<Transaction> hasSaleAmount(BigDecimal saleAmount) {
         return (root, query, cb) -> cb.equal(root.get("saleAmount"), saleAmount);
     }
+
+    public static Specification<Transaction> hasWalletId(Long walletId) {
+        return (root, query, cb) -> cb.equal(root.get("wallet").get("id"), walletId);
+    }
 }

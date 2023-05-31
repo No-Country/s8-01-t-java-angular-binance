@@ -16,6 +16,7 @@ import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.model.mapper.TransactionMapper;
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
+import com.s8.binance.model.response.DepositResponseDto;
 import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.repository.ICoinRepository;
 import com.s8.binance.repository.IPaymentMethodRepository;
@@ -42,10 +43,10 @@ public class TransactionService implements ITransactionService {
     private final IWalletRepository walletRepository;
 
     @Override
-    public List<TransactionResponseDto> getTransactionsByFilters(Long transactionId, Long paymentMethodId,
+    public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId,
             TransactionType transactionType,
             LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
-            BigDecimal saleAmount) {
+            BigDecimal saleAmount, Long walletId) {
 
         Specification<Transaction> spec = Specification.where(null);
 
@@ -77,8 +78,11 @@ public class TransactionService implements ITransactionService {
             spec = spec.and(TransactionSpecification.hasSaleAmount(saleAmount));
         }
 
-        List<Transaction> transactionsFiltered = transactionRepository.findAll(spec);
+        if (walletId != null) {
+            spec = spec.and(TransactionSpecification.hasWalletId(walletId));
+        }
 
+        List<Transaction> transactionsFiltered = transactionRepository.findAll(spec);
         List<TransactionResponseDto> TransactionResponseDtoList = new ArrayList<>();
         for (Transaction transaction : transactionsFiltered) {
             TransactionResponseDto transactionResponseDto = transactionMapper.fromEntityToTransactionDto(transaction);
@@ -86,6 +90,13 @@ public class TransactionService implements ITransactionService {
         }
 
         return TransactionResponseDtoList;
+    }
+
+    @Override
+    public TransactionResponseDto getTransactionById(Long id) {
+        Transaction transaction = transactionRepository.findById(id).orElseThrow();
+        TransactionResponseDto response = transactionMapper.fromEntityToTransactionDto(transaction);
+        return response;
     }
 
     @Override
@@ -118,17 +129,15 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public TransactionResponseDto createDeposit(DepositRequestDto depositRequestDto) {
+    public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto) {
         PaymentMethod paymentMethod = paymentMethodRepository.findById(depositRequestDto.getPaymentMethodId())
                 .orElseThrow();
         Coin depositCoin = coinRepository.findById(depositRequestDto.getDepositCoinId()).orElseThrow();
         Wallet wallet = walletRepository.findById(depositRequestDto.getWalletId()).orElseThrow();
-
         Transaction deposit = transactionMapper.fromDepositDtoToEntity(depositRequestDto, paymentMethod,
                 depositCoin, wallet);
-
         transactionRepository.save(deposit);
-        return transactionMapper.fromEntityToTransactionDto(deposit);
+        return transactionMapper.fromEntityToDepositDto(deposit);
     }
 
     @Override

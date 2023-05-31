@@ -10,6 +10,7 @@ import com.s8.binance.model.entity.Transaction;
 import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
+import com.s8.binance.model.response.DepositResponseDto;
 import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.util.enums.TransactionType;
 
@@ -26,6 +27,18 @@ public class TransactionMapper {
                 .purchaseAmount(transaction.getPurchaseAmount())
                 .saleCoin(transaction.getSaleCoin())
                 .saleAmount(transaction.getSaleAmount())
+                .walletId(transaction.getWallet().getId())
+                .build();
+    }
+
+    public DepositResponseDto fromEntityToDepositDto(Transaction transaction) {
+        return DepositResponseDto.builder()
+                .id(transaction.getId())
+                .paymentMethod(transaction.getPaymentMethod())
+                .transactionType(transaction.getTransactionType().name())
+                .transactionDate(transaction.getTransactionDate())
+                .depositCoin(transaction.getPurchaseCoin())
+                .depositAmount(transaction.getPurchaseAmount())
                 .walletId(transaction.getWallet().getId())
                 .build();
     }
