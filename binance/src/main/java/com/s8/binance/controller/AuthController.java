@@ -37,6 +37,7 @@ public class AuthController {
 	public ResponseEntity<?> register(@Valid @RequestBody RegisterDto register) {
 		userDetailsService.newUser(register);
 		return new ResponseEntity<>(new Message("User succesfully created"), HttpStatus.CREATED);
+
 	}
 
 	// @PostMapping("/login")

@@ -9,7 +9,7 @@ import com.s8.binance.model.entity.PaymentMethod;
 import com.s8.binance.model.mapper.PaymentMethodMapper;
 import com.s8.binance.model.request.PaymentMethodRequestDto;
 import com.s8.binance.model.response.PaymentMethodResponseDto;
-import com.s8.binance.repository.IPaymentMethodRepository;
+import com.s8.binance.model.response.repository.IPaymentMethodRepository;
 import com.s8.binance.service.IPaymentMethodService;
 
 import lombok.RequiredArgsConstructor;

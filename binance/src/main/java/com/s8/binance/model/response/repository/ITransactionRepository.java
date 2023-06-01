@@ -1,4 +1,4 @@
-package com.s8.binance.repository;
+package com.s8.binance.model.response.repository;
 
 import java.util.List;
 

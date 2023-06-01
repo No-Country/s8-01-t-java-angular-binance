@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.s8.binance.model.entity.Wallet;
-import com.s8.binance.repository.IWalletRepository;
+import com.s8.binance.model.response.repository.IWalletRepository;
 import com.s8.binance.service.IWalletService;
 
 import lombok.RequiredArgsConstructor;
