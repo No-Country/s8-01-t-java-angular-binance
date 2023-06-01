@@ -2,6 +2,7 @@ package com.s8.binance.security.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -62,4 +63,8 @@ public class RegisterDto {
 	@NotBlank
 	@ApiModelProperty(example = "France")
 	private String country;
+
+	@NotNull
+	@ApiModelProperty(example = "true")
+	private boolean agree;
 }
