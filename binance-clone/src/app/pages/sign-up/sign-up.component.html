@@ -19,7 +19,7 @@
                       Este campo debe contener un email válido
                     </p>
                 </div>
-                <button (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md" [ngClass]="{'cursor-not-allowed': form.controls.email.invalid}"
+                <button (click)="increaseStep(); emailVerification()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md" [ngClass]="{'cursor-not-allowed': form.controls.email.invalid}"
                 [disabled]="form.controls.email.invalid"
                 >Siguiente</button>
                 <div class="flex gap-2">
@@ -70,15 +70,23 @@
         </div>
 
         <div *ngIf="step === 2" class="flex flex-col w-[500px]">
-            <p class="text-3xl font-semibold mb-7">Crear contraseña</p>
+            <p class="text-3xl font-semibold mb-7">Crear username y contraseña</p>
+            <div>Username</div>
+            <input type="text" formControlName="username" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
+            <div *ngIf="form.controls.username.touched && form.controls.username.invalid">
+                <p
+                  *ngIf="form.controls.username.hasError('required')"
+                  class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                  Este campo es obligatorio
+                </p>
+            </div>
             <div class="flex flex-col gap-5">
                 <p>Contraseña</p>
                 <div class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow
                 cursor-pointer transition-all duration-300 hover:border-binance-yellow active:border-binance-yellow flex w-full
                 "
                 >
-                <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
-                <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
                 <ng-container *ngIf="eyes === false">
                     <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
                     <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
@@ -102,8 +110,8 @@
                     Este campo debe contener al menos una letra mayúscula, una minúscula, un número, un caracter especial y un mínimo de 8 caracteres y un máximo de 128 caracteres.
                     </p>
                 </div>
-                <button type="button"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
-                [ngClass]="{'cursor-not-allowed': form.controls.verificationCode.invalid}"
+                <button type="button" [disabled]="form.controls.password.invalid || form.controls.username.invalid"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
+                [ngClass]="{'cursor-not-allowed': form.controls.password.invalid && form.controls.username.invalid}"
                 >Siguiente</button>
             </div>
         </div>
@@ -118,9 +126,10 @@
 
             <div class="h-4"></div>
             <p>Nombre legal</p>
-            <input type="text" formControlName="legalName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Apellido/s">
+            <input type="text" formControlName="legalName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Nombre/s">
             <div class="h-2"></div>
-            <input type="text" formControlName="legalLastName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Nombre/s">
+            <p>Apellido legal</p>
+            <input type="text" formControlName="legalLastName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Apellido/s">
             <div class="h-6"></div>
             <p>Tal como se muestra en tu pasaporte o carnet de identidad. Utiliza el mismo idioma que en tu documento.</p>
             <div class="h-6"></div>
@@ -143,6 +152,19 @@
             <input type="text" formControlName="fullAddress" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
             <p>Código postal</p>
             <input type="text" formControlName="zipCode" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
+            <div *ngIf="form.controls.zipCode.touched">
+                <p
+                  *ngIf="form.controls.zipCode.hasError('required')"
+                  class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                  Este campo es obligatorio
+                </p>
+                <p
+                *ngIf="form.controls.zipCode.hasError('pattern')"
+                class="mt-1 ml-1 text-xs font-medium text-red-500">
+                Ingresa solo números
+                </p>
+            </div>
             <p>Ciudad</p>
             <input type="text" formControlName="city" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
             <p>País / Región</p>
@@ -155,25 +177,20 @@
             <input type="text" formControlName="username" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
             <div class="h-6"></div>
             <div class="flex items-start gap-2">
-                <input type="checkbox" (change)="toggleCheckbox()" class="flex border cursor-pointer checked:bg-binance-yellow">
+                <input type="checkbox" formControlName="agree" class="flex border cursor-pointer checked:bg-binance-yellow">
                 <p>Al crear una cuenta, acepto los <strong>Términos de servicio</strong> y la <strong>Política de privacidad</strong></p>
             </div>
             <p
-            *ngIf="checkboxActivated === false"
+            *ngIf="form.controls.agree.invalid"
             class="mt-1 ml-1 text-xs font-medium text-red-500"
             >
             Para continuar debes aceptar los términos de servicio y política de privacidad.
-            </p>
-            <p
-            *ngIf="checkboxActivated === true"
-            class="mt-1 ml-1 text-xs font-medium text-green-500"
-            >
-            Al hacer click en continuar se creará tu cuenta en Binance.
             </p>
             <div class="flex justify-items-start w-full gap-4">
                 <button (click)="decreaseStep()" class="text-[#707A8A] hover:text-black"><fa-icon [icon]="faAngleLeft" class="p-2"></fa-icon>Atrás</button>
                 <button type="submit"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
                 [disabled]="form.invalid"
+                [ngClass]="{'cursor-not-allowed': form.invalid}"
                 >Continuar</button>
             </div>
         </div>

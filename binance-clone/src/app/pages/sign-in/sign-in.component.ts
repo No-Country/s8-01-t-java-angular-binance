@@ -23,8 +23,8 @@ export class SignInComponent {
     private auth: AuthService
     ) {
     this.form = this.formBuilder.nonNullable.group({
-      email: ['', [Validators.email, Validators.required]],
-      passowrd: ['', [Validators.minLength(6), Validators.required]]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -32,5 +32,11 @@ export class SignInComponent {
     this.step ++
   }
 
-  signIn(){}
+  signIn(){
+    if(this.form.valid) {
+      const { username, password } = this.form.getRawValue();
+      this.auth.signIn(username, password)
+      this.router.navigate(['/dashboard'])
+    }
+  }
 }

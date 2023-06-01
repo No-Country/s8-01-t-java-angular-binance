@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Register } from 'src/interfaces/register.model';
 import { environment } from 'src/environments/environment';
+import { Register } from 'src/interfaces/register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +14,12 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  // signIn(email: string) {
-  //   this.http.post<Auth>(`${this.apiUrl}/register`, { email });
-  // }
+  signIn(password: string, username: string) {
+    this.http.post<any>(`${this.apiUrl}/api/v1/auth/login`, { password, username });
+  }
 
-  signUp(register: Register) {
-    this.http.post<Register>(`${this.apiUrl}/register`, { register });
+  signUp(register: Register){
+    this.http.post<any>(`${this.apiUrl}/api/v1/auth/register`, { register });
   }
 
 

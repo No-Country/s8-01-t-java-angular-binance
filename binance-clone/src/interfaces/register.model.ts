@@ -1,4 +1,5 @@
 export interface Register {
+    agree: boolean;
     birthdate: string,
     city: string,
     country: string,
