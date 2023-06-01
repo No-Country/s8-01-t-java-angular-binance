@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/v1/auth")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@Api(tags = "Authentication", description = "Registration and login for Binance users.")
+@Api(tags = "Authentication", description = "Register and login for Binance users.")
 public class AuthController {
 
 	private final IUserService userService;
