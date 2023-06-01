@@ -41,31 +41,35 @@ export class SignUpComponent {
     ) {
     this.form = this.formBuilder.nonNullable.group({
       email: ['', [Validators.email, Validators.required]],
-      verificationCode: ['', [
-        Validators.minLength(6), 
-        Validators.maxLength(6), 
-        Validators.required, 
-        Validators.pattern('^[0-9]*$')]],
+      // verificationCode: ['', [
+      //   Validators.minLength(6), 
+      //   Validators.maxLength(6), 
+      //   Validators.required, 
+      //   Validators.pattern('^[0-9]*$')]],
       password: ['', [
         Validators.minLength(8), 
         Validators.maxLength(128), 
         Validators.required, 
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)]],
+        // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)
+      ]],
       nationality: ['', [Validators.required]],
       legalName: ['', [Validators.required]],
       legalLastName: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       fullAddress: ['', [Validators.required]],
-      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      roles: ['USER'],
+      // roles: ['USER'],
       username: ['', [Validators.required]],
-      checkbox: [false, [Validators.requiredTrue]]
+      // checkbox: [false, [Validators.requiredTrue]]
     });
   }
 
-  singUp() {}
+  singUp() {
+    
+    this.auth.signUp(this.form.getRawValue())
+  }
 
   // signUp() {
   //   this.auth.signUpEmail(this.form.getRawValue('email'))
