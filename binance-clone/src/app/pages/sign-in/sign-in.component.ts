@@ -5,6 +5,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 
+interface Registro {
+  username: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-sign-in',
   standalone: true,
@@ -33,10 +38,39 @@ export class SignInComponent {
   }
 
   signIn(){
-    if(this.form.valid) {
-      const { username, password } = this.form.getRawValue();
-      this.auth.signIn(username, password)
-      this.router.navigate(['/dashboard'])
+    // if(this.form.valid) {
+    //   const { username, password } = this.form.getRawValue();
+    //   this.auth.signIn(username, password)
+    //   this.router.navigate(['/dashboard'])
+    // }
+
+
+
+    
+  }
+
+
+  ngOnInit(): void {
+    this.obtenerRegistro();
+  }
+
+
+  registro: Registro | null = null;
+
+  obtenerRegistro() {
+    const registroString = localStorage.getItem('miRegistro');
+    if (registroString) {
+      const registro = JSON.parse(registroString) as Registro;
+      this.registro = registro;
+      console.log('Soy miRegistro:', registro);
+      const { username, password } = registro;
+      if(this.form.username === username && this.form.password === password) {
+        this.auth.signIn(password, username)
+      }
+      console.log('Username:', username);
+      console.log('Password:', password);
+    } else {
+      console.log('No se encontró ningún registro en el almacenamiento local.');
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -8,6 +8,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject } from 'rxjs';
+import { Register } from 'src/interfaces/register.model';
+// import { LocalStorageService } from 'ngx-webstorage';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +20,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+
+  private cambiosLocalStorage = new BehaviorSubject<Register | null>(null);
 
   apiUrl = environment.API_URL;
 
@@ -39,6 +45,7 @@ export class SignUpComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
+    // private localStorageService: LocalStorageService
 
     ) {
     this.form = this.formBuilder.nonNullable.group({
@@ -64,6 +71,14 @@ export class SignUpComponent {
       country: ['', [Validators.required]],
       username: ['', [Validators.required]],
       agree: [false, [Validators.requiredTrue]]
+    });
+  }
+
+  registro: any;
+
+  ngOnInit(): void {
+    this.cambiosLocalStorage.subscribe(() => {
+      this.obtenerRegistro();
     });
   }
 
@@ -181,5 +196,35 @@ export class SignUpComponent {
 
     }
   }
+
+
+  // guardarRegistro() {
+  //   const registro = this.form.getRawValue();
+  //   this.localStorageService.store('miRegistro', registro);
+  // }
+
+  // obtenerRegistro() {
+  //   const registro = this.localStorageService.retrieve('miRegistro');
+  //   console.log(registro);
+  // }
+
+  guardarRegistro() {
+    const registro = this.form.getRawValue();
+    localStorage.setItem('miRegistro', JSON.stringify(registro));
+  }
+
+  
+  obtenerRegistro() {
+    const registroString = localStorage.getItem('miRegistro');
+    if (registroString) {
+      const registro = JSON.parse(registroString);
+      this.registro = registro;
+      console.log('soy miRegistro',registro);
+    } else {
+      console.log('No se encontró ningún registro en el almacenamiento local.');
+    }
+  }
+
+
 
 }
