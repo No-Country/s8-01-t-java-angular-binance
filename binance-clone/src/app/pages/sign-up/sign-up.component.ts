@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { RegisterService } from 'src/app/services/register.service';
 import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from 'src/app/components/button/button.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,27 +18,28 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 })
 export class SignUpComponent {
 
+  apiUrl = environment.API_URL;
+
+
   faAngleLeft = faAngleLeft;
   faExclamationCircle = faExclamationCircle;
   faEyeSlash = faEyeSlash;
   faEye = faEye;
 
   eyes = false;
-
-  // password: 'password' | 'text' = 'password';
   
   form: any;
   
   step: number = 0;
   
   emailVerificated: boolean = false;
-  checkboxActivated: boolean = false;
   
   constructor(
+    private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    private registerService: RegisterService
+
     ) {
     this.form = this.formBuilder.nonNullable.group({
       email: ['', [Validators.email, Validators.required]],
@@ -56,12 +58,11 @@ export class SignUpComponent {
       legalLastName: ['', [Validators.required]],
       birthdate: ['', [Validators.required]],
       fullAddress: ['', [Validators.required]],
-      postalCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      roles: ['USER'],
       username: ['', [Validators.required]],
-      checkbox: [false, [Validators.requiredTrue]]
+      agree: [false, [Validators.requiredTrue]]
     });
   }
 
@@ -98,17 +99,6 @@ export class SignUpComponent {
     this.eyes = !this.eyes;
   }
 
-  disabled = false;
-
-  checkbox(){
-    if(this.checkboxActivated === true) {
-      this.form.checkbox = true;
-      this.increaseStep();
-    } else {
-      this.disabled = false;
-    }
-  }
-
   increaseStep() {
     this.step ++
   }
@@ -117,29 +107,75 @@ export class SignUpComponent {
     this.step --
   }
 
-  emailVerification() {
-    // this.registerService.sendCodeVerification().subscribe(rta => {
-    //   emailVerificated = rta;
-    // })
-  }
-
-  sendCode() {
-    if (this.emailVerificated) {
-      this.increaseStep();
-    }
-  }
-
+  
   signUp() {}
-
-
+  
+  
   toggleButton = false;
-
+  
   clickToggleButton(){
     this.toggleButton = !this.toggleButton;
   }
+  
+  
 
-  toggleCheckbox(){
-    this.checkboxActivated = !this.checkboxActivated;
+  
+  email: string = '';
+  randomNumber: number = 0;
+  codeSent: Number | null = null;
+  num: number = 0;
+  
+  sendCode() {
+
+    this.codeSent = this.form.get('verificationCode').value;
+
+    if (this.codeSent === this.num) {
+      this.increaseStep();
+    }
+  }
+  generateRandomNumber(): string {
+    const length = 6;
+    let randomNumber = '';
+    const characters = '0123456789';
+  
+    for (let i = 0; i < length; i++) {
+      const index = Math.floor(Math.random() * characters.length);
+      randomNumber += characters.charAt(index);
+    }
+  
+    return randomNumber;
+  }
+  
+  emailVerification() {
+  
+
+    this.randomNumber = Number(this.generateRandomNumber());
+    this.num = this.randomNumber;
+    console.log('random number',this.randomNumber)
+    const email = this.form.get('email').value;
+
+  
+    const data = {
+      email: email,
+      num: this.randomNumber
+    };
+    console.log(data)
+  
+    this.http.post(`${this.apiUrl}/api/v1/auth/email`, data).subscribe(
+      response => {
+        // Manejar la respuesta de la API
+        console.log('email verification response',response);
+      },
+      error => {
+        // Manejar el error de la API
+        console.error('email verification', error);
+      }
+    );
+
+    const num = this.form.get('verificationCode').value;
+    if(num === this.randomNumber){
+
+    }
   }
 
 }
