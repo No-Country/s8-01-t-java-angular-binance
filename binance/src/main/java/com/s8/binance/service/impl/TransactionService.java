@@ -144,33 +144,56 @@ public class TransactionService implements ITransactionService {
         Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
 
         // checkear si hay saldo suficiente
-        checkBalance(purchaseCoin.getId(), transactionRequestDto.getPurchaseAmount());
+        if(checkBalance(purchaseCoin.getId(), saleCoin.getId(), transactionRequestDto.getPurchaseAmount()) == true) {
+            ;
+            Transaction transaction = transactionMapper.fromTransactionDtoToEntity(transactionRequestDto, paymentMethod,
+                    purchaseCoin, saleCoin, wallet);
 
+            transactionRepository.save(transaction);
+            return transactionMapper.fromEntityToTransactionDto(transaction);
+        }
         // calcular tipo de cambio
-
-        Transaction transaction = transactionMapper.fromTransactionDtoToEntity(transactionRequestDto, paymentMethod,
-                purchaseCoin, saleCoin, wallet);
-
-        transactionRepository.save(transaction);
-        return transactionMapper.fromEntityToTransactionDto(transaction);
+        else return null; // aca va una excepcion
     }
 
 
     @Override
-    public boolean checkBalance(Long coinId, BigDecimal amount) {
-
-        List<Purchase> purchases = purchaseRepository.findAll();
+    public BigDecimal coinPurcheseBalance(Long id){
+        List<Transaction> transactions = transactionRepository.findAll();
         BigDecimal total = new BigDecimal(0);
-        for(Purchase purchase : purchases){
-            if(purchase.getPurchaseCoin().getId() == coinId){
-                total.add(purchase.getPurchaseAmount());
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionType().equals(TransactionType.PURCHASE)) {
+                total.add(transaction.getPurchaseAmount());
             }
         }
+        return total;
+    }
 
-        Optional<Coin> coin = coinRepository.findById(coinId);
-        BigDecimal totalUsd = total.multiply(coin.get().getUsdValue());
-        if(totalUsd.compareTo(amount) == -1){
-            return false;
-        } else return true;
+    @Override
+    public BigDecimal coinSaleBalance(Long id){
+        List<Transaction> transactions = transactionRepository.findAll();
+        BigDecimal total = new BigDecimal(0);
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionType().equals(TransactionType.SALE)) {
+                total.add(transaction.getPurchaseAmount());
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public boolean checkBalance(Long purchaseCoinId, Long saleCoinId, BigDecimal amount ) {
+
+        BigDecimal total = coinPurcheseBalance(purchaseCoinId); //balance total de la moneda con la que quiero comprar
+
+        Optional<Coin> saleCoin = coinRepository.findById(saleCoinId); // esta es la moneda con la que pago
+        BigDecimal saleCoinUsd = total.multiply(saleCoin.get().getUsdValue()); // cantidad que tengo en dolares de la moneda con la que pago
+
+        Optional<Coin> purchaseCoin = coinRepository.findById(purchaseCoinId); // esta es la moneda que quiero comprar
+        BigDecimal purchaseCoinUsd = amount.multiply(purchaseCoin.get().getUsdValue()); // cantidad que quiero comprar en dolares
+
+        if(saleCoinUsd.compareTo(purchaseCoinUsd) == -1){ //si la cantidad que tengo en dolares de la moneda con la que
+            return false;                                 //quiero pagar  es menos a la cantidad en dolares de la moneda que
+        } else return true;                               //quiero comprar me devuelve un -1
     }
 }

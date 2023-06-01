@@ -31,5 +31,9 @@ public interface ITransactionService {
 
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto);
 
-    public boolean checkBalance(Long id, BigDecimal amount);
+    public BigDecimal coinPurcheseBalance(Long id);
+
+    BigDecimal coinSaleBalance(Long id);
+
+    public boolean checkBalance(Long purchaseCoinId, Long saleCoinId, BigDecimal amount);
 }
