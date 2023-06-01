@@ -29,9 +29,9 @@
         </div>
 
         <div *ngIf="step === 1" class="w-[700px] flex flex-col items-center">
-            <div class="flex justify-items-start w-full">
+            <!-- <div class="flex justify-items-start w-full">
                 <button (click)="decreaseStep()" class="text-[#707A8A] hover:text-black"><fa-icon [icon]="faAngleLeft" class="p-2"></fa-icon>Volver</button>
-            </div>
+            </div> -->
             <div class="h-10"></div>
             <div class="flex flex-col w-[500px]">
                 <p class="text-3xl font-semibold mb-7">Verificación de correo electrónico</p>
@@ -77,6 +77,8 @@
                 cursor-pointer transition-all duration-300 hover:border-binance-yellow active:border-binance-yellow flex w-full
                 "
                 >
+                <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
+                <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
                 <ng-container *ngIf="eyes === false">
                     <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
                     <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
@@ -100,7 +102,7 @@
                     Este campo debe contener al menos una letra mayúscula, una minúscula, un número, un caracter especial y un mínimo de 8 caracteres y un máximo de 128 caracteres.
                     </p>
                 </div>
-                <button type="button" [disabled]="form.controls.password.invalid"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
+                <button type="button"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
                 [ngClass]="{'cursor-not-allowed': form.controls.verificationCode.invalid}"
                 >Siguiente</button>
             </div>
