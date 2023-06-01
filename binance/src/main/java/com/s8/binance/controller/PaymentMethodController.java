@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/payments")
-@CrossOrigin(origins = "http://localhost:8080/swagger-ui.html")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Api(tags = "Payment methods", description = "Management of available payment methods on Binance.")
 public class PaymentMethodController {

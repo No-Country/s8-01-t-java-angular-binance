@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/users")
-@CrossOrigin(origins = "http://localhost:8080/swagger-ui.html")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Api(tags = "Users", description = "Management of available users on Binance.")
 public class UserController {

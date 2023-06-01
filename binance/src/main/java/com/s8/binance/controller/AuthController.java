@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/auth")
-@CrossOrigin(origins = "http://localhost:8080/swagger-ui.html")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @Api(tags = "Authentication", description = "Registration and login for Binance users.")
 public class AuthController {
