@@ -62,8 +62,4 @@ public class RegisterDto {
 	@NotBlank
 	@ApiModelProperty(example = "France")
 	private String country;
-
-	@NotBlank
-	@ApiModelProperty(example = "true")
-	private boolean agree;
 }

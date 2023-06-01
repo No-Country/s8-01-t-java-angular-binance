@@ -36,9 +36,6 @@ public class UserMain implements UserDetails {
 	@Column(name = "LEGAL_LAST_NAME")
 	private String legalLastName;
 
-	@Column(name = "AGREE_TO_TERMS")
-	private boolean agree;
-
 	@Column(name = "AUTHORITIES")
 	private Collection<? extends GrantedAuthority> authorities;
 
@@ -48,7 +45,7 @@ public class UserMain implements UserDetails {
 				.map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
 				.collect(Collectors.toList());
 		return new UserMain(user.getLegalName(), user.getLegalLastName(), user.getUsername(), user.getEmail(),
-				user.getPassword(), user.isAgree(), authorities);
+				user.getPassword(), authorities);
 	}
 
 	@Override
