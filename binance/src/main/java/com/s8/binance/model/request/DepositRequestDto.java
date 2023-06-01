@@ -16,15 +16,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "Currency information")
-public class CoinRequestDto implements Serializable {
+@ApiModel(description = "Deposit information")
+public class DepositRequestDto implements Serializable {
 
-    @ApiModelProperty(example = "BTC")
-    private String name;
+    @ApiModelProperty(example = "5")
+    private Long depositCoinId;
 
-    @ApiModelProperty(example = "Bitcoin")
-    private String description;
+    @ApiModelProperty(example = "5000.00")
+    private BigDecimal depositAmount;
 
-    @ApiModelProperty(example = "27661.90")
-    private BigDecimal usdValue;
+    @ApiModelProperty(example = "1")
+    private Long walletId;
 }

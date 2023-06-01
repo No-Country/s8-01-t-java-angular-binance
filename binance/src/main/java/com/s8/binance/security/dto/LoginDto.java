@@ -6,21 +6,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "User login information")
 public class LoginDto {
 
 	@NotBlank
-	@ApiModelProperty(value = "Username", example = "antonelaroccuzzo")
+	@ApiModelProperty(example = "antonelaroccuzzo")
 	private String username;
 
 	@NotBlank
-	@ApiModelProperty(value = "Password", example = "password1234")
+	@ApiModelProperty(example = "password1234")
 	private String password;
 }

@@ -4,17 +4,18 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.s8.binance.model.response.UserDetailsResponseDto;
 import com.s8.binance.security.dto.LoginDto;
 import com.s8.binance.security.dto.RegisterDto;
+import com.s8.binance.security.entity.User;
+import com.s8.binance.security.service.IUserService;
 import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
-import com.s8.binance.security.service.impl.UserService;
 import com.s8.binance.security.util.Message;
 
 import io.swagger.annotations.Api;
@@ -24,10 +25,10 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
-@Api(tags = "Authentication", description = "Registration and login for Binance users")
+@Api(tags = "Authentication", description = "Registration and login for Binance users.")
 public class AuthController {
 
-	private final UserService userService;
+	private final IUserService userService;
 
 	private final UserDetailsServiceImpl userDetailsService;
 
@@ -38,10 +39,20 @@ public class AuthController {
 		return new ResponseEntity<>(new Message("User succesfully created"), HttpStatus.CREATED);
 	}
 
+	// @PostMapping("/login")
+	// @ApiOperation("Login for a Binance user")
+	// public ResponseEntity<?> login(@Valid @RequestBody LoginDto login,
+	// BindingResult bindingResult) {
+	// return userDetailsService.login(login, bindingResult);
+	// }
+
+	// MOMENTANEOOOO
 	@PostMapping("/login")
 	@ApiOperation("Login for a Binance user")
-	public ResponseEntity<?> login(@Valid @RequestBody LoginDto login, BindingResult bindingResult) {
-		return userDetailsService.login(login, bindingResult);
+	public ResponseEntity<UserDetailsResponseDto> login(@Valid @RequestBody LoginDto login) {
+		User user = userService.getByUsername(login.getUsername()).orElseThrow();
+		UserDetailsResponseDto response = userService.getUserById(user.getId());
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/email")

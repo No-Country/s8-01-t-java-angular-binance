@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionResponseDto implements Serializable {
+public class DepositResponseDto implements Serializable {
 
     private Long id;
 
@@ -28,13 +28,9 @@ public class TransactionResponseDto implements Serializable {
 
     private LocalDate transactionDate;
 
-    private Coin purchaseCoin;
+    private Coin depositCoin;
 
-    private BigDecimal purchaseAmount;
-
-    private Coin saleCoin;
-
-    private BigDecimal saleAmount;
+    private BigDecimal depositAmount;
     
     private Long walletId;
 }

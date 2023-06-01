@@ -2,15 +2,19 @@ package com.s8.binance.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserListResponseDto {
     
+    private Long id;
+
     private String email;
 
     private String username;
@@ -18,4 +22,6 @@ public class UserListResponseDto {
     private String legalName;
 
     private String legalLastName;
+
+    private Long walletId;
 }

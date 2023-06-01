@@ -22,11 +22,13 @@ import com.s8.binance.model.entity.Wallet;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -82,6 +84,10 @@ public class User {
 	@NotNull
 	@Column(name = "COUNTRY")
 	private String country;
+
+	@NotNull
+	@Column(name = "AGREE_TO_TERMS")
+	private boolean agree;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ID")

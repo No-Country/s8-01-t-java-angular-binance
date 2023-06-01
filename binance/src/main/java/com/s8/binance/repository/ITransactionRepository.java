@@ -10,4 +10,6 @@ import com.s8.binance.model.entity.Transaction;
 public interface ITransactionRepository extends JpaRepository<Transaction, Long> {
 
     public List<Transaction> findAll(Specification<Transaction> spec);
+
+    public List<Transaction> findByWalletId(Long walletId);
 }

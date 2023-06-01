@@ -7,18 +7,19 @@ import org.springframework.security.core.GrantedAuthority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Builder.Default;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class JwtDto {
 
 	private String token;
 
-	@Default
 	private String bearer = "Bearer";
 
 	private String username;
