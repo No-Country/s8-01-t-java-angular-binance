@@ -5,12 +5,10 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { Router, RouterModule } from '@angular/router';
 import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ButtonComponent } from 'src/app/components/button/button.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
-import { Register } from 'src/interfaces/register.model';
-// import { LocalStorageService } from 'ngx-webstorage';
+import { first } from 'rxjs';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,9 +18,7 @@ import { Register } from 'src/interfaces/register.model';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
-
-  private cambiosLocalStorage = new BehaviorSubject<Register | null>(null);
+export class SignUpComponent {
 
   apiUrl = environment.API_URL;
 
@@ -45,7 +41,6 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    // private localStorageService: LocalStorageService
 
     ) {
     this.form = this.formBuilder.nonNullable.group({
@@ -74,17 +69,51 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  registro: any;
 
-  ngOnInit(): void {
-    this.cambiosLocalStorage.subscribe(() => {
-      this.obtenerRegistro();
-    });
-  }
-
-  singUp() {
+  signUp() {
+    const register = this.form.getRawValue();
+    console.log('register desde sign-up getRawValue()',register)
     
-    this.auth.signUp(this.form.getRawValue())
+    this.auth.signUp(this.form.value)
+    .subscribe(register => {
+      console.log('register desde sign-up',register)
+
+    this.auth.signUp(register).subscribe(
+      (response) => {
+        console.log('Registro exitoso', response);
+      },
+      (error) => {
+        console.error('Error en el registro', error);
+      }
+    );
+    }
+
+
+
+    //   {
+    //   next: (res) => {
+    //     const username = res.username;
+    //     Swal.fire({
+    //       title: `¡Hola! ${username}`,
+    //       text: `Iniciaste sesión correctamente!`,
+    //       icon: 'success',
+    //       showConfirmButton: false,
+    //       timer: 3000
+    //     }).then(() => {
+    //       this.router.navigate(['/login']);
+    //     });
+    //   },
+    //   error: (error) => {
+    //     console.log('Error en el inicio de sesión:', error);
+    //     Swal.fire({
+    //       title: 'Error',
+    //       text: 'Username o contraseña inválida',
+    //       icon: 'error',
+    //       confirmButtonText: 'Aceptar'
+    //     });
+    //   }
+    // }
+    );
   }
 
   // signUp() {
@@ -127,8 +156,6 @@ export class SignUpComponent implements OnInit {
   }
 
   
-  signUp() {}
-  
   
   toggleButton = false;
   
@@ -168,62 +195,36 @@ export class SignUpComponent implements OnInit {
   emailVerification() {
   
 
-    this.randomNumber = Number(this.generateRandomNumber());
-    this.num = this.randomNumber;
-    console.log('random number',this.randomNumber)
-    const email = this.form.get('email').value;
+    // this.randomNumber = Number(this.generateRandomNumber());
+    // this.num = this.randomNumber;
+    // console.log('random number',this.randomNumber)
+    // const email = this.form.get('email').value;
 
   
-    const data = {
-      email: email,
-      num: this.randomNumber
-    };
-    console.log(data)
+    // const data = {
+    //   email: email,
+    //   num: this.randomNumber
+    // };
+    // console.log(data)
   
-    this.http.post(`${this.apiUrl}/api/v1/auth/email`, data).subscribe(
-      response => {
-        // Manejar la respuesta de la API
-        console.log('email verification response',response);
-      },
-      error => {
-        // Manejar el error de la API
-        console.error('email verification', error);
-      }
-    );
+    // this.http.post(`${this.apiUrl}/api/v1/auth/email`, data).subscribe(
+    //   response => {
+    //     // Manejar la respuesta de la API
+    //     console.log('email verification response',response);
+    //   },
+    //   error => {
+    //     // Manejar el error de la API
+    //     console.error('email verification', error);
+    //   }
+    // );
 
-    const num = this.form.get('verificationCode').value;
-    if(num === this.randomNumber){
+    // const num = this.form.get('verificationCode').value;
+    // if(num === this.randomNumber){
 
-    }
+    // }
   }
 
 
-  // guardarRegistro() {
-  //   const registro = this.form.getRawValue();
-  //   this.localStorageService.store('miRegistro', registro);
-  // }
-
-  // obtenerRegistro() {
-  //   const registro = this.localStorageService.retrieve('miRegistro');
-  //   console.log(registro);
-  // }
-
-  guardarRegistro() {
-    const registro = this.form.getRawValue();
-    localStorage.setItem('miRegistro', JSON.stringify(registro));
-  }
-
-  
-  obtenerRegistro() {
-    const registroString = localStorage.getItem('miRegistro');
-    if (registroString) {
-      const registro = JSON.parse(registroString);
-      this.registro = registro;
-      console.log('soy miRegistro',registro);
-    } else {
-      console.log('No se encontró ningún registro en el almacenamiento local.');
-    }
-  }
 
 
 

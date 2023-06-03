@@ -1,5 +1,5 @@
 
 export const environment = {
     production: false,
-    API_URL: 'https://binance.up.railway.app'
+    API_URL: 'https://binance.up.railway.app/api/v1'
   };
