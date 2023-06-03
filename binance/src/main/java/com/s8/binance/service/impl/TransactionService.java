@@ -143,28 +143,21 @@ public class TransactionService implements ITransactionService {
         Coin saleCoin = coinRepository.findByName(transactionRequestDto.getSaleCoinName());
         Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
 
+        this.checkBalance(saleCoin, transactionRequestDto.getSaleAmount(), wallet);
         Transaction transaction = transactionMapper.fromTransactionDtoToEntity(transactionRequestDto, paymentMethod,
                 purchaseCoin, saleCoin, wallet);
-        this.checkBalance(transaction);
-
         transactionRepository.save(transaction);
         return transactionMapper.fromEntityToTransactionDto(transaction);
     }
 
-    private void checkBalance(Transaction transaction) {
-        HashMap<String, Double> walletBalance = this.getWalletBalance(transaction.getWallet().getId());
-        Coin saleCoin = transaction.getSaleCoin();
-        Coin purchaseCoin = transaction.getPurchaseCoin();
+    private void checkBalance(Coin saleCoin, Double saleAmount, Wallet wallet) {
+        HashMap<String, Double> walletBalance = this.getWalletBalance(wallet.getId());
 
         if (!walletBalance.containsKey(saleCoin.getName())) {
             throw new RuntimeException("Coin does not exist in the wallet");
         }
 
-        Double saleAmountInUsd = transaction.getSaleAmount() * saleCoin.getUsdValue();
-        Double purchaseAmountInUsd = transaction.getPurchaseAmount() * purchaseCoin.getUsdValue();
-
-        if (walletBalance.get(saleCoin.getName()) < transaction.getSaleAmount() ||
-                saleAmountInUsd < purchaseAmountInUsd) {
+        if (walletBalance.get(saleCoin.getName()) < saleAmount) {
             throw new RuntimeException("Insufficient funds to complete the transaction");
         }
     }

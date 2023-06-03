@@ -46,7 +46,7 @@ public class CoinController {
         return ResponseEntity.status(HttpStatus.OK).body("Coin successfully created");
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @ApiOperation("Update an existing coin by Id.")
     public ResponseEntity<CoinResponseDto> updateCoin(@Valid @PathVariable Long id,
             @RequestBody CoinRequestDto coinRequestDto) {

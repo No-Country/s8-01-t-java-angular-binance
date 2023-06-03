@@ -40,7 +40,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     @ApiOperation("Update an existing user by Id.")
     public ResponseEntity<UserDetailsResponseDto> updateUser(@Valid @PathVariable Long id,
             @RequestBody UserRequestDto UserRequestDto) {
