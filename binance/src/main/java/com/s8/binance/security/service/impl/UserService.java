@@ -1,16 +1,22 @@
 package com.s8.binance.security.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
+import com.s8.binance.model.mapper.UserMapper;
 import com.s8.binance.model.request.UserRequestDto;
 import com.s8.binance.model.response.UserDetailsResponseDto;
 import com.s8.binance.model.response.UserListResponseDto;
 import com.s8.binance.security.entity.User;
 import com.s8.binance.security.repository.IUserRepository;
 import com.s8.binance.security.service.IUserService;
+import com.s8.binance.service.ITransactionService;
 import com.s8.binance.service.impl.EmailService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,19 +27,30 @@ public class UserService implements IUserService {
 
 	private final IUserRepository userRepository;
 
+	private final ITransactionService transactionService;
+
+	private final UserMapper userMapper;
+
 	private final EmailService emailService;
 
 	@Override
-	public List<UserListResponseDto> getAllUsers() {
-		List<User> users = userRepository.findAll();
-		return null;
-	}
+    public List<UserListResponseDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserListResponseDto> userResponseDtoList = new ArrayList<>();
+        users.forEach(user -> {
+            UserListResponseDto response = userMapper.fromEntityToDtoList(user);
+            userResponseDtoList.add(response);
+        });
+        return userResponseDtoList;
+    }
 
 	@Override
-	public UserDetailsResponseDto getUserById(Long id) {
-		User user = userRepository.findById(id).orElseThrow();
-		return null;
-	}
+    public UserDetailsResponseDto getUserById(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+		HashMap<String, Double> balance = transactionService.getWalletBalance(user.getWallet().getId());
+        UserDetailsResponseDto response = userMapper.fromEntityToDto(user, balance);
+        return response;
+    }
 
 	public Optional<User> getByUsername(String username) {
 		return userRepository.findByUsername(username);
@@ -52,15 +69,18 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserDetailsResponseDto updateUser(Long id, UserRequestDto user) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
-	}
+    @Transactional
+    public UserDetailsResponseDto updateUser(Long id, UserRequestDto UserRequestDto) {
+        User user = userRepository.findById(id).orElseThrow();
+        User updatedUser = userMapper.updateUser(user, UserRequestDto);
+        userRepository.save(updatedUser);
+        UserDetailsResponseDto response = userMapper.fromEntityToDto(user, new HashMap<>());
+        return response;
+    }
 
 	@Override
 	public void deleteUser(Long id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+		userRepository.deleteById(id);
 	}
 
 	public void emailVerification(String email, Integer num) {

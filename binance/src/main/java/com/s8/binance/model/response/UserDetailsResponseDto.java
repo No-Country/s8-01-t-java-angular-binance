@@ -1,17 +1,21 @@
 package com.s8.binance.model.response;
 
-import java.util.List;
+import java.util.HashMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDetailsResponseDto {
+
+    private Long id;
 
     private String email;
 
@@ -33,5 +37,5 @@ public class UserDetailsResponseDto {
 
     private String country;
 
-    private List<TransactionResponseDto> transactions;
+    private HashMap<String, Double> balance;
 }

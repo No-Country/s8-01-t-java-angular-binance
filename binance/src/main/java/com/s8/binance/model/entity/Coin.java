@@ -14,15 +14,17 @@ import org.hibernate.annotations.Where;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Builder.Default;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SQLDelete(sql = "UPDATE CURRENCY SET status = true WHERE id=?")
+@SQLDelete(sql = "UPDATE coin SET status = true WHERE id=?")
 @Where(clause = "status = false")
 @Table(name = "COINS")
 public class Coin {
@@ -40,7 +42,11 @@ public class Coin {
     @NotBlank(message = "empty")
     private String description;
 
+    @Column(name = "USD_VALUE")
+    @NotBlank(message = "empty")
+    private Double usdValue;
+
     @Column(name = "STATUS")
     @Default
-    private boolean status = Boolean.FALSE;
+    private Boolean status = false;
 }

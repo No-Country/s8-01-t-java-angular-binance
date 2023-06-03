@@ -8,12 +8,13 @@ import com.s8.binance.model.response.CoinResponseDto;
 
 @Component
 public class CoinMapper {
-    
+
     public CoinResponseDto fromEntityToDto(Coin coin) {
         return CoinResponseDto.builder()
                 .id(coin.getId())
                 .name(coin.getName())
                 .description(coin.getDescription())
+                .usdValue(coin.getUsdValue())
                 .build();
     }
 
@@ -21,12 +22,14 @@ public class CoinMapper {
         return Coin.builder()
                 .name(coinRequestDto.getName())
                 .description(coinRequestDto.getDescription())
+                .usdValue(coinRequestDto.getUsdValue())
                 .build();
     }
 
     public Coin updateCoin(Coin coin, CoinRequestDto coinRequestDto) {
         coin.setName(coinRequestDto.getName());
         coin.setDescription(coinRequestDto.getDescription());
+        coin.setUsdValue(coinRequestDto.getUsdValue());
         return coin;
     }
 }

@@ -6,13 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.s8.binance.model.request.PaymentMethodRequestDto;
 import com.s8.binance.model.response.PaymentMethodResponseDto;
@@ -24,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/payments")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@Api(tags = "Payment methods", description = "Management of payment methods available in Binance. It allows creating, modifying, and deleting payment methods, as well as obtaining detailed information about them.")
+@Api(tags = "Payment methods", description = "Management of available payment methods on Binance.")
 public class PaymentMethodController {
 
     private final IPaymentMethodService paymentMethodService;

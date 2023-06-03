@@ -6,19 +6,24 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "Coin information")
+@ApiModel(description = "Currency information")
 public class CoinRequestDto implements Serializable {
 
-    @ApiModelProperty(value = "Coin name", example = "BTC")
+    @ApiModelProperty(example = "BTC")
     private String name;
 
-    @ApiModelProperty(value = "Coin description", example = "Bitcoin")
+    @ApiModelProperty(example = "Bitcoin")
     private String description;
+
+    @ApiModelProperty(example = "27661.90")
+    private Double usdValue;
 }

@@ -10,6 +10,7 @@ import com.s8.binance.model.entity.Transaction;
 import com.s8.binance.model.entity.Wallet;
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
+import com.s8.binance.model.response.DepositResponseDto;
 import com.s8.binance.model.response.TransactionResponseDto;
 import com.s8.binance.util.enums.TransactionType;
 
@@ -19,7 +20,7 @@ public class TransactionMapper {
     public TransactionResponseDto fromEntityToTransactionDto(Transaction transaction) {
         return TransactionResponseDto.builder()
                 .id(transaction.getId())
-                .paymentMethod(transaction.getPaymentMethod())
+                .paymentMethod(transaction.getPaymentMethod().getPaymentType())
                 .transactionType(transaction.getTransactionType().name())
                 .transactionDate(transaction.getTransactionDate())
                 .purchaseCoin(transaction.getPurchaseCoin())
@@ -30,11 +31,23 @@ public class TransactionMapper {
                 .build();
     }
 
+    public DepositResponseDto fromEntityToDepositDto(Transaction transaction) {
+        return DepositResponseDto.builder()
+                .id(transaction.getId())
+                .paymentMethod(transaction.getPaymentMethod().getPaymentType())
+                .transactionType(transaction.getTransactionType().name())
+                .transactionDate(transaction.getTransactionDate())
+                .depositCoin(transaction.getPurchaseCoin())
+                .depositAmount(transaction.getPurchaseAmount())
+                .walletId(transaction.getWallet().getId())
+                .build();
+    }
+
     public Transaction fromTransactionDtoToEntity(TransactionRequestDto transactionRequestDto,
             PaymentMethod paymentMethod, Coin purchaseCoin, Coin saleCoin, Wallet wallet) {
         return Transaction.builder()
                 .paymentMethod(paymentMethod)
-                .transactionType(transactionRequestDto.getTransactionType())
+                .transactionType(TransactionType.TRANSACTION)
                 .transactionDate(LocalDate.now())
                 .purchaseCoin(purchaseCoin)
                 .purchaseAmount(transactionRequestDto.getPurchaseAmount())

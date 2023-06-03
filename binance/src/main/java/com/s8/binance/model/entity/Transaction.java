@@ -1,6 +1,5 @@
 package com.s8.binance.model.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -12,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,15 +22,18 @@ import com.s8.binance.util.enums.TransactionType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "TRANSACTIONS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Transaction {
 
     @Id
@@ -49,18 +53,18 @@ public class Transaction {
     private LocalDate transactionDate;
 
     @ManyToOne
-    @JoinColumn(name = "SALE_COIN_ID", referencedColumnName = "COIN_ID")
-    private Coin saleCoin;
-
-    @Column(name = "SALE_AMOUNT")
-    private BigDecimal saleAmount;
-
-    @ManyToOne
     @JoinColumn(name = "PURCHASE_COIN_ID", referencedColumnName = "COIN_ID")
     private Coin purchaseCoin;
 
     @Column(name = "PURCHASE_AMOUNT")
-    private BigDecimal purchaseAmount;
+    private Double purchaseAmount;
+
+    @ManyToOne
+    @JoinColumn(name = "SALE_COIN_ID", referencedColumnName = "COIN_ID")
+    private Coin saleCoin;
+
+    @Column(name = "SALE_AMOUNT")
+    private Double saleAmount;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -1,6 +1,5 @@
 package com.s8.binance.specification;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.data.jpa.domain.Specification;
@@ -26,7 +25,7 @@ public class TransactionSpecification {
         return (root, query, cb) -> cb.equal(root.get("purchaseCoin").get("id"), purchaseCoinId);
     }
 
-    public static Specification<Transaction> hasPurchaseAmount(BigDecimal purchaseAmount) {
+    public static Specification<Transaction> hasPurchaseAmount(Double purchaseAmount) {
         return (root, query, cb) -> cb.equal(root.get("purchaseAmount"), purchaseAmount);
     }
 
@@ -34,7 +33,11 @@ public class TransactionSpecification {
         return (root, query, cb) -> cb.equal(root.get("saleCoin").get("id"), saleCoinId);
     }
 
-    public static Specification<Transaction> hasSaleAmount(BigDecimal saleAmount) {
+    public static Specification<Transaction> hasSaleAmount(Double saleAmount) {
         return (root, query, cb) -> cb.equal(root.get("saleAmount"), saleAmount);
+    }
+
+    public static Specification<Transaction> hasWalletId(Long walletId) {
+        return (root, query, cb) -> cb.equal(root.get("wallet").get("id"), walletId);
     }
 }

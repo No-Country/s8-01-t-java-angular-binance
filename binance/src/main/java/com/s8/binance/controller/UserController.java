@@ -6,13 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.s8.binance.model.request.UserRequestDto;
 import com.s8.binance.model.response.UserDetailsResponseDto;
@@ -25,8 +19,9 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/users")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@Api(tags = "Users", description = "Management of users available in Binance. It allows modifying and deleting users, as well as obtaining detailed information about them.")
+@Api(tags = "Users", description = "Management of available users on Binance.")
 public class UserController {
 
     private final IUserService userService;
