@@ -1,6 +1,5 @@
 package com.s8.binance.model.mapper;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class UserMapper {
                 .build();
     }
 
-    public UserDetailsResponseDto fromEntityToDto(User user, HashMap<String, BigDecimal> balance) {
+    public UserDetailsResponseDto fromEntityToDto(User user, HashMap<String, Double> balance) {
         return UserDetailsResponseDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())

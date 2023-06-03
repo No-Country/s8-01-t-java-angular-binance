@@ -1,6 +1,5 @@
 package com.s8.binance.model.response;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 
 import lombok.AllArgsConstructor;
@@ -38,5 +37,5 @@ public class UserDetailsResponseDto {
 
     private String country;
 
-    private HashMap<String, BigDecimal> balance;
+    private HashMap<String, Double> balance;
 }

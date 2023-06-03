@@ -1,7 +1,6 @@
 package com.s8.binance.model.response;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,5 +21,5 @@ public class CoinResponseDto implements Serializable {
 
     private String description;
 
-    private BigDecimal usdValue;
+    private Double usdValue;
 }

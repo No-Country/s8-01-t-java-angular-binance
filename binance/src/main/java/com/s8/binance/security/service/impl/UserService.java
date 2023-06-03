@@ -1,6 +1,5 @@
 package com.s8.binance.security.service.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +47,7 @@ public class UserService implements IUserService {
 	@Override
     public UserDetailsResponseDto getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow();
-		HashMap<String, BigDecimal> balance = transactionService.getWalletBalance(user.getWallet().getId());
+		HashMap<String, Double> balance = transactionService.getWalletBalance(user.getWallet().getId());
         UserDetailsResponseDto response = userMapper.fromEntityToDto(user, balance);
         return response;
     }

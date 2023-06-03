@@ -20,7 +20,7 @@ public class TransactionMapper {
     public TransactionResponseDto fromEntityToTransactionDto(Transaction transaction) {
         return TransactionResponseDto.builder()
                 .id(transaction.getId())
-                .paymentMethod(transaction.getPaymentMethod())
+                .paymentMethod(transaction.getPaymentMethod().getPaymentType())
                 .transactionType(transaction.getTransactionType().name())
                 .transactionDate(transaction.getTransactionDate())
                 .purchaseCoin(transaction.getPurchaseCoin())
@@ -34,7 +34,7 @@ public class TransactionMapper {
     public DepositResponseDto fromEntityToDepositDto(Transaction transaction) {
         return DepositResponseDto.builder()
                 .id(transaction.getId())
-                .paymentMethod(transaction.getPaymentMethod())
+                .paymentMethod(transaction.getPaymentMethod().getPaymentType())
                 .transactionType(transaction.getTransactionType().name())
                 .transactionDate(transaction.getTransactionDate())
                 .depositCoin(transaction.getPurchaseCoin())
@@ -47,7 +47,7 @@ public class TransactionMapper {
             PaymentMethod paymentMethod, Coin purchaseCoin, Coin saleCoin, Wallet wallet) {
         return Transaction.builder()
                 .paymentMethod(paymentMethod)
-                .transactionType(transactionRequestDto.getTransactionType())
+                .transactionType(TransactionType.TRANSACTION)
                 .transactionDate(LocalDate.now())
                 .purchaseCoin(purchaseCoin)
                 .purchaseAmount(transactionRequestDto.getPurchaseAmount())

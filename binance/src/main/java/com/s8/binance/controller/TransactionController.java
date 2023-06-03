@@ -1,6 +1,5 @@
 package com.s8.binance.controller;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,14 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.s8.binance.model.request.DepositRequestDto;
 import com.s8.binance.model.request.TransactionRequestDto;
@@ -38,9 +44,9 @@ public class TransactionController {
             @RequestParam(required = false) TransactionType transactionType,
             @RequestParam(required = false) LocalDate transactionDate,
             @RequestParam(required = false) Long purchaseCoinId,
-            @RequestParam(required = false) BigDecimal purchaseAmount,
+            @RequestParam(required = false) Double purchaseAmount,
             @RequestParam(required = false) Long saleCoinId,
-            @RequestParam(required = false) BigDecimal saleAmount,
+            @RequestParam(required = false) Double saleAmount,
             @RequestParam(required = false) Long walletId) {
         List<TransactionResponseDto> transactions = transactionService.getTransactionsByFilters(paymentMethodId,
                 transactionType, transactionDate, purchaseCoinId, purchaseAmount, saleCoinId, saleAmount, walletId);
@@ -60,8 +66,8 @@ public class TransactionController {
 
     @GetMapping("/balance")
     @ApiOperation("Get balance by wallet Id.")
-    public ResponseEntity<HashMap<String, BigDecimal>> getWalletBalance(Long walletId) {
-        HashMap<String, BigDecimal> responseEntity = transactionService.getWalletBalance(walletId);
+    public ResponseEntity<HashMap<String, Double>> getWalletBalance(Long walletId) {
+        HashMap<String, Double> responseEntity = transactionService.getWalletBalance(walletId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(responseEntity);
     }
 
@@ -74,8 +80,7 @@ public class TransactionController {
 
     @PostMapping("/transaction")
     @ApiOperation("Create a new transaction.")
-    public ResponseEntity<TransactionResponseDto> createTransaction(
-            @Valid @RequestBody TransactionRequestDto transactionRequestDto) {
+    public ResponseEntity<TransactionResponseDto> createTransaction(@Valid @RequestBody TransactionRequestDto transactionRequestDto) {
         TransactionResponseDto responseEntity = transactionService.createTransaction(transactionRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(responseEntity);
     }

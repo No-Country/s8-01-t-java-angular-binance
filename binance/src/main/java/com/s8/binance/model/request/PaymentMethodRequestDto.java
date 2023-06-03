@@ -21,6 +21,6 @@ import lombok.Setter;
 public class PaymentMethodRequestDto implements Serializable {
 
     @NotBlank(message = "empty")
-    @ApiModelProperty(example = "P2P Trading")
+    @ApiModelProperty(example = "Credit Card")
     private String paymentType;
 }

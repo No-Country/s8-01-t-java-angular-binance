@@ -1,11 +1,9 @@
 package com.s8.binance.model.response;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.s8.binance.model.entity.Coin;
-import com.s8.binance.model.entity.PaymentMethod;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +20,7 @@ public class DepositResponseDto implements Serializable {
 
     private Long id;
 
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
     private String transactionType;
 
@@ -30,7 +28,7 @@ public class DepositResponseDto implements Serializable {
 
     private Coin depositCoin;
 
-    private BigDecimal depositAmount;
+    private Double depositAmount;
     
     private Long walletId;
 }

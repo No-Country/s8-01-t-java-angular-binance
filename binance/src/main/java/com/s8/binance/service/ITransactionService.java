@@ -1,6 +1,5 @@
 package com.s8.binance.service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -18,14 +17,14 @@ public interface ITransactionService {
             TransactionType transactionType,
             LocalDate transactionDate,
             Long purchaseCoinId,
-            BigDecimal purchaseAmount,
+            Double purchaseAmount,
             Long saleCoinId,
-            BigDecimal saleAmount,
+            Double saleAmount,
             Long walletId);
 
     public TransactionResponseDto getTransactionById(Long id);
 
-    public HashMap<String, BigDecimal> getWalletBalance(Long walletId);
+    public HashMap<String, Double> getWalletBalance(Long walletId);
 
     public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto);
 

@@ -1,6 +1,5 @@
 package com.s8.binance.model.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -58,14 +57,14 @@ public class Transaction {
     private Coin purchaseCoin;
 
     @Column(name = "PURCHASE_AMOUNT")
-    private BigDecimal purchaseAmount;
+    private Double purchaseAmount;
 
     @ManyToOne
     @JoinColumn(name = "SALE_COIN_ID", referencedColumnName = "COIN_ID")
     private Coin saleCoin;
 
     @Column(name = "SALE_AMOUNT")
-    private BigDecimal saleAmount;
+    private Double saleAmount;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

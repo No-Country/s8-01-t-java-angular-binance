@@ -17,7 +17,7 @@ INSERT INTO coins (NAME, DESCRIPTION, USD_VALUE, STATUS) VALUES
 ('ETH', 'Ethereum', '1894.84', false),
 ('BNB', 'Binance Coin', '310.20', false),
 ('USDT', 'TetherUS', '1.00', false),
-('ARS', 'Argentine Peso', '474.50', false);
+('ARS', 'Argentine Peso', '0.002', false);
 
 -- INSERT payment methods --
 INSERT INTO payment_methods (PAYMENT_TYPE) VALUES

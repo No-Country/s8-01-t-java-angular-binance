@@ -1,9 +1,6 @@
 package com.s8.binance.model.request;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-
-import com.s8.binance.util.enums.TransactionType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,20 +18,17 @@ import lombok.Setter;
 @ApiModel(description = "Transaction information")
 public class TransactionRequestDto implements Serializable {
 
-    @ApiModelProperty(example = "PURCHASE")
-    private TransactionType transactionType;
-
-    @ApiModelProperty(example = "4")
-    private Long purchaseCoinId;
+    @ApiModelProperty(example = "USDT")
+    private String purchaseCoinName;
 
     @ApiModelProperty(example = "1.00")
-    private BigDecimal purchaseAmount;
+    private Double purchaseAmount;
 
-    @ApiModelProperty(example = "5")
-    private Long saleCoinId;
+    @ApiModelProperty(example = "ARS")
+    private String saleCoinName;
 
     @ApiModelProperty(example = "474.50")
-    private BigDecimal saleAmount;
+    private Double saleAmount;
 
     @ApiModelProperty(example = "1")
     private Long walletId;

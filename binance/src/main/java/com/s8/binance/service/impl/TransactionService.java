@@ -1,6 +1,5 @@
 package com.s8.binance.service.impl;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +44,8 @@ public class TransactionService implements ITransactionService {
     @Override
     public List<TransactionResponseDto> getTransactionsByFilters(Long paymentMethodId,
             TransactionType transactionType,
-            LocalDate transactionDate, Long purchaseCoinId, BigDecimal purchaseAmount, Long saleCoinId,
-            BigDecimal saleAmount, Long walletId) {
+            LocalDate transactionDate, Long purchaseCoinId, Double purchaseAmount, Long saleCoinId,
+            Double saleAmount, Long walletId) {
 
         Specification<Transaction> spec = Specification.where(null);
 
@@ -100,38 +99,36 @@ public class TransactionService implements ITransactionService {
     }
 
     @Override
-    public HashMap<String, BigDecimal> getWalletBalance(Long walletId) {
-        HashMap<String, BigDecimal> map = new HashMap<>();
+    public HashMap<String, Double> getWalletBalance(Long walletId) {
+        HashMap<String, Double> walletBalance = new HashMap<>();
         List<Transaction> transactions = transactionRepository.findByWalletId(walletId);
+
         for (Transaction transaction : transactions) {
             String purchaseCoinName = transaction.getPurchaseCoin().getName();
-            BigDecimal purchaseAmount = transaction.getPurchaseAmount();
-            if (map.containsKey(purchaseCoinName)) {
-                BigDecimal total = map.get(purchaseCoinName);
-                map.put(purchaseCoinName, total.add(purchaseAmount));
+            Double purchaseAmount = transaction.getPurchaseAmount();
+
+            if (walletBalance.containsKey(purchaseCoinName)) {
+                Double total = walletBalance.get(purchaseCoinName);
+                walletBalance.put(purchaseCoinName, total + purchaseAmount);
             } else {
-                map.put(purchaseCoinName, purchaseAmount);
+                walletBalance.put(purchaseCoinName, purchaseAmount);
             }
 
             if (transaction.getSaleCoin() != null) {
                 String saleCoinName = transaction.getSaleCoin().getName();
-                BigDecimal saleAmount = transaction.getSaleAmount();
-                if (map.containsKey(saleCoinName)) {
-                    BigDecimal total = map.get(saleCoinName);
-                    map.put(saleCoinName, total.subtract(saleAmount));
-                } else {
-                    map.put(saleCoinName, saleAmount.negate());
-                }
+                Double saleAmount = transaction.getSaleAmount();
+                Double total = walletBalance.get(saleCoinName);
+                walletBalance.put(saleCoinName, total - saleAmount);
             }
         }
 
-        return map;
+        return walletBalance;
     }
 
     @Override
     public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto) {
         PaymentMethod paymentMethod = paymentMethodRepository.findByPaymentType("Bank Deposit");
-        Coin depositCoin = coinRepository.findById(depositRequestDto.getDepositCoinId()).orElseThrow();
+        Coin depositCoin = coinRepository.findByName(depositRequestDto.getDepositCoinName());
         Wallet wallet = walletRepository.findById(depositRequestDto.getWalletId()).orElseThrow();
         Transaction deposit = transactionMapper.fromDepositDtoToEntity(depositRequestDto, paymentMethod,
                 depositCoin, wallet);
@@ -142,18 +139,33 @@ public class TransactionService implements ITransactionService {
     @Override
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto) {
         PaymentMethod paymentMethod = paymentMethodRepository.findByPaymentType("Cash Balance");
-        Coin purchaseCoin = coinRepository.findById(transactionRequestDto.getPurchaseCoinId()).orElseThrow();
-        Coin saleCoin = coinRepository.findById(transactionRequestDto.getSaleCoinId()).orElseThrow();
+        Coin purchaseCoin = coinRepository.findByName(transactionRequestDto.getPurchaseCoinName());
+        Coin saleCoin = coinRepository.findByName(transactionRequestDto.getSaleCoinName());
         Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
-
-        // checkear si hay saldo suficiente
-
-        // calcular tipo de cambio
 
         Transaction transaction = transactionMapper.fromTransactionDtoToEntity(transactionRequestDto, paymentMethod,
                 purchaseCoin, saleCoin, wallet);
+        this.checkBalance(transaction);
 
         transactionRepository.save(transaction);
         return transactionMapper.fromEntityToTransactionDto(transaction);
+    }
+
+    private void checkBalance(Transaction transaction) {
+        HashMap<String, Double> walletBalance = this.getWalletBalance(transaction.getWallet().getId());
+        Coin saleCoin = transaction.getSaleCoin();
+        Coin purchaseCoin = transaction.getPurchaseCoin();
+
+        if (!walletBalance.containsKey(saleCoin.getName())) {
+            throw new RuntimeException("Coin does not exist in the wallet");
+        }
+
+        Double saleAmountInUsd = transaction.getSaleAmount() * saleCoin.getUsdValue();
+        Double purchaseAmountInUsd = transaction.getPurchaseAmount() * purchaseCoin.getUsdValue();
+
+        if (walletBalance.get(saleCoin.getName()) < transaction.getSaleAmount() ||
+                saleAmountInUsd < purchaseAmountInUsd) {
+            throw new RuntimeException("Insufficient funds to complete the transaction");
+        }
     }
 }
