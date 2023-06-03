@@ -1,47 +1,17 @@
 <div class="bg-binance-light-gray">
   <div class="max-w-[1248px] mx-auto py-10 px-4 md:px-6">
     <p class="text-3xl font-medium pb-7">Compra criptomonedas</p>
-    <div class="max-w-[682px] mx-auto">
-      <div class="flex text-2xl font-medium">
-        <button [ngClass]="buy? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 border-transparent border-y-4 hover:bg-binance-gray" (click)="setBuy()">Comprar</button>
-        <button [ngClass]="sell? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 border-transparent border-y-4 hover:bg-binance-gray" (click)="setSell()">Vender</button>
+    <div class="">
+      <div *ngIf="operationSelectors" class="flex text-2xl font-medium max-w-[682px] mx-auto">
+        <div [ngClass]="buy? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 text-center border-transparent cursor-pointer border-y-4 hover:bg-binance-gray" (click)="setBuy()">Comprar</div>
+        <div [ngClass]="sell? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 text-center border-transparent cursor-pointer border-y-4 hover:bg-binance-gray" (click)="setSell()">Vender</div>
       </div>
-
-      <p class="text-center pt-7 pb-10 text-[#A7A7A8]">Precio estimado 1 cripto = 123123 moneda</p>
 
       <!-- compra -->
-      <div class="flex flex-col gap-10">
-        <div class="flex flex-col gap-3 p-3 bg-binance-gray">
-          <div class="flex justify-between font-medium">
-            <p>Gastar</p>
-            <p>Balance en efectivo</p>
-          </div>
-          <div class="flex items-center">
-            <input class="w-full py-3 bg-binance-gray" type="number" placeholder="3000.00 - 1350000.00 ">
-            <button class="p-1 bg-blue-100">cripto</button>
-          </div>
-          
-        </div>
-        
-        <div class="flex flex-col gap-3 p-3 bg-binance-gray">
-          <div class="font-medium">
-            <p>Recibir</p>
-          </div>
-          <div class="flex items-center">
-            <input class="w-full py-3 bg-binance-gray" type="number" placeholder="3000.00 - 1350000.00 ">
-            <button class="p-1 bg-blue-100">cripto</button>
-          </div>
-        
-        </div>
-
-        <button class="px-6 py-3 text-base font-medium rounded-md bg-binance-yellow hover:opacity-90">Continuar</button>
-
-      </div>
+      <app-buy *ngIf="buy" (event)="receiveEvent()" [cryptos]="popularCryptos!"></app-buy>
 
       <!-- venta -->
-      <div>
-
-      </div>
+      <app-sell *ngIf="sell"></app-sell>
       
     </div>
   </div>

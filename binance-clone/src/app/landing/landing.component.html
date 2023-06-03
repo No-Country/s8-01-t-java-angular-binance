@@ -64,19 +64,6 @@
           <div class="hidden md:col-span-2 md:block text-end">Cap. de mercado</div>
         </div>
 
-        <!-- <div class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
-          <div class="flex items-center col-span-5 md:col-span-4">
-            <div class="w-6 md:w-8 aspect-square me-4">
-              <img class="object-cover" src="" alt="">
-            </div>
-            <p class="font-medium">Bitcoin</p>
-            <p class="text-[#707A8A] ms-2">BTC</p>
-          </div>
-          <div class="flex items-center justify-end col-span-3 md:justify-start">$28.000</div>
-          <div [ngClass]="positivo? 'text-[#03a66d]' : 'text-[#cf304a]'" class="flex items-center justify-end col-span-4 md:col-span-3 md:justify-start">{{porcentaje > 0? '+' : ''}}{{porcentaje}}</div>
-          <div class="items-center justify-end hidden col-span-2 md:flex">${{ marketCap | numberShortener }}</div>
-        </div> -->
-
         <div *ngFor="let coin of popularCryptos" class="grid grid-cols-12 p-3 text-sm md:p-4 text-binance-dark-gray md:text-base">
           <div class="flex items-center col-span-5 md:col-span-4">
             <div class="w-6 md:w-8 aspect-square me-4">

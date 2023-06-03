@@ -12,4 +12,8 @@ export class CryptoService {
     return this.httpClient.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=binancecoin%2C%20bitcoin%2C%20ethereum&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en');
   }
 
+  getCoins() {
+    return this.httpClient.get('https://binance.up.railway.app/api/v1/coins');
+  }
+
 }

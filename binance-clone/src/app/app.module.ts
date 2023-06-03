@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,8 @@ import { SideBarComponent } from './core/side-bar/side-bar.component';
 
 import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
 import { CryptoComponent } from './pages/crypto/crypto.component';
+import { BuyComponent } from './pages/crypto/components/buy/buy.component';
+import { SellComponent } from './pages/crypto/components/sell/sell.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,17 @@ import { CryptoComponent } from './pages/crypto/crypto.component';
     SignUpComponent,
     SideBarComponent,
     NumberShortenerPipe,
-    CryptoComponent
+    CryptoComponent,
+    BuyComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
