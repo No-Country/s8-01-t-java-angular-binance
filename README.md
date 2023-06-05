@@ -23,6 +23,7 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06ADC9?style=for-the-badge&logo=TailwindCSS&logoColor=white)
 ![Typescript](https://img.shields.io/badge/Typescript-0074C2?style=for-the-badge&logo=Typescript&logoColor=white)
+ ![Solidity](https://img.shields.io/badge/Solidity-%23363636.svg?style=for-the-badge&logo=solidity&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-F2C129?style=for-the-badge&logo=Firebase&logoColor=white)
 
 #### 🧑‍💻 Developers:
