@@ -34,7 +34,7 @@
     "chai-as-promised": "^7.1.1",
     "chart.js": "^4.3.0",
     "dotenv": "^16.1.4",
-    "ethers": "^4.0.49",
+    "ethers": "4.0.49",
     "firebase": "^9.22.1",
     "flowbite": "^1.6.5",
     "fontawesome": "^5.6.3",
