@@ -30,11 +30,26 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss",
               "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [
               "./node_modules/plotly.js/dist/plotly.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "bn.js",
+              "aes-js",
+              "scrypt-js",
+              "js-sha3",
+              "bech32",
+              "hash.js",
+              "debug",
+              "varint",
+              "err-code",
+              "stream-to-it/source.js",
+              "ipfs-utils/src/files/url-source.js",
+              "any-signal"
             ]
           },
           "configurations": {
@@ -96,6 +111,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
             "scripts": []

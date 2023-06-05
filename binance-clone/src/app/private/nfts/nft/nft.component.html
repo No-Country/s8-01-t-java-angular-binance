@@ -1,0 +1,224 @@
+<!-- <div class="w-full h-auto">
+  <a href="/home">
+    <section
+      class="custom-modal-container bg-transparent flex justify-center items-start mt-8"
+    >
+      <article
+        href="#"
+        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg md:flex-row md:max-w-4xl md:w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+      >
+        <img
+          class="object-contain w-full rounded-t-lg h-96 md:min-h-[384px] md:max-w-[250px] md:rounded-none md:rounded-l-lg"
+          [src]="nfts?.fileUrl"
+          alt=""
+        />
+        <div class="flex flex-col justify-between p-8 leading-normal md:w-auto">
+          <h2
+            class="mb-2 text-lg font-bold md:text-center tracking-tight text-gray-900 dark:text-white"
+          >
+            NO-COUNTRY NFT COLLECTIONS
+          </h2>
+          <h3
+            class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            <strong class="text-base"> Title: </strong
+            ><span class="text-sm">{{ nfts?.title }}</span>
+          </h3>
+          <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+            <strong class="text-base"> Dueño: </strong
+            ><span class="text-sm"> {{ nfts?.contract }}</span>
+          </h3>
+          <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+            <strong class="text-base"> Precio: </strong
+            ><span class="text-sm">{{ nfts?.price }}</span>
+          </h3>
+          <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+            <strong class="text-base"> Creado: </strong
+            ><span class="text-sm">{{ nfts?.date }}</span>
+          </h3>
+          <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">
+            {{ nfts?.description }}
+          </p>
+        </div>
+      </article>
+    </section>
+  </a>
+</div> -->
+
+<!-- <div class="upload">
+  <h2>Upload new Image</h2>
+  <form [formGroup]="buyForm" (ngSubmit)="buyNft()">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Image Title</mat-label>
+        <input type="text" matInput formControlName="title" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Direccion de contrato</mat-label>
+        <input type="text" matInput formControlName="contract" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <input type="text" matInput formControlName="category" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input type="text" matInput formControlName="price" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input type="text" matInput formControlName="date" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Image</mat-label>
+        <input type="text" matInput formControlName="fileUrl" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Image Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+    </p>
+
+    <button mat-flat-button color="primary" type="submit"></button>
+  </form>
+</div> -->
+<!--  -->
+
+<div
+  class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
+>
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto lg:max-w-[600px] lg:w-full">
+    <div
+      class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-lg sm:p-10"
+    >
+      <div class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-xl font-mono"
+          >
+            NFT
+          </div>
+          <div class="block pl-2 font-semibold text-xl text-gray-700">
+            <h2 class="leading-relaxed">Comprar NFTS</h2>
+          </div>
+        </div>
+        <div class="mt-8">
+          <img
+            class="h-auto max-w-xs"
+            [src]="nfts?.fileUrl"
+            alt="image description"
+          />
+        </div>
+
+        <div class="divide-y divide-gray-200">
+          <form
+            [formGroup]="buyForm"
+            (ngSubmit)="buyNft()"
+            class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7 lg:max-w-[600px] lg:w-full"
+          >
+            <div class="flex flex-col pointer-events-none cursor-none">
+              <label class="leading-loose">Imagen</label>
+              <input
+                type="text"
+                formControlName="fileUrl"
+                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+              />
+            </div>
+            <div class="flex flex-col pointer-events-none cursor-none">
+              <label class="leading-loose">title</label>
+              <input
+                type="text"
+                formControlName="title"
+                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+              />
+            </div>
+            <div class="flex flex-col pointer-events-none cursor-none">
+              <label class="leading-loose">Propietario</label>
+              <input
+                type="text"
+                formControlName="contract"
+                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+              />
+            </div>
+            <div class="flex flex-col pointer-events-none cursor-none">
+              <label class="leading-loose">Precio</label>
+              <input
+                type="text"
+                formControlName="price"
+                type="number"
+                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+              />
+            </div>
+            <div
+              class="flex items-center space-x-4 pointer-events-none cursor-none"
+            >
+              <div class="flex flex-col">
+                <label class="leading-loose">Creacion</label>
+                <div class="relative focus-within:text-gray-600 text-gray-400">
+                  <input
+                    type="text"
+                    formControlName="date"
+                    class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                  />
+                  <div class="absolute left-3 top-2">
+                    <svg
+                      class="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col pointer-events-none cursor-none">
+              <label class="leading-loose">Description</label>
+              <textarea
+                type="text"
+                formControlName="description"
+                class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                placeholder="Requerido"
+              ></textarea>
+            </div>
+            <div class="pt-4 flex items-center space-x-4">
+              <button
+                type="submit"
+                class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+              >
+                Comprar
+              </button>
+              <button
+                type="button"
+                routerLink="/home"
+                class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+              >
+                Volver
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
