@@ -74,7 +74,7 @@
 
 ### 👩‍💼 Project Manager:
 
-| <img src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682753805/readme/tzg0cph6zv0mlq5ezd3o.jpg" width=50>|
+| <img src="https://media.licdn.com/dms/image/D4E35AQHS8-JsALdfUQ/profile-framedphoto-shrink_400_400/0/1685664584579?e=1686610800&v=beta&t=NOGrarjWMzatTsL0TTYxhs_rzcGLSqiUTwvjXPjaUuY" width=50>|
 |:-:|
-| **Camila Cataldi**|
-|<a href="https://www.linkedin.com/in/cami-cataldi/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| **Sarai Hernández**|
+|<a href="https://www.linkedin.com/in/sarahg09/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
