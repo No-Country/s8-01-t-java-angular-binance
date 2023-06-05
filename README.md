@@ -18,14 +18,12 @@
 
 #### 🛠️ Tech Stack:
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black) 
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white) 
-![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-000000?style=for-the-badge&logo=axios&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white) 
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white) 
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-D6002F?style=for-the-badge&logo=Angular&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06ADC9?style=for-the-badge&logo=TailwindCSS&logoColor=white)
+![Typescript](https://img.shields.io/badge/Typescript-0074C2?style=for-the-badge&logo=Typescript&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-F2C129?style=for-the-badge&logo=Firebase&logoColor=white)
 
 #### 🧑‍💻 Developers:
 
