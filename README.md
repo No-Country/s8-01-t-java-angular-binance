@@ -1,4 +1,4 @@
-<img align="center" src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682751696/readme/imxge16pjcsecjrn7pst.png">
+<img align="center" src="https://res.cloudinary.com/dqkkehztd/image/upload/v1685997451/readme/mjnvdbjbs7mj3mslvyo5.png">
 
 <h3>👉🏻 Buy, trade, and hold 350+ cryptocurrencies on Binance.</h3>
 
