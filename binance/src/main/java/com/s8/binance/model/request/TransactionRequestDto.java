@@ -18,14 +18,14 @@ import lombok.Setter;
 @ApiModel(description = "Transaction information")
 public class TransactionRequestDto implements Serializable {
 
-    @ApiModelProperty(example = "USDT")
-    private String purchaseCoinName;
+    @ApiModelProperty(example = "1")
+    private Long purchaseCoinId;
 
-    @ApiModelProperty(example = "1.00")
+    @ApiModelProperty(example = "27689.30")
     private Double purchaseAmount;
 
-    @ApiModelProperty(example = "ARS")
-    private String saleCoinName;
+    @ApiModelProperty(example = "5")
+    private Long saleCoinId;
 
     @ApiModelProperty(example = "474.50")
     private Double saleAmount;

@@ -128,7 +128,7 @@ public class TransactionService implements ITransactionService {
     @Override
     public DepositResponseDto createDeposit(DepositRequestDto depositRequestDto) {
         PaymentMethod paymentMethod = paymentMethodRepository.findByPaymentType("Bank Deposit");
-        Coin depositCoin = coinRepository.findByName(depositRequestDto.getDepositCoinName());
+        Coin depositCoin = coinRepository.findById(depositRequestDto.getDepositCoinId()).orElseThrow();
         Wallet wallet = walletRepository.findById(depositRequestDto.getWalletId()).orElseThrow();
         Transaction deposit = transactionMapper.fromDepositDtoToEntity(depositRequestDto, paymentMethod,
                 depositCoin, wallet);
@@ -139,8 +139,8 @@ public class TransactionService implements ITransactionService {
     @Override
     public TransactionResponseDto createTransaction(TransactionRequestDto transactionRequestDto) {
         PaymentMethod paymentMethod = paymentMethodRepository.findByPaymentType("Cash Balance");
-        Coin purchaseCoin = coinRepository.findByName(transactionRequestDto.getPurchaseCoinName());
-        Coin saleCoin = coinRepository.findByName(transactionRequestDto.getSaleCoinName());
+        Coin purchaseCoin = coinRepository.findById(transactionRequestDto.getPurchaseCoinId()).orElseThrow();
+        Coin saleCoin = coinRepository.findById(transactionRequestDto.getSaleCoinId()).orElseThrow();
         Wallet wallet = walletRepository.findById(transactionRequestDto.getWalletId()).orElseThrow();
 
         this.checkBalance(saleCoin, transactionRequestDto.getSaleAmount(), wallet);

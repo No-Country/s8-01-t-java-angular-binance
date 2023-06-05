@@ -18,8 +18,8 @@ import lombok.Setter;
 @ApiModel(description = "Deposit information")
 public class DepositRequestDto implements Serializable {
 
-    @ApiModelProperty(example = "ARS")
-    private String depositCoinName;
+    @ApiModelProperty(example = "5")
+    private Long depositCoinId;
 
     @ApiModelProperty(example = "5000.00")
     private Double depositAmount;
