@@ -60,10 +60,10 @@
 
 ### 🎨 UX/UI:
 
-| <img src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682753805/readme/whcqj9rtnci4opbptd29.jpg" width=50>| <img src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682753805/readme/gkmeoymptrjzbvbj2d3p.jpg" width=50>|
+| <img src="https://mir-s3-cdn-cf.behance.net/user/138/0856f51321832613.62ebfd5b7465e.jpg" width=50>| <img src="https://mir-s3-cdn-cf.behance.net/user/138/ce5ffa1399140411.637a9258e80ef.jpg" width=50>|
 |:-:|:-:|
-| **Maria Laura Cattaneo**| **Veronica Stanislavsky**|
-|<a href="https://www.behance.net/marialcattane"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"/></a>  <a href="https://www.linkedin.com/in/maria-laura-cattaneo/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.behance.net/phstanis"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"/></a>  <a href="https://www.linkedin.com/in/veronica-mariela-stanislavsky/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+| **Micaela Andrés**| **Mariel Sansó**|
+|<a href="https://www.behance.net/micaandres"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"/></a>  <a href="https://www.linkedin.com/in/micaelaandres"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> | <a href="https://www.behance.net/marielsans"><img src="https://img.shields.io/badge/Behance-1769ff?style=for-the-badge&logo=behance&logoColor=white"/></a>  <a href="https://www.linkedin.com/in/mariel-sans%C3%B3-684569186"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 <hr/>
 
