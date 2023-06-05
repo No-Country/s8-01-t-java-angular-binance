@@ -2,7 +2,7 @@
 
 <h3>👉🏻 Buy, trade, and hold 350+ cryptocurrencies on Binance.</h3>
 
-<h3>👉🏻 <b>Visit our website at <a href="https://s8-01-t-java-angular-binance.web.app/">Bright English</a> 📚</b></h3>
+<h3>👉🏻 <b>Visit our website at <a href="https://s8-01-t-java-angular-binance.web.app/">Binance</a> 📚</b></h3>
 
 <h3><a href="https://www.canva.com/design/DAFbsKILg88/mCCl3MFdHaR6UWSZUtPZWw/watch"> <img src="https://img.shields.io/badge/Video Preview%20-%231A237E.svg?&style=for-the-badge&logo=Canva&logoColor=white"/></h3>
 
