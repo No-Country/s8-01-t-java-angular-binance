@@ -1,4 +1,4 @@
-export interface Coin{
+export interface Coin {
   id: string;
   image: string;
   name: string;
