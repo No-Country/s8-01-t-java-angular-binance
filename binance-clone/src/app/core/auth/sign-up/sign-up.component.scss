@@ -1,0 +1,11 @@
+/* Estilo para ocultar los botones de incremento y decremento */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Estilo adicional para asegurarse de que los botones no se muestren en Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
