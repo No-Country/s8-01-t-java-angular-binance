@@ -1,8 +1,8 @@
 <img align="center" src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682751696/readme/imxge16pjcsecjrn7pst.png">
 
-<h3>👉🏻 Learn English easily with Bright English. We offer fast customer support, online interviews, streamlined data loading, and an interactive methodology for a fun and effective learning experience.</h3>
+<h3>👉🏻 Buy, trade, and hold 350+ cryptocurrencies on Binance.</h3>
 
-<h3>👉🏻 <b>Visit our website at <a href="https://bright-english.vercel.app/">Bright English</a> 📚</b></h3>
+<h3>👉🏻 <b>Visit our website at <a href="https://s8-01-t-java-angular-binance.web.app/">Bright English</a> 📚</b></h3>
 
 <h3><a href="https://www.canva.com/design/DAFbsKILg88/mCCl3MFdHaR6UWSZUtPZWw/watch"> <img src="https://img.shields.io/badge/Video Preview%20-%231A237E.svg?&style=for-the-badge&logo=Canva&logoColor=white"/></h3>
 
