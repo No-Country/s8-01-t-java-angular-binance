@@ -10,6 +10,7 @@ import { tap } from 'rxjs';
 
 import { Chart, registerables } from 'chart.js';
 import { Coin } from 'src/app/helpers/interfaces';
+import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
 Chart.register(...registerables);
 
 @Component({
@@ -24,15 +25,18 @@ export class DashboardComponent implements OnInit {
   faArrowDown = faArrowDown;
   faChart = faChartSimple;
   faArrowRotate = faArrowsRotate;
-
+  loading: boolean = false;
   api: string =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false1111';
   coins: Coin[] = [];
   titles: string[] = ['#', 'Coin', 'Price', 'Price Change', '24H Volume'];
   searchText: string = '';
   filteredCoins: Coin[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    public spinnerService: SpinnerService
+  ) {}
 
   ngOnInit() {
     this.chart();
@@ -48,6 +52,12 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         error: (err) => console.error(err),
       });
+
+    this.spinnerService.show();
+    this.spinnerService.startTimer(3000);
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
   }
 
   chart() {

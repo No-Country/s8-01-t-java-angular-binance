@@ -8,6 +8,9 @@ import { Nft } from 'src/app/helpers/interfaces';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
 import { JumbotronComponent } from 'src/app/shared/jumbotron/jumbotron.component';
+import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({
   standalone: true,
@@ -17,6 +20,7 @@ import { JumbotronComponent } from 'src/app/shared/jumbotron/jumbotron.component
     HttpClientModule,
     CarouselComponent,
     JumbotronComponent,
+    SpinnerComponent,
   ],
   selector: 'app-images-by-author',
   templateUrl: './images-by-author.component.html',
@@ -24,11 +28,13 @@ import { JumbotronComponent } from 'src/app/shared/jumbotron/jumbotron.component
 })
 export class ImagesByAuthorComponent implements OnInit {
   public nfts: any[] = [];
+  loading: boolean = false;
 
   constructor(
     private gallery: GalleryService,
     private http: HttpClient,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    public spinnerService: SpinnerService
   ) {}
 
   public async ngOnInit(): Promise<void> {
@@ -48,6 +54,12 @@ export class ImagesByAuthorComponent implements OnInit {
         };
       })
     );
+
+    this.spinnerService.show();
+    this.spinnerService.startTimer(3000);
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
   }
 
   detailNft(nft: Nft) {
