@@ -66,10 +66,10 @@
 
 ### 🧪 QA:
 
-| <img src="https://res.cloudinary.com/dqkkehztd/image/upload/v1682753805/readme/shteogxsz1zefdoebdt2.jpg" width=50>|
+| <img src="https://media.licdn.com/dms/image/C4E03AQGjjLZ6QRLTXQ/profile-displayphoto-shrink_400_400/0/1534798634150?e=1691625600&v=beta&t=8omEvFbkF9Od-SIbVB5HzJPyxeCPF6i7FfwxbeSFLP8" width=50>|
 |:-:|
 | **Gabriel Flores**|
-|<a href="https://www.linkedin.com/in/gabrielfloresc/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
+|<a href="https://www.linkedin.com/in/jes%C3%BAs-quintero-a3750a90/"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a> |
 
 <hr/>
 
