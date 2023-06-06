@@ -3,6 +3,7 @@ package com.s8.binance.security.service.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import com.s8.binance.model.entity.Wallet;
@@ -29,26 +31,20 @@ import com.s8.binance.security.util.Message;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+@Service @Transactional
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-
 	private final UserService userService;
-
 	private final PasswordEncoder passwordEncoder;
-
 	private final RoleService roleService;
-
 	private final JwtProvider jwtProvider;
-
-	private final AuthenticationManager authenticationManager;
-
+	@Autowired
+	AuthenticationManager authenticationManager;
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userService.getByUsername(username).get();
 		return UserMain.build(user);
 	}
-
 	public User newUser(RegisterDto register) {
 			Set<Role> roles = new HashSet<>();
 			roles.add(roleService.getByRoleName(RoleName.ROLE_USER).orElseThrow());

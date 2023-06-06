@@ -23,13 +23,12 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@RequiredArgsConstructor
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
-
-	private final JwtEntryPoint jwtEntryPoint;
+	UserDetailsServiceImpl userDetailsService;
+    @Autowired
+	JwtEntryPoint jwtEntryPoint;
 
 	@Bean
 	public JwtTokenFilter jwtTokenFilter() {
@@ -37,9 +36,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

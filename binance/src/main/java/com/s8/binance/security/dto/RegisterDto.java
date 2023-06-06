@@ -12,6 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Builder
 @Getter
 @Setter
@@ -21,50 +24,51 @@ import lombok.Setter;
 public class RegisterDto {
 
 	@Email
-	@ApiModelProperty(example = "antonelaroccuzzo@gmail.com")
+	@ApiModelProperty(value = "User email", example = "antonelaroccuzzo@gmail.com")
 	private String email;
 
 	@NotBlank
-	@ApiModelProperty(example = "password1234")
+	@ApiModelProperty(value = "New password", example = "password1234")
 	private String password;
 
 	@NotBlank
-	@ApiModelProperty(example = "antonelaroccuzzo")
+	@ApiModelProperty(value = "New username", example = "antonelaroccuzzo")
 	private String username;
 
 	@NotBlank
-	@ApiModelProperty(example = "Antonela")
+	@ApiModelProperty(value = "First name", example = "Antonela")
 	private String legalName;
 
 	@NotBlank
-	@ApiModelProperty(example = "Roccuzzo")
+	@ApiModelProperty(value = "Last name", example = "Roccuzzo")
 	private String legalLastName;
 
 	@NotBlank
-	@ApiModelProperty(example = "1988-02-26")
+	@ApiModelProperty(value = "Birth date", example = "1988-02-26")
 	private String birthdate;
 
 	@NotBlank
-	@ApiModelProperty(example = "Argentina")
+	@ApiModelProperty(value = "Nationality", example = "Argentina")
 	private String nationality;
 
 	@NotBlank
-	@ApiModelProperty(example = "Avenue Montaigne 123")
+	@ApiModelProperty(value = "Address", example = "Avenue Montaigne 123")
 	private String fullAddress;
 
 	@NotBlank
-	@ApiModelProperty(example = "Paris")
+	@ApiModelProperty(value = "City", example = "Paris")
 	private String city;
 
 	@NotBlank
-	@ApiModelProperty(example = "70123")
+	@ApiModelProperty(value = "Zip Code", example = "70123")
 	private String zipCode;
 
 	@NotBlank
-	@ApiModelProperty(example = "France")
+	@ApiModelProperty(value = "Country", example = "France")
 	private String country;
 
 	@NotNull
 	@ApiModelProperty(example = "true")
 	private boolean agree;
+	private Set<String> roles = new HashSet<>();
 }

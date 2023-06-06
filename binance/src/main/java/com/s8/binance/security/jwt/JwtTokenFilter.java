@@ -18,15 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.s8.binance.security.service.impl.UserDetailsServiceImpl;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
-
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
-
     @Autowired
-    private JwtProvider jwtProvider;
-
+    JwtProvider jwtProvider;
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
+    UserDetailsServiceImpl userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -35,10 +31,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (token != null && jwtProvider.validateToken(token)) {
                 String username = jwtProvider.getUsernameFromToken(token);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
-                        null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
-
             }
         } catch (Exception e) {
             logger.error("doFilterInternal method failed" + e.getMessage());
