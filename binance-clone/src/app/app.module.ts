@@ -15,6 +15,7 @@ import { SideBarComponent } from './core/side-bar/side-bar.component';
 import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    SpinnerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

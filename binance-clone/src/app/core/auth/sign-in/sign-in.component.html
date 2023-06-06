@@ -1,38 +1,72 @@
+<!-- <ng-container *ngIf="!loading"> -->
 <div class="flex flex-col place-items-center h-screen justify-center">
-    <form [formGroup]="form" (ngSubmit)="signIn()">
-        <div *ngIf="step === 0" class="flex flex-col w-[500px]">
-            <p class="text-3xl font-semibold mb-7">Iniciar sesión</p>
-            <div class="flex flex-col gap-5">
-                <div>Username</div>
-                <input type="username" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" formControlName="username">
-                <button (click)="increaseStep()" type="button" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md">Siguiente</button>
-                <a routerLink="/register" class="text-binance-mustard">Crear una cuenta de Binance</a>
-            </div>
+  <form [formGroup]="form" (ngSubmit)="signIn()">
+    <div *ngIf="step === 0" class="flex flex-col w-[500px]">
+      <p class="text-3xl font-semibold mb-7">Iniciar sesión</p>
+      <div class="flex flex-col gap-5">
+        <div>Username</div>
+        <input
+          type="username"
+          class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none"
+          formControlName="username"
+        />
+        <button
+          (click)="increaseStep()"
+          type="button"
+          class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
+        >
+          Siguiente
+        </button>
+        <a routerLink="/register" class="text-binance-mustard"
+          >Crear una cuenta de Binance</a
+        >
+      </div>
+    </div>
+    <div *ngIf="step === 1" class="flex flex-col w-[500px]">
+      <p class="text-3xl font-semibold mb-7">¡Bienvenido de nuevo!</p>
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col gap-5">
+          <p>Contraseña</p>
+          <div
+            class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow cursor-pointer transition-all duration-300 hover:border-binance-yellow active:border-binance-yellow flex w-full"
+          >
+            <ng-container *ngIf="eyes === false">
+              <input
+                type="password"
+                class="w-[450px] focus:border-none focus:outline-none"
+                formControlName="password"
+              />
+              <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
+            </ng-container>
+            <ng-container *ngIf="eyes === true">
+              <input
+                type="text"
+                class="w-[450px] focus:border-none focus:outline-none"
+                formControlName="password"
+              />
+              <fa-icon [icon]="faEye" (click)="faEyes()"></fa-icon>
+            </ng-container>
+          </div>
+          <button
+            type="submit"
+            [disabled]="
+              form.value.password.invalid || form.value.username.invalid
+            "
+            class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
+            [ngClass]="{
+              'cursor-not-allowed':
+                form.value.password.invalid && form.value.username.invalid
+            }"
+          >
+            Iniciar sesión
+          </button>
         </div>
-        <div *ngIf="step === 1" class="flex flex-col w-[500px]">
-            <p class="text-3xl font-semibold mb-7">¡Bienvenido de nuevo!</p>
-            <div class="flex flex-col gap-5">
-                <div class="flex flex-col gap-5">
-                    <p>Contraseña</p>
-                    <div class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow
-                    cursor-pointer transition-all duration-300 hover:border-binance-yellow active:border-binance-yellow flex w-full
-                    "
-                    >
-                    <ng-container *ngIf="eyes === false">
-                        <input type="password" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
-                        <fa-icon [icon]="faEyeSlash" (click)="faEyes()"></fa-icon>
-                    </ng-container>
-                    <ng-container *ngIf="eyes === true">
-                        <input type="text" class="w-[450px] focus:border-none focus:outline-none" formControlName="password">
-                        <fa-icon [icon]="faEye" (click)="faEyes()"></fa-icon>
-                    </ng-container>
-                </div>
-                <button type="submit" [disabled]="form.value.password.invalid || form.value.username.invalid" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
-                [ngClass]="{'cursor-not-allowed': form.value.password.invalid && form.value.username.invalid}"
-                >Iniciar sesión</button>
-                </div>
-                <a class="text-binance-mustard">¿Olvidaste la contraseña?</a>
-            </div>
-        </div>
-    </form>
+        <a class="text-binance-mustard">¿Olvidaste la contraseña?</a>
+      </div>
+    </div>
+  </form>
 </div>
+<!-- </ng-container>
+<ng-container *ngIf="loading">
+  <app-spinner></app-spinner>
+</ng-container> -->
