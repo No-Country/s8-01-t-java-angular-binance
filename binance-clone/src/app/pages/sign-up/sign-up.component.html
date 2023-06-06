@@ -18,8 +18,14 @@
                     >
                       Este campo debe contener un email válido
                     </p>
+                    <p
+                    *ngIf="form.controls.email.hasError('noDoubleAt')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                  >
+                    El email no debe contener doble arroba.
+                  </p>
                 </div>
-                <button (click)="increaseStep(); emailVerification()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md" [ngClass]="{'cursor-not-allowed': form.controls.email.invalid}"
+                <button (click)="increaseStep(); enviarCodigoPorEmail()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md" [ngClass]="{'cursor-not-allowed': form.controls.email.invalid}"
                 [disabled]="form.controls.email.invalid"
                 >Siguiente</button>
                 <div class="flex gap-2">
@@ -28,46 +34,7 @@
             </div>
         </div>
 
-        <div *ngIf="step === 1" class="w-[700px] flex flex-col items-center">
-            <!-- <div class="flex justify-items-start w-full">
-                <button (click)="decreaseStep()" class="text-[#707A8A] hover:text-black"><fa-icon [icon]="faAngleLeft" class="p-2"></fa-icon>Volver</button>
-            </div> -->
-            <div class="h-10"></div>
-            <div class="flex flex-col w-[500px]">
-                <p class="text-3xl font-semibold mb-7">Verificación de correo electrónico</p>
-                <div class="flex flex-col gap-5">
-                    <div>Ingresa el código de verificación de 6 dígitos enviado a <strong>{{ form.get('email')?.value }}</strong>. El código es válido durante 30 minutos.</div>
-                    <div>Código de verificación por email</div>
-                    <input type="text" class="no-spinner border border-spacing-1 h-11 p-3 rounded-md text-end focus:border-binance-yellow focus:outline-none" placeholder="Código de verficación enviado" >
-                    <div *ngIf="form.controls.verificationCode.touched && form.controls.verificationCode.invalid">
-                        <p
-                          *ngIf="form.controls.verificationCode.hasError('required')"
-                          class="mt-1 ml-1 text-xs font-medium text-red-500"
-                        >
-                          Este campo es obligatorio
-                        </p>
-                        <p
-                        *ngIf="form.controls.verificationCode.hasError('minlength')"
-                        class="mt-1 ml-1 text-xs font-medium text-red-500">
-                        Ingresa 6 dígitos
-                        </p>
-                        <p
-                        *ngIf="form.controls.verificationCode.hasError('maxlength')"
-                        class="mt-1 ml-1 text-xs font-medium text-red-500">
-                        Ingresa 6 dígitos
-                        </p>
-                        <p
-                        *ngIf="form.controls.verificationCode.hasError('pattern')"
-                        class="mt-1 ml-1 text-xs font-medium text-red-500">
-                        Ingresa solo números
-                        </p>
-                    </div>
-                    <button [disabled]="form.controls.verificationCode.invalid" (click)="increaseStep(); sendCode()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
-                    [ngClass]="{'cursor-not-allowed': form.controls.verificationCode.invalid}"
-                    >Enviar</button>
-                </div>
-            </div>
-        </div>
+
 
         <div *ngIf="step === 2" class="flex flex-col w-[500px]">
             <p class="text-3xl font-semibold mb-7">Crear username y contraseña</p>
@@ -104,10 +71,40 @@
                     Este campo es obligatorio
                     </p>
                     <p
-                    *ngIf="form.controls.password.hasError('pattern')"
+                    *ngIf="form.controls.password.hasError('minlength')"
                     class="mt-1 ml-1 text-xs font-medium text-red-500"
                     >
-                    Este campo debe contener al menos una letra mayúscula, una minúscula, un número, un caracter especial y un mínimo de 8 caracteres y un máximo de 128 caracteres.
+                    Este campo debe tener como mínimo 8 caracteres.
+                    </p>
+                    <p
+                    *ngIf="form.controls.password.hasError('maxlength')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                    Este campo debe tener como máximo 128 caracteres.
+                    </p>
+                    <p
+                    *ngIf="form.controls.password.hasError('caracterEspecial')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                    Este campo debe contener al menos un caracter especial.
+                    </p>
+                    <p
+                    *ngIf="form.controls.password.hasError('numero')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                    Este campo debe contener al menos un número.
+                    </p>
+                    <p
+                    *ngIf="form.controls.password.hasError('letraMayuscula')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                    Este campo debe contener al menos una letra mayúscula.
+                    </p>
+                    <p
+                    *ngIf="form.controls.password.hasError('letraMinuscula')"
+                    class="mt-1 ml-1 text-xs font-medium text-red-500"
+                    >
+                    Este campo debe contener al menos una letra minúscula.
                     </p>
                 </div>
                 <button [disabled]="form.controls.password.invalid || form.controls.username.invalid"  (click)="increaseStep()" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
@@ -127,9 +124,25 @@
             <div class="h-4"></div>
             <p>Nombre legal</p>
             <input type="text" formControlName="legalName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Nombre/s">
+            <div *ngIf="form.controls.legalName.touched">
+                <p
+                  *ngIf="form.controls.legalName.hasError('required')"
+                  class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                  Este campo es obligatorio
+                </p>
+            </div>
             <div class="h-2"></div>
             <p>Apellido legal</p>
             <input type="text" formControlName="legalLastName" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none" placeholder="Apellido/s">
+            <div *ngIf="form.controls.legalLastName.touched">
+                <p
+                  *ngIf="form.controls.legalLastName.hasError('required')"
+                  class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                  Este campo es obligatorio
+                </p>
+            </div>
             <div class="h-6"></div>
             <p>Tal como se muestra en tu pasaporte o carnet de identidad. Utiliza el mismo idioma que en tu documento.</p>
             <div class="h-6"></div>
@@ -150,6 +163,14 @@
             <div class="h-4"></div>
             <p>Dirección completa</p>
             <input type="text" formControlName="fullAddress" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
+            <div *ngIf="form.controls.fullAddress.touched">
+                <p
+                  *ngIf="form.controls.fullAddress.hasError('required')"
+                  class="mt-1 ml-1 text-xs font-medium text-red-500"
+                >
+                  Este campo es obligatorio
+                </p>
+            </div>
             <p>Código postal</p>
             <input type="text" formControlName="zipCode" class="border border-spacing-1 h-11 p-3 rounded-md focus:border-binance-yellow focus:outline-none">
             <div *ngIf="form.controls.zipCode.touched">
@@ -208,6 +229,48 @@
         </div> -->
 
 
+    </form>
+
+    <form [formGroup]="formCode" (ngSubmit)="verificarCodigo()">
+        <div *ngIf="step === 1" class="w-[700px] flex flex-col items-center">
+            <!-- <div class="flex justify-items-start w-full">
+                <button (click)="decreaseStep()" class="text-[#707A8A] hover:text-black"><fa-icon [icon]="faAngleLeft" class="p-2"></fa-icon>Volver</button>
+            </div> -->
+            <div class="h-10"></div>
+            <div class="flex flex-col w-[500px]">
+                <p class="text-3xl font-semibold mb-7">Verificación de correo electrónico</p>
+                <div class="flex flex-col gap-5">
+                    <div>Ingresa el código de verificación de 6 dígitos enviado a <strong>{{ form.get('email')?.value }}</strong>. El código es válido durante 30 minutos.</div>
+                    <div>Código de verificación por email</div>
+                    <input type="text" class="no-spinner border border-spacing-1 h-11 p-3 rounded-md text-end focus:border-binance-yellow focus:outline-none" placeholder="Código de verficación enviado" formControlName="verificationCode">
+                    <div *ngIf="formCode.controls.verificationCode.touched && formCode.controls.invalid">
+                        <p
+                          *ngIf="formCode.controls.verificationCode.hasError('required')"
+                          class="mt-1 ml-1 text-xs font-medium text-red-500"
+                        >
+                          Este campo es obligatorio
+                        </p>
+                        <p
+                        *ngIf="formCode.controls.verificationCode.hasError('minlength')"
+                        class="mt-1 ml-1 text-xs font-medium text-red-500">
+                        Ingresa 6 dígitos
+                        </p>
+                        <p
+                        *ngIf="formCode.controls.verificationCode.hasError('maxlength')"
+                        class="mt-1 ml-1 text-xs font-medium text-red-500">
+                        Ingresa 6 dígitos
+                        </p>
+                        <p
+                        *ngIf="formCode.controls.verificationCode.hasError('pattern')"
+                        class="mt-1 ml-1 text-xs font-medium text-red-500">
+                        Ingresa solo números
+                        </p>
+                    </div>
+                    <button type="submit" class="bg-binance-yellow hover:opacity-90 px-6 py-3 rounded-md"
+                    >Enviar</button>
+                </div>
+            </div>
+        </div>
     </form>
 
 </div>

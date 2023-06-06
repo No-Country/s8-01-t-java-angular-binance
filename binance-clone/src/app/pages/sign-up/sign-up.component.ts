@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormsModule, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -31,6 +31,7 @@ export class SignUpComponent {
   eyes = false;
   
   form: any;
+  formCode: any;
   
   step: number = 0;
   
@@ -41,32 +42,38 @@ export class SignUpComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-
     ) {
     this.form = this.formBuilder.nonNullable.group({
-      email: ['', [Validators.email, Validators.required]],
-      // verificationCode: ['', [
-      //   Validators.minLength(6), 
-      //   Validators.maxLength(6), 
-      //   Validators.required, 
-      //   Validators.pattern('^[0-9]*$')]],
+      email: ['', [
+        Validators.email, 
+        Validators.required, 
+        this.NoDoubleAtValidator()
+      ]],
       password: ['', [
         Validators.minLength(8), 
         Validators.maxLength(128), 
         Validators.required, 
-        // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)
+        this.caracterEspecialValidator(),
+        this.letraMinusculaValidator(),
+        this.letraMayusculaValidator(),
+        this.numeroValidator()
       ]],
-      nationality: ['', [Validators.required]],
-      legalName: ['', [Validators.required]],
-      legalLastName: ['', [Validators.required]],
+      nationality: ['', [Validators.required, Validators.maxLength(128)]],
+      legalName: ['', [Validators.required, Validators.maxLength(128)]],
+      legalLastName: ['', [Validators.required, Validators.maxLength(128)]],
       birthdate: ['', [Validators.required]],
-      fullAddress: ['', [Validators.required]],
-      zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      city: ['', [Validators.required]],
-      country: ['', [Validators.required]],
-      username: ['', [Validators.required]],
+      fullAddress: ['', [Validators.required, Validators.maxLength(128)]],
+      zipCode: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('^[0-9]*$')]],
+      city: ['', [Validators.required, Validators.maxLength(128)]],
+      country: ['', [Validators.required, Validators.maxLength(128)]],
+      username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       agree: [false, [Validators.requiredTrue]]
     });
+
+    this.formCode = this.formBuilder.nonNullable.group({
+      verificationCode: ['', [
+        Validators.required
+      ]]})
   }
 
 
@@ -88,60 +95,9 @@ export class SignUpComponent {
     );
     }
 
-
-
-    //   {
-    //   next: (res) => {
-    //     const username = res.username;
-    //     Swal.fire({
-    //       title: `¡Hola! ${username}`,
-    //       text: `Iniciaste sesión correctamente!`,
-    //       icon: 'success',
-    //       showConfirmButton: false,
-    //       timer: 3000
-    //     }).then(() => {
-    //       this.router.navigate(['/login']);
-    //     });
-    //   },
-    //   error: (error) => {
-    //     console.log('Error en el inicio de sesión:', error);
-    //     Swal.fire({
-    //       title: 'Error',
-    //       text: 'Username o contraseña inválida',
-    //       icon: 'error',
-    //       confirmButtonText: 'Aceptar'
-    //     });
-    //   }
-    // }
-    );
+    )
   }
 
-  // signUp() {
-  //   this.auth.signUpEmail(this.form.getRawValue('email'))
-  //   if (this.verificated) {
-  //     this.auth.signUpPassword(this.form.getRawValue('password'))
-  //   }
-  // }
-
-  // register() {
-  //   if (this.form.valid) {
-  //     this.status = 'loading';
-  //     const { name, email, password } = this.form.getRawValue();
-  //     this.authService.register(name, email, password)
-  //     .subscribe({
-  //       next: () => {
-  //         this.status = 'success';
-  //         this.router.navigate(['/login']);
-  //       },
-  //       error: (error) => {
-  //         this.status = 'failed';
-  //         console.log(error);
-  //       }
-  //     })
-  //   } else {
-  //     this.form.markAllAsTouched();
-  //   }
-  // }
 
   faEyes() {
     this.eyes = !this.eyes;
@@ -168,14 +124,16 @@ export class SignUpComponent {
   
   email: string = '';
   randomNumber: number = 0;
-  codeSent: Number | null = null;
-  num: number = 0;
+  code: any;
+  num: any;
+  disabled: boolean = false;
   
-  sendCode() {
+  verificarCodigo() {
 
-    this.codeSent = this.form.get('verificationCode').value;
+    this.code = this.formCode.getRawValue();
+    console.log('this.code', this.code )
 
-    if (this.codeSent === this.num) {
+    if (this.code.verificationCode === this.num) {
       this.increaseStep();
     }
   }
@@ -191,6 +149,35 @@ export class SignUpComponent {
   
     return randomNumber;
   }
+
+  enviarCodigoPorEmail() {
+    const url = `${this.apiUrl}/auth/email`;
+    const email = this.form.get('email').value;
+    const codigo = this.generateRandomNumber();
+    this.num = codigo;
+    console.log('this num', this.num)
+    console.log('codigo',codigo)
+
+    const headers = new HttpHeaders().set('Accept', '*/*');
+  
+    this.http.post(url, null, {
+      headers: headers,
+      params: {
+        email: email,
+        num: codigo.toString()
+      }
+    })
+    .subscribe(
+      respuesta => {
+        console.log('respuesta post código de verificación',respuesta);
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  
   
   emailVerification() {
   
@@ -225,7 +212,58 @@ export class SignUpComponent {
   }
 
 
+  NoDoubleAtValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value: string = control.value;
+      if (value && value.includes('@@')) {
+        return { noDoubleAt: true };
+      }
+      return null;
+    };
+  }
 
+  NumberValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value: string = control.value;
+      if (value && !/^\d+$/.test(value)) {
+        return { onlyNumbers: true };
+      }
+      return null;
+    };
+  }
 
+  // Validators para password
+
+  letraMinusculaValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const patron = /[a-z]/;
+      const valid = patron.test(control.value);
+      return valid ? null : { letraMinuscula: true };
+    };
+  }
+  
+  letraMayusculaValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const patron = /[A-Z]/;
+      const valid = patron.test(control.value);
+      return valid ? null : { letraMayuscula: true };
+    };
+  }
+  
+  numeroValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const patron = /\d/;
+      const valid = patron.test(control.value);
+      return valid ? null : { numero: true };
+    };
+  }
+  
+  caracterEspecialValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const patron = /[@#$%^&+=!]/;
+      const valid = patron.test(control.value);
+      return valid ? null : { caracterEspecial: true };
+    };
+  }
 
 }
