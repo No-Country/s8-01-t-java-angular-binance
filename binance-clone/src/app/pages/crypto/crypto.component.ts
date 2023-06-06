@@ -24,9 +24,6 @@ export class CryptoComponent implements OnInit {
     // });
   }
 
-  /**
-   * se encarga de 
-   */
   operationSelectorsToogle() {
     this.operationSelectors = !this.operationSelectors;
   }

@@ -45,24 +45,16 @@ export class BuyComponent implements OnInit, OnChanges {
     })
   }
 
-  /**
-   * cuando cryptos recibe el array del padre se asigna la crypto btc por defecto a selectedCrypto
-   * @param changes 
-   */
   ngOnChanges(changes: SimpleChanges) {
     if (changes['cryptos'] && changes['cryptos'].currentValue) {
       this.selectedCrypto = changes['cryptos'].currentValue[0];
     }
   }
 
-  /**
-   * esto sirve para avisarle al padre (crypto.component) si tiene que mostrar u ocultar una porcion de html
-   */
   emitEvent() {
     this.event.emit();
   }
 
-  // =============== modals ===============
   showCryptoModal() {
     this.cryptoModal = !this.cryptoModal;
     document.body.classList.toggle('overflow');
@@ -73,7 +65,6 @@ export class BuyComponent implements OnInit, OnChanges {
     document.body.classList.toggle('overflow');
   }
 
-  // =============== step ===============
   increaseStep() {
     this.formStep ++;
   }
@@ -82,11 +73,6 @@ export class BuyComponent implements OnInit, OnChanges {
     this.formStep--;
   }
 
-  /**
-   * se asigna la crypto elegida por el usuario a selectedCrypto y se
-   * llena el formulario con el id correspondiente
-   * @param crypto crypto seleccionada por el usuario en el modal de seleccion
-   */
   setSelectedCrypto(crypto: any) {
     switch (crypto.symbol) {
       case 'btc':
@@ -147,7 +133,6 @@ export class BuyComponent implements OnInit, OnChanges {
     this.paymentMethod = !this.paymentMethod;
   }
 
-  // =============== api backend ===============
   getCoins() {
     this.cryptoService.getCoins().subscribe({
       next: (res: any) => {
