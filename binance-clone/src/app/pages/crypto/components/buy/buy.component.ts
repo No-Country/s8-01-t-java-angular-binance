@@ -18,6 +18,7 @@ export class BuyComponent implements OnInit, OnChanges {
   
   cryptoModal: boolean = false;
   fiatModal: boolean = false;
+  paymentMethod: boolean = false;
   
   formStep: number = 1;
   backendCryptos = [];
@@ -140,6 +141,10 @@ export class BuyComponent implements OnInit, OnChanges {
         saleAmount: saleAmount.toFixed(2)
       });
     }
+  }
+
+  togglePaymentMethod() {
+    this.paymentMethod = !this.paymentMethod;
   }
 
   // =============== api backend ===============

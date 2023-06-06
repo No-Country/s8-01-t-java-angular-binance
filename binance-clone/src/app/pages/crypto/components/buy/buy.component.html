@@ -87,20 +87,27 @@
       </div>
       <div class="flex flex-col gap-8">
   
-        <!-- <div *ngFor="let item of [].constructor(5)" class="flex border border-[#A7A7A8] rounded-xl items-center gap-2 px-5 py-3 bg-red-200 cursor-pointer md:px-6">
-          <img class="h-10" src="{{btc.image}}" alt="">
-          <div class="flex flex-col w-full">
-            <div class="flex justify-between w-full font-medium">
-              <p>{{btc.symbol | uppercase}}</p>
-              <p>{{btc.current_price | currency}}</p>
-            </div>
-            <div class="flex justify-between w-full">
-              <p class="text-[#A7A7A8]">{{btc.name}}</p>
-              <p [ngClass]="btc.price_change_percentage_24h > 0? 'text-[#03a66d]' : 'text-[#cf304a]'">
-                {{btc.price_change_percentage_24h > 0? '+' : ''}}{{ btc.price_change_percentage_24h | number:'1.2-2' }}%</p>
+        <div [ngClass]="paymentMethod? 'border-2 border-binance-yellow' : 'border-[#A7A7A8]'" class="flex flex-col border border-[#A7A7A8] rounded-xl gap-2 p-5 bg-blue-100 cursor-pointer md:p-6" (click)="togglePaymentMethod()">
+          <div class="flex justify-between w-full font-medium">
+            <p>Balance en cuenta</p>
+            <p>{{buyForm.getRawValue().purchaseAmount}} {{selectedCrypto.symbol | uppercase}}</p>
+          </div>
+          <div class="flex flex-col justify-start">
+            <p>balance</p>
+            <div class="flex gap-1"> <!-- condicionar en base al balace contra saleAmount -->
+              <p>Balance insuficiente</p>
+              <a href="" class="text-binance-yellow hover:text-binance-mustard">Depositar</a>
             </div>
           </div>
-        </div> -->
+        </div>
+
+        <div class="flex justify-between">
+          <div class="flex flex-col">
+            <p class="text-[#A7A7A8]">Pagarás</p>
+            <p>{{buyForm.getRawValue().saleAmount | currency}}</p>
+          </div>
+          <button [ngClass]="paymentMethod? 'bg-binance-yellow hover:opacity-90' : 'bg-binance-yellow/50'" type="button" class="px-6 py-3 text-base font-medium rounded-md" [disabled]="!paymentMethod">Confirmar</button>
+        </div>
         
       </div>    
     </div>
