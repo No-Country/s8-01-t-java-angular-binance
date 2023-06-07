@@ -20,7 +20,9 @@ flex-direction: row;
 -webkit-box-pack: justify;
 justify-content: space-between;
 margin: 70px auto 0px;
-padding: 0px 128px;}
+padding: 0px 128px;
+margin-top: 35px;
+}
 
 
 
@@ -60,3 +62,38 @@ background-color: rgb(234, 236, 239);
 color: rgb(30, 35, 41);
 min-width: 140px;
 margin-top: 0px;}
+
+
+.css-7xb8x7{
+  text-size-adjust: 100%;
+  font-family: BinancePlex,Arial,sans-serif!important;
+  --text-color: #e6e6e6;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  padding: 0px;
+  box-sizing: border-box;
+  margin: 0px 0px 0px 36px;
+  min-width: 0px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: rgb(30, 35, 41);
+}
+
+.css-1eywgc0{
+  text-size-adjust: 100%;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: BinancePlex,Arial,sans-serif!important;
+  --text-color: #e6e6e6;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: rgb(30, 35, 41);
+  font-size: 24px;
+  fill: rgb(30, 35, 41);
+  width: 96px;
+  height: 96px;
+}

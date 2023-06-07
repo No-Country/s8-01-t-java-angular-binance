@@ -67,7 +67,7 @@ export class SignInComponent {
             timer: 1000,
           }).then(() => {
             this.loading = true;
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           });
         },
         error: (error) => {

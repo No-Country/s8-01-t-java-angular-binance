@@ -1,0 +1,20 @@
+<div class="Flex ItemsCenter">
+  <div class="p-3 bg-white rounded-[50%] Flex JustifyCenter ItemsCenter">
+    <span [innerHTML]="item.icon"></span>
+  </div>
+
+  <div class="Ml15">
+    <p class="ColorDarkGray3">{{ item.label }}</p>
+    <p class="FontLato Font600 FontSize10 ColorLightGray3 Mt5">
+      {{ item.name }}
+    </p>
+  </div>
+  <div class="Flex Col MlAuto ItemsEnd">
+    <p classe="Mb5 FontLato FontTransformY Font700 FontSize12 ColorDarkGray3">
+      {{ item.value }}
+    </p>
+    <p class="FontLato Font600 FontSize10 ColorLightGray3">
+      {{ item.usd }}
+    </p>
+  </div>
+</div>

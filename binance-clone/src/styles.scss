@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "src/assets/Colors.scss";
+
 *,
 *::after,
 *::before {
@@ -22,10 +25,9 @@ body{
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-}
+  height: 100%;
 
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+}
 
 body.overflow{
   overflow: hidden;
@@ -48,6 +50,7 @@ li {
   margin: 0;
 }
 
+
 input[type=checkbox] {
   width: 30px;
   height: 25px;
@@ -65,4 +68,378 @@ input[type=checkbox] {
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: transparent !important;
+}
+
+
+// WALLET
+
+
+
+// $dark-gray-1: #1d222c;
+// $dark-gray-2: #5e636c;
+// $dark-gray-3: #1f242b;
+// $light-gray-1: #9ba1b0;
+// $light-gray-2: #e8e9ef;
+// $light-gray-3: #858d9f;
+// $light-gray-4: #c1bfd9;
+// $light-gray-5: #78889f;
+// $light-gray-6: #f5f3fb;
+// $light-gray-7: #fcfbfe;
+// $light-purple: #aba9da;
+// $light-purple-2: #635fd1;
+// $white: #fff;
+// $black: #000;
+
+.Wallet {
+  ::-webkit-scrollbar {
+    height: 2px;
+    width: 2px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: $light-gray-2;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: $light-gray-3;
+  }
+  background: $light-gray-6;
+  width: 100vw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .Container {
+    overflow: hidden;
+    width: 100%;
+    border: .5px solid $black;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "wallet-list"
+      "steps"
+      "convert-details";
+  }
+
+  .Flex {
+    display: flex;
+  }
+  .Row {
+    flex-direction: row;
+  }
+  .Col {
+    flex-direction: column;
+  }
+  .WFull {
+    width: 100%;
+  }
+  .JustifyBetween {
+    justify-content: space-between;
+  }
+  .JustifyCenter {
+    justify-content: center;
+  }
+  .ItemsEnd {
+    align-items: flex-end;
+  }
+  .ItemsCenter {
+    align-items: center;
+  }
+  .FontTransformY {
+    transform: scaleY(1.5);
+  }
+  .Font400 {
+    font-weight: 400;
+  }
+  .Font600 {
+    font-weight: 600;
+  }
+  .Font700 {
+    font-weight: 700;
+  }
+  .FontSize1-4 {
+    font-size: 1.4rem;
+  }
+  .FontSize10 {
+    font-size: 10px;
+  }
+  .FontSize12 {
+    font-size: 12px;
+  }
+  .FontSize20 {
+    font-size: 20px;
+  }
+  .BgDarkGray3 {
+    background: $dark-gray-3;
+  }
+  .BgLightGray2 {
+    background: $light-gray-2;
+  }
+  .ColorLightGray1 {
+    color: $light-gray-1;
+  }
+  .ColorLightGray3 {
+    color: $light-gray-3;
+  }
+  .ColorLightGray4 {
+    color: $light-gray-4;
+  }
+  .ColorLightGray5 {
+    color: $light-gray-5;
+  }
+  .ColorDarkGray3 {
+    color: $dark-gray-3;
+  }
+  .Mx30 {
+    margin: 0 30px;
+  }
+  .My20 {
+    margin: 20px 0;
+  }
+  .My30 {
+    margin: 30px 0;
+  }
+  .Mt5 {
+    margin-top: 5px;
+  }
+  .Mt20 {
+    margin-top: 20px;
+  }
+  .Mt30 {
+    margin-top: 30px;
+  }
+  .Mt40 {
+    margin-top: 40px;
+  }
+  .Mr5 {
+    margin-right: 5px;
+  }
+  .Mb5 {
+    margin-bottom: 5px;
+  }
+  .Ml15 {
+    margin-left: 15px;
+  }
+  .Ml30 {
+    margin-left: 30px;
+  }
+  .MlAuto {
+    margin-left: auto;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .Wallet {
+    height: 100vh;
+
+    .Container {
+      padding: 20px;
+      width: 67%;
+      height: 80%;
+      display: grid;
+      grid-template-columns: 70px 25% auto;
+      grid-template-rows: 10% 90%;
+      grid-template-areas:
+        "nav wallet-list steps"
+        "nav wallet-list convert-details";
+    }
+  }
+}
+
+.NavBar {
+  display: none;
+  grid-area: nav;
+  background: $dark-gray-1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 0;
+  width: 70px;
+  border-radius: 30px;
+  li {
+    list-style: none;
+  }
+  i {
+    color: $dark-gray-2;
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  li:first-child i {
+    color: $white;
+  }
+  i.active::after {
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 4px;
+    background: $white;
+    border-radius: 50%;
+    bottom: -8px;
+  }
+}
+
+.NavBar {
+  display: none;
+  grid-area: nav;
+  background: $dark-gray-1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 0;
+  width: 70px;
+  border-radius: 30px;
+  li {
+    list-style: none;
+  }
+  i {
+    color: $dark-gray-2;
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  li:first-child i {
+    color: $white;
+  }
+  i.active::after {
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 4px;
+    background: $white;
+    border-radius: 50%;
+    bottom: -8px;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .NavBar {
+    display: flex;
+  }
+}
+
+.ConversionCard {
+  background: $light-gray-7;
+  margin-right: 40px;
+  padding: 40px 30px;
+  margin-top: 40px;
+  position: relative;
+  hr {
+    border-bottom: 0;
+    margin: 5px 0;
+  }
+  hr.Purple {
+    border-top: 2px solid $light-purple;
+  }
+  hr.Light {
+    border-top: 2px solid $light-gray-2;
+  }
+  .ConversionToFrom {
+    background: $white;
+    padding: 20px;
+    .LabelBlock {
+      margin-right: 20px;
+    }
+    .Name {
+      font-family: "Lato";
+      font-weight: 600;
+      font-size: 10px;
+      color: $light-gray-3;
+      margin-top: 5px;
+    }
+    .Icon {
+      padding: 10px;
+      border-radius: 50%;
+      color: $light-purple-2;
+      font-size: 1.2rem;
+    }
+  }
+  .VLine {
+    border-left: 1px solid $light-gray-2;
+    height: 40%;
+  }
+  .Icon {
+    padding: 10px;
+    border-radius: 50%;
+  }
+  .ConvertBtn {
+    position: absolute;
+    background: $dark-gray-3;
+    color: $light-gray-2;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-weight: 600;
+    right: -40px;
+  }
+}
+
+
+@media only screen and (min-width: 1170px) {
+  .ConvertBtn {
+    right: 40px;
+  }
+}
+
+
+.Steps {
+  grid-area: steps;
+  padding: 2rem;
+  .Label {
+    span {
+      font-size: 14px;
+      color: $light-gray-1;
+    }
+    span.Active {
+      font-weight: 600;
+      color: $dark-gray-3;
+    }
+  }
+  .Line {
+    width: 20%;
+    height: 1px;
+    background: $light-gray-2;
+    position: relative;
+  }
+  .Line.Active::after {
+    content: "";
+    width: 50%;
+    height: 1px;
+    background: $light-gray-4;
+    position: absolute;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .Steps {
+    padding-top: 55px;
+  }
+}
+
+
+.WalletList {
+  grid-area: wallet-list;
+  padding: 20px 20px 0 20px;
+  hr {
+    border-top: 1px solid $light-gray-2;
+    border-bottom: 0;
+    margin: 30px 0;
+  }
+  .Icon {
+    font-size: 1.3rem;
+  }
+}
+
+.WalletItem {
+  .IconWrapper {
+    padding: 10px;
+    background: white;
+    border-radius: 50%;
+  }
 }

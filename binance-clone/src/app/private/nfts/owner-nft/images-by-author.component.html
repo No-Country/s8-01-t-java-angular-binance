@@ -1,0 +1,105 @@
+<app-spinner *ngIf="spinnerService.getSpinnerStatus()"></app-spinner>
+
+<ng-container *ngIf="loading">
+  <app-carousel></app-carousel>
+  <section class="custom-grid px-4 mt-0 mb-32 mx-auto lg:max-w-[1200px]">
+    <div *ngFor="let nft of nfts">
+      <div class="css-12nnkcx">
+        <a (click)="detailNft(nft)">
+          <div class="css-x0dwiq">
+            <div class="css-1n0rtc0">
+              <div class="css-hr04qc">
+                <span
+                  class="lazy-load-image-custom-wrapper lazy-load-image-background lazy-load-image-loaded"
+                  style="
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    opacity: 1;
+                  "
+                  ><img
+                    [src]="nft.fileUrl"
+                    sx="[object Object]"
+                    style="
+                      height: 100%;
+                      width: 100%;
+                      object-fit: cover;
+                      background: none 0% 0% / contain;
+                    "
+                /></span>
+              </div>
+              <div class="css-spt8x2">
+                <div class="css-qx3vov">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1024 1024"
+                    fill="none"
+                    class="css-alnszv"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M884.363636 0H139.636364C62.487273 0 0 62.487273 0 139.636364v744.727272c0 77.149091 62.487273 139.636364 139.636364 139.636364h744.727272c77.149091 0 139.636364-62.487273 139.636364-139.636364V139.636364c0-77.149091-62.487273-139.636364-139.636364-139.636364zM514.792727 977.454545C139.869091 977.454545 46.545455 884.130909 46.545455 509.207273S139.869091 46.545455 514.792727 46.545455 977.454545 134.4 977.454545 509.207273 889.6 977.454545 514.792727 977.454545z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <div class="css-1ehyqbw">
+                    <span
+                      class="lazy-load-image-custom-wrapper lazy-load-image-background blur lazy-load-image-loaded"
+                      style="
+                        display: contents;
+                        width: 100%;
+                        height: 100%;
+                        margin-right: 0px;
+                        border-radius: 12px;
+                        object-fit: cover;
+                        flex-shrink: 0;
+                      "
+                      ><img
+                        src="https://uploads-ssl.webflow.com/62cc216ce23f79c10bc88169/62d1b77ddf0b28953ff61fa8_favicon.jpg"
+                        sx="[object Object]"
+                        style="
+                          height: 100%;
+                          width: 100%;
+                          object-fit: cover;
+                          border-radius: 12px;
+                          background: none 0% 0% / contain;
+                        "
+                    /></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="css-eq7ejj">
+              <div data-bn-type="text" class="css-nekt17">{{ nft.title }}</div>
+              <div class="css-x2gp5l">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="css-14nfsts"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M15.824 5.34L14.43 2.927 12.02 4.32 9.608 2.928 8.216 5.339H5.43v2.785L3.02 9.516l1.392 2.412-1.392 2.411 2.411 1.392v2.785h2.785l1.392 2.412 2.412-1.393 2.411 1.393 1.393-2.412h2.784v-2.784l2.412-1.393-1.393-2.411 1.393-2.412-2.412-1.392V5.339h-2.784zm-4.964 7.107l4.432-4.431 1.767 1.767-6.199 6.2-3.92-3.92 1.769-1.767 2.151 2.152z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="css-ryevcu">
+              <div class="css-10nf7hq">
+                <div data-bn-type="text" class="css-1833vnl">Precio mínimo</div>
+                <div data-bn-type="text" class="css-113zbap">
+                  {{ nft.price | currency }}USD
+                </div>
+              </div>
+            </div>
+          </div></a
+        >
+      </div>
+    </div>
+  </section>
+</ng-container>

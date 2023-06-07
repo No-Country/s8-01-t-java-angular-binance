@@ -30,9 +30,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/remixicon/fonts/remixicon.css",
               "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.scss",
-              "node_modules/sweetalert2/dist/sweetalert2.css"
+              "node_modules/sweetalert2/dist/sweetalert2.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/plotly.js/dist/plotly.min.js"

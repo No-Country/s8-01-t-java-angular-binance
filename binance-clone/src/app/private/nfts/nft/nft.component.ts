@@ -10,7 +10,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MetaMaskService } from 'src/app/services/meta-mask.service';
 import { IpfsService } from 'src/app/services/ipfs.service';
 
 @Component({
@@ -58,8 +57,7 @@ export class NftComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder,
-    private metaMaskService: MetaMaskService
+    private fb: FormBuilder
   ) {}
 
   public async ngOnInit() {
@@ -68,7 +66,8 @@ export class NftComponent implements OnInit {
       this.id = id !== null ? id : '';
       this.nfts = this.someMethod(this.id);
     });
-    const address = this.metaMaskService.getAccountAddress();
+
+    const address = this.gallery.getAccountAddress();
     this.buyForm.get('contract')?.setValue(address);
 
     const image = this.nfts?.fileUrl;

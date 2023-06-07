@@ -4,7 +4,7 @@ import { LandingComponent } from './private/landing/landing.component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { NftComponent } from './private/nfts/nft/nft.component';
 import { UploadImageComponent } from './private/nfts/upload-image/upload-image.component';
-import { ImagesByAuthorComponent } from './private/nfts/images-by-author/images-by-author.component';
+import { ImagesByAuthorComponent } from './private/nfts/owner-nft/images-by-author.component';
 import { HomeComponent } from './private/nfts/home/home.component';
 
 const routes: Routes = [
@@ -22,9 +22,15 @@ const routes: Routes = [
       ),
     data: { isAdminComponent: true },
   },
+
+  // Public
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'market',
+    loadComponent: () =>
+      import('./core/market/pages/market.component').then(
+        (c) => c.MarketComponent
+      ),
+    data: { isAdminComponent: true },
   },
 
   // Private
@@ -38,6 +44,19 @@ const routes: Routes = [
   { path: 'upload', component: UploadImageComponent },
   { path: 'nft', component: NftComponent },
   { path: 'nft/:id', component: NftComponent },
+
+  {
+    path: 'wallet',
+    loadComponent: () =>
+      import('./private/wallet/page/wallet/wallet.component').then(
+        (c) => c.WalletComponent
+      ),
+  },
+
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
 
   // Core
   {

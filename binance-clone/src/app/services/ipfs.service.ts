@@ -63,7 +63,7 @@ export class IpfsService {
 
     try {
       const added = await this.client.add(data);
-      url = `https://nocountry.infura-ipfs.io/ipfs/${added.path}`;
+      url = `https://binance.infura-ipfs.io/ipfs/${added.path}`;
     } catch (error) {
       console.log(error);
     }

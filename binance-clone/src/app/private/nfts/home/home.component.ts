@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { CommonModule } from '@angular/common';
-import { MetaMaskService } from 'src/app/services/meta-mask.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NftCardComponent } from '../nft-card/nft-card.component';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
@@ -38,19 +37,19 @@ export class HomeComponent implements OnInit {
   constructor(
     private gallery: GalleryService,
     private http: HttpClient,
-    private metaMaskService: MetaMaskService,
     private readonly dialog: MatDialog,
     public spinnerService: SpinnerService,
     private router: Router
-  ) {
-    const address = this.metaMaskService.getAccountAddress();
-    // if (address) {
-    //   console.log('Dirección de MetaMask:', address);
-    // }
-  }
+  ) {}
 
   public async ngOnInit(): Promise<void> {
-    // this.metaMaskService.initialize();
+    const address = this.gallery.getAccountAddress();
+    if (address) {
+      console.log('Dirección de MetaMask:', address);
+    }
+
+    // this.gallery.getBalancesForTokens();
+
     const images = await this.gallery.getAllImages();
     this.images = await Promise.all(
       images.map(async (image) => {

@@ -7,5 +7,5 @@ export const environment = {
   ipfsKey: '2QFujw28oy1ninclr6ESxPeBcyD',
   ipfsKeyS: '001f43d04b968cf53d2dfae000c7a44b',
 
-  contractAddress: '0x55FEdA15621E6aA3862E445fD96B757e392a7b71',
+  contractAddress: '0x03D6A6f3bdb74701dF11a7bf14716de13315eBC7',
 };

@@ -1,31 +1,12 @@
-// import { Injectable } from '@angular/core';
-// import Web3 from 'web3';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class MetaMaskService {
-//   private web3: Web3;
-
-//   constructor() {
-//     // Crea una instancia de web3
-//     this.web3 = new Web3(Web3.givenProvider);
-//   }
-
-//   getAccountAddress(): string | null {
-//     // Verifica si MetaMask está instalado y hay una cuenta logueada
-//     if (this.web3.givenProvider && this.web3.givenProvider.selectedAddress) {
-//       return this.web3.givenProvider.selectedAddress;
-//     } else {
-//       console.error('MetaMask no está instalado o no hay una cuenta logueada');
-//       return null;
-//     }
-//   }
-// }
-
 import { Injectable } from '@angular/core';
 import Web3 from 'web3';
 import detectEthereumProvider from '@metamask/detect-provider';
+
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +22,12 @@ export class MetaMaskService {
     this.getNetworkId();
     this.currentNetwork = '';
     this.currentContract = '';
+
+    if (typeof window.ethereum !== 'undefined') {
+      this.web3 = new Web3(window.ethereum);
+    } else {
+      console.error('MetaMask not found!');
+    }
   }
 
   public initialize(): void {
@@ -121,5 +108,14 @@ export class MetaMaskService {
 
   private showWarningAndRedirect(): void {
     // Implementa la lógica para mostrar una advertencia al usuario y redirigirlo a la página principal
+  }
+
+  getTransactions(contractAddress: string, abi: any): Promise<any[]> {
+    const contract = new this.web3.eth.Contract(abi, contractAddress);
+
+    return contract.getPastEvents('allEvents', {
+      fromBlock: 0,
+      toBlock: 'latest',
+    });
   }
 }

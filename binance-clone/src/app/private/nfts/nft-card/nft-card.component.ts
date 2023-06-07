@@ -14,12 +14,14 @@ import { Nft } from 'src/app/helpers/interfaces';
   standalone: true,
   imports: [CommonModule, MaterialModule, RouterModule, ModalComponent],
   templateUrl: './nft-card.component.html',
+
+  styleUrls: ['./nft-card.component.scss'],
 })
 export class NftCardComponent implements OnInit {
   @Input() nft!: Nft;
   @Input() index!: number;
   public cardData: any;
-  public selectedNft: Nft | null = null;
+
   destroyed$ = new Subject<void>();
 
   constructor(
@@ -40,20 +42,10 @@ export class NftCardComponent implements OnInit {
     this.router.navigate(['/nft', id]);
   }
 
-  // detailNft(nft: Nft) {
-
-  //   this.dialog.open(ModalComponent, {
-  //     data: { ...nft },
-  //     width: '800px',
-  //     panelClass: 'custom-modalbox',
-  //   });
-  // }
-
   detailNft(nft: Nft) {
     const dialogConfig: MatDialogConfig = {
       data: { ...nft },
       panelClass: 'custom-modalbox',
-      // Resto de las opciones del modal
     };
 
     this.dialog.open(ModalComponent, dialogConfig);

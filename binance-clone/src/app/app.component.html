@@ -2,11 +2,9 @@
 
 <ng-container *ngIf="loading">
   <ng-container *ngIf="!isAdminComponent">
-    <div>
-      <app-header></app-header>
-      <router-outlet></router-outlet>
-      <app-footer></app-footer>
-    </div>
+    <app-header></app-header>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
   </ng-container>
   <ng-container *ngIf="isAdminComponent">
     <router-outlet></router-outlet>

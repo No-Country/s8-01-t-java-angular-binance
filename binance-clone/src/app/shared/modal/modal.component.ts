@@ -13,6 +13,15 @@ import { Nft } from 'src/app/helpers/interfaces';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal.component.html',
+  styles: [
+    `
+      .text-gradient {
+        background: linear-gradient(to right, #00ff00, #0000ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    `,
+  ],
 })
 export class ModalComponent implements OnInit {
   constructor(

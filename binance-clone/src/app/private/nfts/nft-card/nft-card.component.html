@@ -1,61 +1,96 @@
-<!-- <mat-card>
-  <mat-card-header class="border-gray-700 bg-gray-800">
-    <mat-card-title>{{ nft.title }}</mat-card-title>
-    <mat-card-subtitle>{{ nft.category }}</mat-card-subtitle>
-  </mat-card-header>
-  <a>
-    <img
-      class="object-cover max-h-[25rem] w-full lg:max-h-none"
-      [src]="nft.fileUrl"
-      alt="Nft of a Art-Country"
-    />
-  </a>
-  <mat-card-content class="border-gray-700 bg-gray-800">
-    <h3 class="pt-2">{{ nft.date }}</h3>
-    <p class="hidden truncate ...">
-      <strong>Personaje: </strong>{{ nft.description }}
-    </p>
-  </mat-card-content>
-  <mat-card-actions class="border-gray-700 bg-gray-800">
-    <button mat-button color="warn">Leer mas...</button>
-    <button mat-button color="link">Editar</button>
-  </mat-card-actions>
-</mat-card> -->
-
-<div
-  class="block rounded-lg border border-slate-500 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
->
-  <div
-    class="relative overflow-hidden bg-cover bg-no-repeat max-h-[250px] w-full"
-    data-te-ripple-init
-    data-te-ripple-color="light"
+<div class="css-12nnkcx">
+  <a (click)="detailNft(nft)">
+    <div class="css-x0dwiq">
+      <div class="css-1n0rtc0">
+        <div class="css-hr04qc">
+          <span
+            class="lazy-load-image-custom-wrapper lazy-load-image-background lazy-load-image-loaded"
+            style="
+              display: flex;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              opacity: 1;
+            "
+            ><img
+              [src]="nft.fileUrl"
+              sx="[object Object]"
+              style="
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                background: none 0% 0% / contain;
+              "
+          /></span>
+        </div>
+        <div class="css-spt8x2">
+          <div class="css-qx3vov">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1024 1024"
+              fill="none"
+              class="css-alnszv"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M884.363636 0H139.636364C62.487273 0 0 62.487273 0 139.636364v744.727272c0 77.149091 62.487273 139.636364 139.636364 139.636364h744.727272c77.149091 0 139.636364-62.487273 139.636364-139.636364V139.636364c0-77.149091-62.487273-139.636364-139.636364-139.636364zM514.792727 977.454545C139.869091 977.454545 46.545455 884.130909 46.545455 509.207273S139.869091 46.545455 514.792727 46.545455 977.454545 134.4 977.454545 509.207273 889.6 977.454545 514.792727 977.454545z"
+                fill="currentColor"
+              ></path>
+            </svg>
+            <div class="css-1ehyqbw">
+              <span
+                class="lazy-load-image-custom-wrapper lazy-load-image-background blur lazy-load-image-loaded"
+                style="
+                  display: contents;
+                  width: 100%;
+                  height: 100%;
+                  margin-right: 0px;
+                  border-radius: 12px;
+                  object-fit: cover;
+                  flex-shrink: 0;
+                "
+                ><img
+                  src="https://uploads-ssl.webflow.com/62cc216ce23f79c10bc88169/62d1b77ddf0b28953ff61fa8_favicon.jpg"
+                  sx="[object Object]"
+                  style="
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 12px;
+                    background: none 0% 0% / contain;
+                  "
+              /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="css-eq7ejj">
+        <div data-bn-type="text" class="css-nekt17">{{ nft.title }}</div>
+        <div class="css-x2gp5l">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="css-14nfsts"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M15.824 5.34L14.43 2.927 12.02 4.32 9.608 2.928 8.216 5.339H5.43v2.785L3.02 9.516l1.392 2.412-1.392 2.411 2.411 1.392v2.785h2.785l1.392 2.412 2.412-1.393 2.411 1.393 1.393-2.412h2.784v-2.784l2.412-1.393-1.393-2.411 1.393-2.412-2.412-1.392V5.339h-2.784zm-4.964 7.107l4.432-4.431 1.767 1.767-6.199 6.2-3.92-3.92 1.769-1.767 2.151 2.152z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div class="css-ryevcu">
+        <div class="css-10nf7hq">
+          <div data-bn-type="text" class="css-1833vnl">Precio mínimo</div>
+          <div data-bn-type="text" class="css-113zbap">
+            {{ nft.price | currency }}USD
+          </div>
+        </div>
+      </div>
+    </div></a
   >
-    <img
-      class="rounded-t-lg w-full h-auto object-cover"
-      [src]="nft.fileUrl"
-      alt=""
-    />
-    <a href="#!">
-      <div
-        class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsla(0,0%,98%,0.15)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"
-      ></div>
-    </a>
-  </div>
-  <div class="p-6">
-    <h5
-      class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50"
-    >
-      {{ nft.title }}-{{ index }}
-    </h5>
-    <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-      {{ nft.description }}
-    </p>
-    <button
-      (click)="detailNft(nft)"
-      type="button"
-      class="inline-block w-full rounded bg-binance-mustard px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-    >
-      Leer mas...
-    </button>
-  </div>
 </div>

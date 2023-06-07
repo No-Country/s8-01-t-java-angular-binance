@@ -6,12 +6,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { GalleryService } from '../../../services/gallery.service';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { MetaMaskService } from 'src/app/services/meta-mask.service';
+import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({
   standalone: true,
@@ -21,6 +22,8 @@ import { MetaMaskService } from 'src/app/services/meta-mask.service';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
+    RouterLink,
+    SpinnerComponent,
   ],
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
@@ -43,22 +46,31 @@ export class UploadImageComponent implements OnInit {
   public formError = '';
   public isLoading = false;
   public address!: string | null;
+  public fileCharged: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private ipfs: IpfsService,
     private fb: FormBuilder,
     private router: Router,
     private gallery: GalleryService,
-    private metaMaskService: MetaMaskService
+    public spinnerService: SpinnerService
   ) {}
 
-  ngOnInit(): void {
-    const address = this.metaMaskService.getAccountAddress();
+  async ngOnInit(): Promise<void> {
+    const address = this.gallery.getAccountAddress();
     this.uploadForm.get('contract')?.setValue(address);
+
+    this.spinnerService.show();
+    this.spinnerService.startTimer(3000);
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
   }
 
   public async uploadImage(eventTarget: any) {
     const fileUrl = await this.ipfs.uploadFile(eventTarget.files[0]);
+    this.fileCharged = true;
     this.uploadedImage = fileUrl;
     this.uploadForm.get('fileUrl')?.setValue(fileUrl);
   }

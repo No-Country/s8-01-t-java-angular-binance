@@ -9,7 +9,6 @@ import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
 import { JumbotronComponent } from 'src/app/shared/jumbotron/jumbotron.component';
 import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({

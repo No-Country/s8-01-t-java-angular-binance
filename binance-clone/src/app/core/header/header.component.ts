@@ -40,6 +40,8 @@ export class HeaderComponent implements OnInit {
         }
       }
     );
+
+    initTE({ Collapse, Dropdown });
   }
 
   faMoon = faMoon;

@@ -18,7 +18,7 @@ import { HomeComponent } from './../../../private/nfts/home/home.component';
 
 import { DashboardComponent } from 'src/app/core/dashboard/dashboard.component';
 import { SignUpComponent } from 'src/app/core/auth/sign-up/sign-up.component';
-import { ImagesByAuthorComponent } from 'src/app/private/nfts/images-by-author/images-by-author.component';
+import { ImagesByAuthorComponent } from 'src/app/private/nfts/owner-nft/images-by-author.component';
 
 @Component({
   standalone: true,
