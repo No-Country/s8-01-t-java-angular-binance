@@ -63,9 +63,6 @@ export class DashboardComponent implements OnInit {
     this.auth.getUserData().subscribe(
       (data)=>{
         this.userData=data;
-      },
-      (err) => {
-        console.error('An error occurred:', err);
       }
     )
   }

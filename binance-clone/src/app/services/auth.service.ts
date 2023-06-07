@@ -41,8 +41,7 @@ export class AuthService {
   }
 
   public getUserData(): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', 'Bearer YOUR_TOKEN_HERE');
-    return this.http.get(`${this.apiUrl}/users/1`, { headers });
+    return this.http.get(`${this.apiUrl}/users/1`);
   }
 
 }

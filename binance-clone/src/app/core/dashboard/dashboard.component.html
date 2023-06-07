@@ -6,7 +6,7 @@
     </div>
     <div class="mx-5 relative" *ngIf="userData">
       <div class="user-nick text mb-2 flex justify-center md:justify-start">
-        <h5 class="font-semibold">L_Pbte {{userData.username}}</h5>
+        <h5 class="font-semibold">{{userData.username}}</h5>
       </div>
       <div class="flex flex-row ">
         <div class="id-user flex flex-col mr-5">
@@ -56,7 +56,7 @@
 
       <div class="flex flex-col w-full justify-center items-center mb-7 md:flex-row md:mr-[40%] md:w-3/6">
         <div class="flex flex-row items-center ml-2 text-3xl ">
-          <h3>0.00035 BTC<!--{{user.balance}}--></h3>
+          <h3>0.00035 BTC{{userData.balance}}</h3>
           <button class="px-2 py-2 bg-binance-gray mx-2 text-xl">
             <fa-icon [icon]="faArrowDown"></fa-icon>
           </button>
@@ -65,7 +65,7 @@
           <h3 class="">≈</h3>
         </div>
         <div class="text-3xl">
-          <h3>$1300.59<!--{{user.usd}}--></h3>
+          <h3>$1300.59{{userData.usd}}</h3>
         </div>
       </div>
 

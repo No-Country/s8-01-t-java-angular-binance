@@ -4,6 +4,7 @@ import { faArrowRight, faHourglassHalf } from '@fortawesome/free-solid-svg-icons
 import { forEach } from 'lodash';
 import { CryptoService } from 'src/app/services/crypto.service';
 
+
 @Component({
   selector: 'app-sell',
   templateUrl: './sell.component.html',
