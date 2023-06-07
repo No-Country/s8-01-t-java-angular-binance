@@ -13,23 +13,16 @@ export class LandingComponent implements OnInit {
   faUser = faUser;
   faAngleRight = faAngleRight;
 
-  positivo: boolean = true;
   popularCryptos: any[] | undefined;
-
-  marketCap: number = 40000000000;
-  porcentaje: number = 0.53;
 
   constructor(private cryptoService: CryptoService) {}
 
   ngOnInit(): void {
-
     this.cryptoService.getPopularCryptos().subscribe({
         next: (res: any) => {
-          console.log(res);
           this.popularCryptos = res;
         }
     });
-
   }
 
 }

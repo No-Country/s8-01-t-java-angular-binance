@@ -1,0 +1,108 @@
+<div *ngIf="cryptoModal" class="fixed z-[10] top-0 left-0 w-full h-full overflow-auto">
+  <div class="relative flex items-center justify-center w-full min-h-screen">
+    <div class="absolute w-full h-full bg-black/50" (click)="showCryptoModal()"></div>
+    <div class="relative m-5 w-[450px] rounded-[10px] overflow-hidden bg-binance-light-gray">
+      <p class="p-5 font-medium md:p-6">Seleccionar cripto</p>
+      <div class="overflow-auto max-h-[500px]">
+        <div *ngFor="let item of cryptos"
+          class="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-binance-gray md:px-6" (click)="setSelectedCrypto(item); showCryptoModal()">
+          <img class="h-10" src="{{item.image}}" alt="">
+          <div class="flex flex-col w-full">
+            <div class="flex justify-between w-full font-medium">
+              <p>{{item.symbol | uppercase}}</p>
+              <p>{{item.current_price | currency}}</p>
+            </div>
+            <div class="flex justify-between w-full">
+              <p class="text-[#A7A7A8]">{{item.name}}</p>
+              <p [ngClass]="item.price_change_percentage_24h > 0? 'text-[#03a66d]' : 'text-[#cf304a]'">
+                {{item.price_change_percentage_24h > 0? '+' : ''}}{{ item.price_change_percentage_24h | number:'1.2-2' }}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="fiatModal" class="fixed z-[10] top-0 left-0 w-full h-full overflow-auto">
+  <div class="relative flex items-center justify-center w-full min-h-screen">
+    <div class="absolute w-full h-full bg-black/50" (click)="showFiatModal()"></div>
+    <div class="relative m-5 w-[450px] rounded-[10px] overflow-hidden bg-binance-light-gray">
+      <p class="p-5 font-medium md:p-6">Seleccionar moneda de pago</p>
+      <div class="overflow-auto max-h-[500px]">
+        <div class="flex items-center gap-2 px-5 py-3 cursor-pointer hover:bg-binance-gray md:px-6"
+          (click)="showFiatModal()">
+          <div class="flex justify-between w-full font-medium">
+            <p>{{ars[0].name}}</p>
+            <p>{{ars[0].description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="buyForm" (ngSubmit)="buy()">
+  <div *ngIf="formStep === 1" class="flex flex-col gap-10 max-w-[682px] mx-auto">
+    <p *ngIf="selectedCrypto && ars" class="text-center pt-7 pb-6 text-[#A7A7A8]">Precio estimado 1 {{selectedCrypto.symbol | uppercase}} = {{selectedCrypto.current_price * ars[0].usdValue | currency}} ARS</p>
+    <div class="flex flex-col gap-3 p-3 bg-binance-gray">
+      <div class="flex justify-between font-medium">
+        <p>Gastar</p>
+        <p>Balance en efectivo</p>
+      </div>
+      <div class="flex items-center justify-between">
+        <input id="saleAmount" formControlName="saleAmount" class="w-[80%] focus:outline-none bg-binance-gray" type="text" placeholder="3000.00 - 1350000.00" (keyup)="cryptoConversion()">
+        <div class="flex items-center gap-1 p-1 px-3 font-medium bg-white rounded-md cursor-pointer"
+          (click)="showFiatModal()">
+          <p>ARS<fa-icon class="ms-1" [icon]="faAngleRight"></fa-icon></p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 p-3 bg-binance-gray">
+      <div class="font-medium">
+        <p>Recibir</p>
+      </div>
+      <div class="flex items-center justify-between">
+        <input id="purchaseAmount" formControlName="purchaseAmount" class="w-[80%] focus:outline-none bg-binance-gray" type="number" placeholder="3000.00 - 1350000.00" (keyup)="fiatConversion()">
+        <div *ngIf="selectedCrypto" class="flex items-center gap-1 p-1 px-3 font-medium bg-white rounded-md cursor-pointer" (click)="showCryptoModal()">
+          <img class="h-6" src="{{selectedCrypto.image}}" alt="">
+          <p>{{selectedCrypto.symbol | uppercase}}<fa-icon class="ms-1" [icon]="faAngleRight"></fa-icon></p>
+        </div>
+      </div>
+    </div>
+    <button class="px-6 py-3 text-base font-medium rounded-md bg-binance-yellow hover:opacity-90" (click)="increaseStep(); emitEvent()">Continuar</button>
+  </div>
+  
+  <div *ngIf="formStep === 2">
+    <div class="relative text-center">
+      <div class="absolute flex h-full font-medium bg-red-100 cursor-pointer md:text-xl" (click)="decreaseStep(); emitEvent()">
+        <p class="m-auto"><fa-icon class="me-1" [icon]="faAngleLeft"></fa-icon>atras</p>
+      </div>
+      <p class="font-medium bg-blue-200 md:text-2xl">Seleccionar método de pago</p>
+    </div>
+    <div class="max-w-[682px] py-10 mx-auto bg-green-100">
+      <div class="text-[#A7A7A8] flex justify-between">
+        <p>Pagar con</p>
+        <p>Recibirás</p>
+      </div>
+      <div class="flex flex-col gap-8">
+  
+        <!-- <div *ngFor="let item of [].constructor(5)" class="flex border border-[#A7A7A8] rounded-xl items-center gap-2 px-5 py-3 bg-red-200 cursor-pointer md:px-6">
+          <img class="h-10" src="{{btc.image}}" alt="">
+          <div class="flex flex-col w-full">
+            <div class="flex justify-between w-full font-medium">
+              <p>{{btc.symbol | uppercase}}</p>
+              <p>{{btc.current_price | currency}}</p>
+            </div>
+            <div class="flex justify-between w-full">
+              <p class="text-[#A7A7A8]">{{btc.name}}</p>
+              <p [ngClass]="btc.price_change_percentage_24h > 0? 'text-[#03a66d]' : 'text-[#cf304a]'">
+                {{btc.price_change_percentage_24h > 0? '+' : ''}}{{ btc.price_change_percentage_24h | number:'1.2-2' }}%</p>
+            </div>
+          </div>
+        </div> -->
+        
+      </div>    
+    </div>
+  </div>
+</form>
