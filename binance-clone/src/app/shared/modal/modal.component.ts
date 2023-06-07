@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// Initialization for ES Users
-import { Modal, Ripple, initTE } from 'tw-elements';
 import { ModalService } from './services/modal.service';
-
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Modal, Ripple, initTE } from 'tw-elements';
 import { Nft } from 'src/app/helpers/interfaces';
 
 @Component({
@@ -33,7 +31,6 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     initTE({ Modal, Ripple });
-    console.log(this.nft.title);
   }
 
   closeDetail() {

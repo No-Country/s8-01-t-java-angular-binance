@@ -43,7 +43,7 @@
   <!-- Jumbotron -->
   <div class="px-6 py-12 text-center md:px-12 lg:py-24 lg:text-left">
     <div
-      class="w-100 mx-auto text-neutral-800 sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl"
+      class="w-100 mx-auto text-neutral-800 sm:max-w-2xl md:max-w-3xl lg:max-w-[1200px] xl:max-w-[1200px] w-full"
     >
       <div class="grid items-center gap-12 lg:grid-cols-2">
         <div class="mt-12 lg:mt-0" style="z-index: 10">
@@ -74,75 +74,96 @@
             </button>
           </div>
         </div>
-        <div class="relative mb-12 lg:mb-0">
+        <div class="relative mb-12 lg:mb-0 w-full">
           <div
             id="radius-shape-1"
             class="absolute rounded-full shadow-lg"
           ></div>
           <div id="radius-shape-2" class="absolute shadow-lg"></div>
           <div
-            class="relative bg-[hsla(0,0%,100%,0.9)] backdrop-blur-[25px] backdrop-saturate-[200%] block rounded-lg px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,15%,0.9)] dark:shadow-black/20 md:px-12"
+            class="lg:min-w-[700px] relative bg-[hsla(0,0%,100%,0.9)] backdrop-blur-[25px] backdrop-saturate-[200%] block rounded-lg px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,15%,0.9)] dark:shadow-black/20 mx-auto"
           >
-            <form>
-              <div class="grid md:grid-cols-2 md:gap-6">
-                <div class="relative mb-6" data-te-input-wrapper-init>
-                  <input
-                    type="text"
-                    class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleFormControlInput1"
-                    placeholder="First name"
-                  />
-                  <label
-                    for="exampleFormControlInput1"
-                    class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                    >First name
-                  </label>
+            <div class="flex flex-col mx-auto">
+              <div class="overflow-x-hidden sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div class="overflow-hidden my-8">
+                    <table class="min-w-full text-center text-sm font-light">
+                      <thead
+                        class="border-b font-medium dark:border-neutral-500"
+                      >
+                        <tr>
+                          <th scope="col" class="px-6 py-4">WALLET</th>
+                          <th scope="col" class="px-6 py-4 w-full min-w-full">
+                            ID
+                          </th>
+                          <th scope="col" class="px-6 py-4"></th>
+                          <th scope="col" class="px-6 py-4"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="border-b bg-success-100 text-neutral-800">
+                          <td class="whitespace-nowrap px-6 py-4">
+                            <img
+                              class="object-contain w-5 h-auto"
+                              src="../../../assets//images/blockchain/metamask-icon.svg"
+                              alt=""
+                            />
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4">
+                            0x0873891180243E10a79Cb6570cF981Ba1eBBD2C5
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="overflow-hidden my-8">
+                    <table class="min-w-full text-center text-sm font-light">
+                      <thead
+                        class="border-b font-medium dark:border-neutral-500"
+                      >
+                        <tr>
+                          <th scope="col" class="px-6 pl-0 py-4">MONEDA</th>
+                          <th scope="col" class="px-6 pl-0 py-4">TOKEN</th>
+                          <th scope="col" class="px-6 pl-0 py-4">CANTIDAD</th>
+                          <th scope="col" class="px-6 pl-0 py-4">SALDO</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          class="border-b border-primary-200 bg-primary-100 text-neutral-800"
+                        >
+                          <td class="whitespace-nowrap px-6 py-4 font-medium">
+                            <img
+                              class="object-contain w-5 h-auto"
+                              src="../../../assets//images/blockchain/ethereum-eth-logo.svg"
+                              alt=""
+                            />
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4">ETH</td>
+                          <td class="whitespace-nowrap px-6 py-4">2</td>
+                          <td class="whitespace-nowrap px-6 py-4">10000 USD</td>
+                        </tr>
+                        <tr
+                          class="border-b border-danger-200 bg-danger-100 text-neutral-800"
+                        >
+                          <td class="whitespace-nowrap px-6 py-4 font-medium">
+                            TESTNET
+                          </td>
+                          <td class="whitespace-nowrap px-6 py-4">SEPOLIA</td>
+                          <td class="whitespace-nowrap px-6 py-4">RED ID</td>
+                          <td class="whitespace-nowrap px-6 py-4">55511115</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="relative mb-6" data-te-input-wrapper-init>
-                  <input
-                    type="text"
-                    class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    id="exampleFormControlInput2"
-                    placeholder="Last name"
-                  />
-                  <label
-                    for="exampleFormControlInput2"
-                    class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                    >Last name
-                  </label>
-                </div>
               </div>
-              <div class="relative mb-6" data-te-input-wrapper-init>
-                <input
-                  type="email"
-                  class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                  id="exampleFormControlInput3"
-                  placeholder="Email address"
-                />
-                <label
-                  for="exampleFormControlInput3"
-                  class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >Email address
-                </label>
-              </div>
-              <div class="relative mb-6" data-te-input-wrapper-init>
-                <input
-                  type="password"
-                  class="peer block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                  id="exampleFormControlInput4"
-                  placeholder="Password"
-                />
-                <label
-                  for="exampleFormControlInput4"
-                  class="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                  >Password
-                </label>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- Jumbotron -->
+  ->
 </section>

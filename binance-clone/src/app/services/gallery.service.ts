@@ -90,21 +90,7 @@ export class GalleryService implements OnInit {
     }
   }
 
-  async ngOnInit() {
-    // if (typeof window.ethereum !== 'undefined') {
-    //   this.web3 = new Web3(window.ethereum);
-    //   try {
-    //     await window.ethereum.enable();
-    //     console.log('MetaMask is installed and enabled');
-    //   } catch (e) {
-    //     console.error('User denied MetaMask access');
-    //     alert('Access to MetaMask was denied.');
-    //   }
-    // } else {
-    //   console.error('MetaMask not found!');
-    //   alert('MetaMask is not installed.');
-    // }
-  }
+  async ngOnInit() {}
 
   // Metamask
   getAccountAddress(): string | null {
@@ -115,18 +101,6 @@ export class GalleryService implements OnInit {
       return null;
     }
   }
-
-  // getNetworkId(): void {
-  //   this.web3.eth.net
-  //     .getId()
-  //     .then((networkId: number) => {
-  //       this.currentNetwork = networkId.toString();
-  //       console.log('Network ID:', this.currentNetwork); // Imprimir en consola
-  //     })
-  //     .catch((error: any) => {
-  //       console.error('Error al obtener el Network ID:', error);
-  //     });
-  // }
 
   async getNetworkId() {
     try {
@@ -188,47 +162,6 @@ export class GalleryService implements OnInit {
       }
     }
   }
-
-  // async onClickConnect(): Promise<void> {
-  //   try {
-  //     await window.ethereum.enable();
-  //     const accounts = await this.web3.eth.getAccounts();
-
-  //     const newAccounts = await Promise.all(
-  //       accounts.map(async (address: string) => {
-  //         const balance = await this.web3.eth.getBalance(address);
-
-  //         const tokenBalances = await Promise.all(
-  //           this.tokenAddresses.map(async (token) => {
-  //             const tokenInst = new this.web3.eth.Contract(
-  //               tokenABI,
-  //               token.address
-  //             );
-  //             const tokenBalance = await tokenInst.methods
-  //               .balanceOf(address)
-  //               .call();
-
-  //             return {
-  //               token: token.token,
-  //               balance: tokenBalance,
-  //             };
-  //           })
-  //         );
-
-  //         return {
-  //           address,
-  //           balance: this.web3.utils.fromWei(balance, 'ether'),
-  //           tokens: tokenBalances,
-  //         };
-  //       })
-  //     );
-
-  //     console.log(newAccounts);
-  //   } catch (error) {
-  //     console.error('Error connecting with MetaMask:', error);
-  //     alert('Please install MetaMask to use this dApp!');
-  //   }
-  // }
 
   // Gallery
   public async getAllImages(): Promise<any[]> {

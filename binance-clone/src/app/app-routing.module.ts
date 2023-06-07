@@ -13,6 +13,8 @@ const routes: Routes = [
     redirectTo: 'landing',
     pathMatch: 'full',
   },
+  { path: 'nft', component: NftComponent },
+  { path: 'nft/:id', component: NftComponent },
   // Admin
   {
     path: 'admin',
@@ -21,6 +23,20 @@ const routes: Routes = [
         (c) => c.AdminComponent
       ),
     data: { isAdminComponent: true },
+  },
+  {
+    path: 'users',
+    loadComponent: () =>
+      import('./admin/components/user-list/user-list.component').then(
+        (c) => c.UserListComponent
+      ),
+  },
+  {
+    path: 'users/:id',
+    loadComponent: () =>
+      import('./admin/components/user-list/user-list.component').then(
+        (c) => c.UserListComponent
+      ),
   },
 
   // Public
@@ -44,14 +60,6 @@ const routes: Routes = [
   { path: 'upload', component: UploadImageComponent },
   { path: 'nft', component: NftComponent },
   { path: 'nft/:id', component: NftComponent },
-
-  {
-    path: 'wallet',
-    loadComponent: () =>
-      import('./private/wallet/page/wallet/wallet.component').then(
-        (c) => c.WalletComponent
-      ),
-  },
 
   {
     path: 'dashboard',

@@ -1,61 +1,80 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { faAngleLeft, faExclamationCircle, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAngleLeft,
+  faExclamationCircle,
+  faEyeSlash,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { first } from 'rxjs';
 import Swal from 'sweetalert2';
-
+import { SpinnerService } from 'src/app/shared/spinner/services/spinner.service';
+import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule, RouterModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule,
+    SpinnerComponent,
+  ],
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent {
-
+export class SignUpComponent implements OnInit {
   apiUrl = environment.API_URL;
-
-
+  loading: boolean = false;
   faAngleLeft = faAngleLeft;
   faExclamationCircle = faExclamationCircle;
   faEyeSlash = faEyeSlash;
   faEye = faEye;
 
   eyes = false;
-  
+
   form: any;
-  
+
   step: number = 0;
-  
+
   emailVerificated: boolean = false;
-  
+
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
-
-    ) {
+    public spinnerService: SpinnerService
+  ) {
     this.form = this.formBuilder.nonNullable.group({
       email: ['', [Validators.email, Validators.required]],
       // verificationCode: ['', [
-      //   Validators.minLength(6), 
-      //   Validators.maxLength(6), 
-      //   Validators.required, 
+      //   Validators.minLength(6),
+      //   Validators.maxLength(6),
+      //   Validators.required,
       //   Validators.pattern('^[0-9]*$')]],
-      password: ['', [
-        Validators.minLength(8), 
-        Validators.maxLength(128), 
-        Validators.required, 
-        // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)
-      ]],
+      password: [
+        '',
+        [
+          Validators.minLength(8),
+          Validators.maxLength(128),
+          Validators.required,
+          // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\s\S])[A-Za-z\d\s\S]{8,}$/)
+        ],
+      ],
       nationality: ['', [Validators.required]],
       legalName: ['', [Validators.required]],
       legalLastName: ['', [Validators.required]],
@@ -65,54 +84,58 @@ export class SignUpComponent {
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
       username: ['', [Validators.required]],
-      agree: [false, [Validators.requiredTrue]]
+      agree: [false, [Validators.requiredTrue]],
     });
   }
-
+  ngOnInit(): void {
+    this.spinnerService.show();
+    this.spinnerService.startTimer(3000);
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
+  }
 
   signUp() {
     const register = this.form.getRawValue();
-    console.log('register desde sign-up getRawValue()',register)
-    
-    this.auth.signUp(this.form.value)
-    .subscribe(register => {
-      console.log('register desde sign-up',register)
+    console.log('register desde sign-up getRawValue()', register);
 
-    this.auth.signUp(register).subscribe(
-      (response) => {
-        console.log('Registro exitoso', response);
-      },
-      (error) => {
-        console.error('Error en el registro', error);
+    this.auth.signUp(this.form.value).subscribe(
+      (register) => {
+        console.log('register desde sign-up', register);
+
+        this.auth.signUp(register).subscribe(
+          (response) => {
+            console.log('Registro exitoso', response);
+          },
+          (error) => {
+            console.error('Error en el registro', error);
+          }
+        );
       }
-    );
-    }
 
-
-
-    //   {
-    //   next: (res) => {
-    //     const username = res.username;
-    //     Swal.fire({
-    //       title: `¡Hola! ${username}`,
-    //       text: `Iniciaste sesión correctamente!`,
-    //       icon: 'success',
-    //       showConfirmButton: false,
-    //       timer: 3000
-    //     }).then(() => {
-    //       this.router.navigate(['/login']);
-    //     });
-    //   },
-    //   error: (error) => {
-    //     console.log('Error en el inicio de sesión:', error);
-    //     Swal.fire({
-    //       title: 'Error',
-    //       text: 'Username o contraseña inválida',
-    //       icon: 'error',
-    //       confirmButtonText: 'Aceptar'
-    //     });
-    //   }
-    // }
+      //   {
+      //   next: (res) => {
+      //     const username = res.username;
+      //     Swal.fire({
+      //       title: `¡Hola! ${username}`,
+      //       text: `Iniciaste sesión correctamente!`,
+      //       icon: 'success',
+      //       showConfirmButton: false,
+      //       timer: 3000
+      //     }).then(() => {
+      //       this.router.navigate(['/login']);
+      //     });
+      //   },
+      //   error: (error) => {
+      //     console.log('Error en el inicio de sesión:', error);
+      //     Swal.fire({
+      //       title: 'Error',
+      //       text: 'Username o contraseña inválida',
+      //       icon: 'error',
+      //       confirmButtonText: 'Aceptar'
+      //     });
+      //   }
+      // }
     );
   }
 
@@ -148,31 +171,25 @@ export class SignUpComponent {
   }
 
   increaseStep() {
-    this.step ++
+    this.step++;
   }
 
   decreaseStep() {
-    this.step --
+    this.step--;
   }
 
-  
-  
   toggleButton = false;
-  
-  clickToggleButton(){
+
+  clickToggleButton() {
     this.toggleButton = !this.toggleButton;
   }
-  
-  
 
-  
   email: string = '';
   randomNumber: number = 0;
   codeSent: Number | null = null;
   num: number = 0;
-  
-  sendCode() {
 
+  sendCode() {
     this.codeSent = this.form.get('verificationCode').value;
 
     if (this.codeSent === this.num) {
@@ -183,30 +200,25 @@ export class SignUpComponent {
     const length = 6;
     let randomNumber = '';
     const characters = '0123456789';
-  
+
     for (let i = 0; i < length; i++) {
       const index = Math.floor(Math.random() * characters.length);
       randomNumber += characters.charAt(index);
     }
-  
+
     return randomNumber;
   }
-  
-  emailVerification() {
-  
 
+  emailVerification() {
     // this.randomNumber = Number(this.generateRandomNumber());
     // this.num = this.randomNumber;
     // console.log('random number',this.randomNumber)
     // const email = this.form.get('email').value;
-
-  
     // const data = {
     //   email: email,
     //   num: this.randomNumber
     // };
     // console.log(data)
-  
     // this.http.post(`${this.apiUrl}/api/v1/auth/email`, data).subscribe(
     //   response => {
     //     // Manejar la respuesta de la API
@@ -217,15 +229,8 @@ export class SignUpComponent {
     //     console.error('email verification', error);
     //   }
     // );
-
     // const num = this.form.get('verificationCode').value;
     // if(num === this.randomNumber){
-
     // }
   }
-
-
-
-
-
 }

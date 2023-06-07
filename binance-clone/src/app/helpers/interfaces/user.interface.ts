@@ -1,8 +1,9 @@
 export interface User {
+  walletId?: number;
   id?: number;
   email?: string;
-  username: string;
-  password: string;
+  username?: string;
+  password?: string;
   legalName?: string;
   legalLastName?: string;
   birthdate?: Date;

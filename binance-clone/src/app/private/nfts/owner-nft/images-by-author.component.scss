@@ -41,7 +41,7 @@ background-color: rgb(255, 255, 255);
 width: 100%;
 margin-right: 0px;
 margin-top: 0;
-margin-bottom: 8rem;
+margin-bottom: 0;
 }
 
 .css-x0dwiq {
@@ -324,11 +324,10 @@ min-width: 0px;
 display: flex;
 padding-left: 12px;
 padding-right: 12px;
--webkit-box-pack: justify;
-justify-content: space-between;
--webkit-box-align: center;
+justify-content: start;
 align-items: center;
-padding-bottom: 20px;
+padding-bottom: 2rem;
+padding-top: 2rem;
 }
 .css-10nf7hq {
 text-size-adjust: 100%;
