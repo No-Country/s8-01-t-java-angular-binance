@@ -5,19 +5,15 @@
       <div *ngIf="operationSelectors" class="flex text-2xl font-medium max-w-[682px] mx-auto">
         <div [ngClass]="buyForm? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 text-center border-transparent cursor-pointer border-y-4 hover:bg-binance-gray" (click)="setBuyForm()">Comprar</div>
         <div [ngClass]="sellForm? 'border-b-binance-yellow bg-binance-gray' : ''" class="w-full py-4 text-center border-transparent cursor-pointer border-y-4 hover:bg-binance-gray" (click)="setSellForm()">Vender</div>
-      </div>
+      </div>      
       
-      <app-buy *ngIf="buyForm" (event)="operationSelectorsToogle()" [cryptos]="popularCryptos!"></app-buy>
-      
-      <!-- <ng-container *ngIf="popularCryptos; else elseTemplate">
-        
+      <ng-container *ngIf="popularCryptos; else elseTemplate">
+        <app-buy *ngIf="buyForm" (event)="operationSelectorsToogle()" [cryptos]="popularCryptos!"></app-buy>
         <app-sell *ngIf="sellForm"></app-sell>
       </ng-container>
       <ng-template #elseTemplate>
-       <app-sell></app-sell>
-        <app-sell></app-sell>
         <p class="py-5 text-2xl font-medium text-center">Algo salió mal :C</p>
-      </ng-template> -->
+      </ng-template>
       
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faAngleRight, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { CryptoService } from 'src/app/services/crypto.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class BuyComponent implements OnInit, OnChanges {
 
   faAngleLeft = faAngleLeft;
   faAngleRight = faAngleRight;
+  faArrowRight = faArrowRight;
   
   cryptoModal: boolean = false;
   fiatModal: boolean = false;
@@ -24,6 +25,7 @@ export class BuyComponent implements OnInit, OnChanges {
   backendCryptos = [];
   selectedCrypto: any | undefined;
   ars: any | undefined;
+  wallet: any | undefined;
 
   buyForm: FormGroup = new FormGroup({});
 
@@ -32,16 +34,13 @@ export class BuyComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.getCoins();
+    this.getWallet();
     this.buyForm = this.formBuilder.group({
-      // cantidad de crypto recibida
       purchaseAmount: ['', Validators.required],
-      // crypto a comprar
       purchaseCoinId: ['', Validators.required],
-      // lo que se gasta
       saleAmount: ['', Validators.required],
       saleCoinId: [5],
-      transactionType: ['PURCHASE'],
-      walletId: ['', Validators.required]
+      walletId: [1, Validators.required]
     })
   }
 
@@ -142,8 +141,25 @@ export class BuyComponent implements OnInit, OnChanges {
     });
   }
 
+  getWallet() {
+    this.cryptoService.getWallet().subscribe({
+      next: (res: any) => {
+        this.wallet = res.ARS;
+      }
+    });
+  }
+
   buy() {
-    console.log('se hizo la compra');
+    this.cryptoService.buy(this.buyForm.getRawValue()).subscribe({
+      next: (res) => {
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        this.increaseStep();
+      }
+    });
   }
 
 }

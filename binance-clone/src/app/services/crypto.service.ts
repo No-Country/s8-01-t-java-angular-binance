@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class CryptoService {
 
+  apiBackend = 'https://binance.up.railway.app/api/v1/';
+
   constructor(private httpClient: HttpClient) { }
 
   getPopularCryptos() {
@@ -13,7 +15,15 @@ export class CryptoService {
   }
 
   getCoins() {
-    return this.httpClient.get('https://binance.up.railway.app/api/v1/coins');
+    return this.httpClient.get(`${this.apiBackend}coins`);
+  }
+
+  getWallet() {
+    return this.httpClient.get(`${this.apiBackend}transactions/balance?walletId=1`);
+  }
+
+  buy(form: any) {
+    return this.httpClient.post(`${this.apiBackend}transactions/transaction`, form);
   }
 
 }
