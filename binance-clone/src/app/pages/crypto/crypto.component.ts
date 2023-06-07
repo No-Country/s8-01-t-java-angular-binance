@@ -17,11 +17,11 @@ export class CryptoComponent implements OnInit {
   constructor(private cryptoService: CryptoService) {}
 
   ngOnInit(): void {
-    // this.cryptoService.getPopularCryptos().subscribe({
-    //   next: (res: any) => {
-    //     this.popularCryptos = res;
-    //   }
-    // });
+    this.cryptoService.getPopularCryptos().subscribe({
+      next: (res: any) => {
+        this.popularCryptos = res;
+      }
+    });
   }
 
   operationSelectorsToogle() {
