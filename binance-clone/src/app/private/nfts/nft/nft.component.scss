@@ -1,0 +1,7 @@
+.custom-grid {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-Fit, minmax(16rem, 1fr));
+  gap: 1rem;
+  margin: 0 auto;
+}
