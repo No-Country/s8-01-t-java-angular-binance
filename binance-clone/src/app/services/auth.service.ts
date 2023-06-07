@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Register } from 'src/interfaces/register.model';
 import { Observable, map } from 'rxjs';
@@ -9,8 +9,10 @@ import { Credentials } from 'src/interfaces/credentials.model';
   providedIn: 'root'
 })
 export class AuthService {
+  [x: string]: any;
 
   apiUrl = environment.API_URL;
+  userId:number=0;
 
   constructor(
     private http: HttpClient
@@ -22,7 +24,7 @@ export class AuthService {
       // localStorage.setItem('user', user);
       localStorage.setItem('user', JSON.stringify(user));
       return user
-      
+
     }));
   }
 
@@ -36,6 +38,11 @@ export class AuthService {
 
   signUp(register: Register) {
     return this.http.post<any>(`${this.apiUrl}/auth/register`, register);
+  }
+
+  public getUserData(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer YOUR_TOKEN_HERE');
+    return this.http.get(`${this.apiUrl}/users/1`, { headers });
   }
 
 }
