@@ -6,6 +6,7 @@ import { NftComponent } from './private/nfts/nft/nft.component';
 import { UploadImageComponent } from './private/nfts/upload-image/upload-image.component';
 import { ImagesByAuthorComponent } from './private/nfts/images-by-author/images-by-author.component';
 import { HomeComponent } from './private/nfts/home/home.component';
+import { CryptoComponent } from './pages/crypto/crypto.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
         (c) => c.SignInComponent
       ),
   },
+  {
+    path: 'crypto',
+    component: CryptoComponent,
+    title: 'Buy/Sell Bitcoin, Ether and Altcoins | Cryptocurrency Exchange | Binance'
+  }
 ];
 
 @NgModule({

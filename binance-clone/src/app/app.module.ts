@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,9 @@ import { NumberShortenerPipe } from './pipes/number-shortener.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CryptoComponent } from './pages/crypto/crypto.component';
+import { BuyComponent } from './pages/crypto/components/buy/buy.component';
+import { SellComponent } from './pages/crypto/components/sell/sell.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     SideBarComponent,
     NumberShortenerPipe,
     ButtonComponent,
+    CryptoComponent,
+    BuyComponent,
+    SellComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     FormsModule,
     BrowserAnimationsModule,
     SpinnerComponent,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

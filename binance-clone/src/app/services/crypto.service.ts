@@ -6,10 +6,24 @@ import { Injectable } from '@angular/core';
 })
 export class CryptoService {
 
+  apiBackend = 'https://binance.up.railway.app/api/v1/';
+
   constructor(private httpClient: HttpClient) { }
 
   getPopularCryptos() {
     return this.httpClient.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=binancecoin%2C%20bitcoin%2C%20ethereum&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en');
+  }
+
+  getCoins() {
+    return this.httpClient.get(`${this.apiBackend}coins`);
+  }
+
+  getWallet() {
+    return this.httpClient.get(`${this.apiBackend}transactions/balance?walletId=1`);
+  }
+
+  buy(form: any) {
+    return this.httpClient.post(`${this.apiBackend}transactions/transaction`, form);
   }
 
 }
