@@ -1,11 +1,11 @@
-<!-- <div class="flex flex-col gap-10">
+<div class="flex flex-col gap-10" >
   <p class="text-center pt-7 pb-6 text-[#A7A7A8]">Precio estimado 1 cripto = 123123 moneda</p>
   <div class="flex flex-col gap-3 p-3 bg-binance-gray">
     <div class="flex justify-between font-medium">
       <p>Vender</p>
     </div>
     <div class="flex items-center">
-      <input class="w-full py-3 bg-binance-gray" type="number" placeholder="3000.00 - 1350000.00 ">
+      <input class="w-full py-3 bg-binance-gray" type="number" [(ngModel)]="cantidadCripto"  (ngModelChange)=" mostrarValorConsola()" placeholder="3000.00 - 1350000.00 ">
       <button class="p-1 bg-blue-100">cripto</button>
     </div>
   </div>
@@ -15,13 +15,13 @@
       <p>Recibir</p>
     </div>
     <div class="flex items-center">
-      <input class="w-full py-3 bg-binance-gray" type="number" placeholder="3000.00 - 135000.00 ">
+      <input class="w-full py-3 bg-binance-gray" type="number" placeholder="3000.00 - 135000.00" [(ngModel)]="resultadoMultiplicacion">
       <button class="p-1 bg-blue-100">cripto</button>
     </div>
   </div> 
   <span class="linea"></span>
   <button class="px-6 py-3 text-base font-medium rounded-md bg-binance-yellow hover:opacity-90 continuar">Continuar</button>
-</div> -->
+</div>
 
 
 
@@ -86,8 +86,62 @@
 
 </div> -->
 
-<div class="flex flex-col m-5 gap-3" *ngFor="let coin of ARS">
-  <div class="flex justify-center" *ngIf="coin['name']  === 'BTC' || coin['name']  === 'ARS'">
+<!-- <div class="flex flex-col m-5 gap-3">
+  <div class="flex justify-center">
+    <h1 class="text-3xl font-medium">Elegir método de pago</h1>
+  </div>
+  <div class="flex flex-col gap-10" *ngFor="let coin of ARS">
+    <div class="flex justify-around" *ngIf="coin['name'] === 'BTC' || coin['name'] === 'ARS'">
+      <div class="flex flex-col gap-2" *ngIf="coin['name'] === 'BTC'">
+        <div>
+          <h2>Vender</h2>
+        </div>
+        <div class="flex flex-col">
+          <h3>BTC</h3>
+          <p>{{ coin['usdValue'] }}</p>
+        </div>
+      </div>
+  
+      <div>
+        <fa-icon [icon]="faRight"></fa-icon>
+      </div>
+  
+      <div class="flex flex-col gap-2" *ngIf="coin['name'] === 'ARS'">
+        <div class="flex">
+          <h2>Recibir</h2>
+        </div>
+        <div class="flex flex-col">
+          <h3>ARS</h3>
+          <p>{{ coin['usdValue'] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="flex justify-around">
+    <div class="flex justify-center">
+      <div class="flex flex-col gap-3">
+        <p>Visa/Mastercard</p>
+        <p><fa-icon [icon]="faMastercard" class="mr-4"></fa-icon> *****1234</p>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <a href="" class="text-binance-mustard">Cambiar Tarjeta</a>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-2 linea__buttons">
+    <div class="flex gap-10 mt-2">
+      <button class="px-5 py-2 rounded-sm">Atras</button>
+      <button class="px-5 py-2 rounded-sm bg-binance-yellow">Continuar</button>
+    </div>
+  </div>
+</div>
+ -->
+
+<!-- <div class="flex flex-col m-5 gap-3" *ngFor="let coin of ARS">
+  <div class="flex justify-center" *ngIf="coin['name']  === 'BTC' || coin['name']  === 'ARS' ">
     <h1 class="text-3xl font-medium" *ngIf="coin['name'] === 'BTC'">Elegir método de pago</h1>
   </div>
   <div class="flex flex-col gap-10" *ngIf="coin['name']  === 'BTC'">
@@ -138,7 +192,7 @@
     </div>
 
   </div>
-</div>
+</div> -->
 <!-- <div class="flex flex-col m-5 gap-3">
   <div class="flex justify-center" *ngFor="let coin of ARS">
     <ng-container *ngIf="coin['name'] === 'BTC' || coin['name'] === 'ARS'">
