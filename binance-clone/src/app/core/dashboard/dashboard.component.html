@@ -4,9 +4,9 @@
     <div class="w-[-64PX] h-[-64PX] rounded-full flex justify-center static">
       <img src="./../../../assets/images/dashboard/Avatar.png" alt="" srcset="">
     </div>
-    <div class="mx-5 relative">
+    <div class="mx-5 relative" *ngIf="userData">
       <div class="user-nick text mb-2 flex justify-center md:justify-start">
-        <h5 class="font-semibold">L_Pbte <!--{{user.username}}--></h5>
+        <h5 class="font-semibold">L_Pbte {{userData.username}}</h5>
       </div>
       <div class="flex flex-row ">
         <div class="id-user flex flex-col mr-5">

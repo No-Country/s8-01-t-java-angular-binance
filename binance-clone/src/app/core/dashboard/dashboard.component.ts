@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +28,8 @@ export class DashboardComponent implements OnInit {
   faChart = faChartSimple;
   faArrowRotate = faArrowsRotate;
 
+  userData:any;
+
 
   api: string =
   'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false';
@@ -35,10 +38,14 @@ export class DashboardComponent implements OnInit {
   searchText: string = '';
   filteredCoins: Coin[] = [];
 
-  constructor (private http:HttpClient)
+  constructor (
+    private http:HttpClient,
+    private auth:AuthService)
     {}
 
   ngOnInit() {
+
+    this.fetchUserData();
 
     this.chart();
 
@@ -50,6 +57,17 @@ export class DashboardComponent implements OnInit {
     ).subscribe({
       error: (err) => console.error(err)
     });
+  }
+
+  private fetchUserData(){
+    this.auth.getUserData().subscribe(
+      (data)=>{
+        this.userData=data;
+      },
+      (err) => {
+        console.error('An error occurred:', err);
+      }
+    )
   }
 
   chart(){
