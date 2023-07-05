@@ -1,4 +1,5 @@
 <img align="center" src="https://res.cloudinary.com/dqkkehztd/image/upload/v1685997451/readme/mjnvdbjbs7mj3mslvyo5.png">
+![Captura de pantalla 2023-07-05 150414](https://github.com/No-Country/s8-01-t-java-angular-binance/assets/99411527/c3115a30-5d36-455f-bd7f-5b37486ece73)
 
 <h3>👉🏻 Buy, trade, and hold 350+ cryptocurrencies on Binance.</h3>
 
