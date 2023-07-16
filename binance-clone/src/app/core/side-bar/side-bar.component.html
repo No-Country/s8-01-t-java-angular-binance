@@ -1,0 +1,74 @@
+
+<div class="logo-container mb-5 w-10 ">
+  <button class="logo hover:bg-gray-400" (click)="toggleCollapse()">
+    <fa-icon [icon]="faBars"></fa-icon>
+  </button>
+</div>
+
+<div class="sidenav bg-gray-200 w-[80vw] lg:w-[20vw]" [ngClass]="collapsed ? 'left-0' : 'left-[-80vw]'">
+        <div  class="flex justify-end items-center">
+          <button class="hover:bg-gray-400 p-4" (click)="toggleCollapse()">
+            <fa-icon [icon]="faClose"></fa-icon>
+          </button>
+        </div>
+
+        <nav class="sidenav-nav" >
+          <li class="sidenav-nav-item">
+            <a href="" class="sidenav-nav-link hover:bg-gray-300">
+              <fa-icon class="sidenav-link-icon" [icon]="faUser"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Panel de usuario</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+            <fa-icon class="sidenav-link-icon" [icon]="faIdCard"></fa-icon>
+            <span class="sidenav-link-text" *ngIf="collapsed">Identificación</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faShield"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Seguridad</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faCoins"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Pago</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faUserPlus"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Programa de referidos</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faGift"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Centro de recompensas</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faClipboardList"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Centro de tareas</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faArrowsToDot"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Gestion de API</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faUserGroup"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Subcuentas</span>
+          </a>
+
+          <a href="" class="sidenav-nav-link">
+              <fa-icon class="sidenav-link-icon" [icon]="faGear"></fa-icon>
+              <span class="sidenav-link-text" *ngIf="collapsed">Ajustes</span>
+          </a>
+
+          <a href="" class="w-full h-20 sidenav-nav-link flex justify-center items-center">
+            <fa-icon class="sidenav-link-icon" [icon]="faArrowRightFromBracket"></fa-icon>
+            <span class="sidenav-link-text" *ngIf="collapsed"> Cerrar sesion</span>
+          </a>
+          </li>
+        </nav>
+</div>
+

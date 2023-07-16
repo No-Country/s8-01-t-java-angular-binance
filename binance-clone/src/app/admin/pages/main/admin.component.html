@@ -1,0 +1,12 @@
+<app-panel></app-panel>
+
+<div class="p-4 sm:ml-64">
+  <div
+    class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700"
+  >
+    <ng-container *ngIf="currentComponent">
+      <app-home></app-home>
+    </ng-container>
+    <ng-container #dynamicComponentContainer></ng-container>
+  </div>
+</div>

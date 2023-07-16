@@ -1,0 +1,56 @@
+<section class="custom-modal-container bg-transparent">
+  <article
+    href="#"
+    class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl md:w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+  >
+    <img
+      class="object-contain w-full rounded-t-lg h-96 md:min-h-[384px] md:max-w-[250px] md:rounded-none md:rounded-l-lg"
+      [src]="nft.fileUrl"
+      alt=""
+    />
+    <div class="flex flex-col justify-between p-8 leading-normal md:w-auto">
+      <h2
+        class="mb-2 text-lg font-bold md:text-center tracking-tight text-gray-900 dark:text-white"
+      >
+        NO-COUNTRY NFT COLLECTIONS
+      </h2>
+      <h3 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+        <strong class="text-base"> Title: </strong
+        ><span class="text-sm">{{ nft.title }}</span>
+      </h3>
+      <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+        <strong class="text-base"> Dueño: </strong
+        ><span class="text-sm">{{ nft.contract }}</span>
+      </h3>
+      <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+        <strong class="text-base"> Precio: </strong
+        ><span class="text-sm">{{ nft.price }}</span>
+      </h3>
+      <h3 class="font-bold tracking-tight text-gray-900 dark:text-white">
+        <strong class="text-base"> Creado: </strong
+        ><span class="text-sm">{{ nft.date }}</span>
+      </h3>
+      <p class="mb-2 font-normal text-gray-700 dark:text-gray-400">
+        {{ nft.description }}
+      </p>
+      <!-- <button
+        (click)="sendId(nft.title)"
+        (click)="closeDetail()"
+        type="button"
+        class="inline-block rounded bg-binance-yellow px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+        data-te-ripple-init
+        data-te-ripple-color="light"
+      >
+        Comprar
+      </button> -->
+
+      <button
+        (click)="sendId(nft.title)"
+        (click)="closeDetail()"
+        class="inline-block rounded bg-binance-yellow px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-binance-dark-gray shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-binance-yellow hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-binance-yellow focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-binance-yellow/75 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+      >
+        Comprar
+      </button>
+    </div>
+  </article>
+</section>

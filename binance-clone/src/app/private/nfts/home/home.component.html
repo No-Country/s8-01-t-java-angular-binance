@@ -1,0 +1,16 @@
+<app-spinner *ngIf="spinnerService.getSpinnerStatus()"></app-spinner>
+
+<ng-container *ngIf="loading">
+  <app-banner></app-banner>
+  <ng-container>
+    <app-jumbotron class="w-full mx-0"></app-jumbotron>
+  </ng-container>
+  <!-- <section class="custom-grid px-4 lg:max-w-[1200px]">
+  <mat-divider class="p-3"></mat-divider>
+</section> -->
+  <section class="custom-grid px-4 lg:max-w-[1200px]">
+    <div *ngFor="let nft of images; let i = index">
+      <app-nft-card [nft]="nft" [index]="i + 1"></app-nft-card>
+    </div>
+  </section>
+</ng-container>
